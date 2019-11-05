@@ -1,0 +1,1 @@
+"./robotica_lab1.obj" "../lnk_msp430g2453.cmd" -l"libc.a" 

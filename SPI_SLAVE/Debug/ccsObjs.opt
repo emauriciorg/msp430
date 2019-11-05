@@ -1,0 +1,1 @@
+"./nrf24l01p.obj" "./main.obj" "./FBF.obj" "./CDC.obj" "../lnk_msp430g2553.cmd" -l"libc.a" 

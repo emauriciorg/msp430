@@ -1,0 +1,1 @@
+"./main.obj" "./ishan.obj" "./ds18x20.obj" "../lnk_msp430g2452.cmd" -l"libc.a" 
