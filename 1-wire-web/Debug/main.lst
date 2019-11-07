@@ -694,15 +694,15 @@ C:\Users\mauricio\AppData\Local\Temp\0876010                         PAGE   12
      633                    .dwattr $C$DW$69, DW_AT_decl_line(0x09)
      634                    .dwattr $C$DW$69, DW_AT_decl_column(0x1e)
      635            ;       C:\ti\ccsv5\tools\compiler\msp430_4.2.1\bin\opt430.exe C:\\Users\\mauricio\\AppData\\Local\\Te
-     636 000000               .sect   ".text:sd_"
+     636 000000               .sect   ".text:uart_write_byte"
      637                    .align  2
      638                    .clink
-     639                    .global sd_
+     639                    .global uart_write_byte
      640            
-     641            $C$DW$70        .dwtag  DW_TAG_subprogram, DW_AT_name("sd_")
-     642                    .dwattr $C$DW$70, DW_AT_low_pc(sd_)
+     641            $C$DW$70        .dwtag  DW_TAG_subprogram, DW_AT_name("uart_write_byte")
+     642                    .dwattr $C$DW$70, DW_AT_low_pc(uart_write_byte)
      643                    .dwattr $C$DW$70, DW_AT_high_pc(0x00)
-     644                    .dwattr $C$DW$70, DW_AT_TI_symbol_name("sd_")
+     644                    .dwattr $C$DW$70, DW_AT_TI_symbol_name("uart_write_byte")
      645                    .dwattr $C$DW$70, DW_AT_external
      646                    .dwattr $C$DW$70, DW_AT_TI_begin_file("..\CDC.h")
      647                    .dwattr $C$DW$70, DW_AT_TI_begin_line(0x35)
@@ -711,9 +711,9 @@ C:\Users\mauricio\AppData\Local\Temp\0876010                         PAGE   12
      650                    .dwattr $C$DW$70, DW_AT_decl_line(0x35)
      651                    .dwattr $C$DW$70, DW_AT_decl_column(0x06)
      652                    .dwattr $C$DW$70, DW_AT_TI_max_frame_size(0x02)
-     653                    .dwpsn  file "..\CDC.h",line 53,column 20,is_stmt,address sd_,isa 0
+     653                    .dwpsn  file "..\CDC.h",line 53,column 20,is_stmt,address uart_write_byte,isa 0
      654            
-     655                    .dwfde $C$DW$CIE, sd_
+     655                    .dwfde $C$DW$CIE, uart_write_byte
      656            $C$DW$71        .dwtag  DW_TAG_formal_parameter, DW_AT_name("dato")
      657                    .dwattr $C$DW$71, DW_AT_TI_symbol_name("dato")
      658                    .dwattr $C$DW$71, DW_AT_type(*$C$DW$T$6)
@@ -725,13 +725,13 @@ C:\Users\mauricio\AppData\Local\Temp\0876010                         PAGE   13
 
      660            
      661            ;*****************************************************************************
-     662            ;* FUNCTION NAME: sd_                                                        *
+     662            ;* FUNCTION NAME: uart_write_byte                                                        *
      663            ;*                                                                           *
      664            ;*   Regs Modified     : SP,SR                                               *
      665            ;*   Regs Used         : SP,SR,r12                                           *
      666            ;*   Local Frame Size  : 0 Args + 0 Auto + 0 Save = 0 byte                   *
      667            ;*****************************************************************************
-     668 000000       sd_:
+     668 000000       uart_write_byte:
      669            ;* --------------------------------------------------------------------------*
      670                    .dwcfi  cfa_offset, 2
      671                    .dwcfi  save_reg_to_mem, 16, -2
@@ -1015,9 +1015,9 @@ C:\Users\mauricio\AppData\Local\Temp\0876010                         PAGE   17
      909 000004 4F6C          MOV.B     @r15,r12              ; [] |72| 
      910            $C$DW$87        .dwtag  DW_TAG_TI_branch
      911                    .dwattr $C$DW$87, DW_AT_low_pc(0x00)
-     912                    .dwattr $C$DW$87, DW_AT_name("sd_")
+     912                    .dwattr $C$DW$87, DW_AT_name("uart_write_byte")
      913                    .dwattr $C$DW$87, DW_AT_TI_call
-     914 000006 12B0          CALL      #sd_                  ; [] |72| 
+     914 000006 12B0          CALL      #uart_write_byte                  ; [] |72| 
 MSP430 Assembler PC v4.2.1 Sat Jan 28 11:33:17 2017
 
 Tools Copyright (c) 2003-2013 Texas Instruments Incorporated
@@ -1295,9 +1295,9 @@ C:\Users\mauricio\AppData\Local\Temp\0876010                         PAGE   22
          000002 0020 
     1153            $C$DW$101       .dwtag  DW_TAG_TI_branch
     1154                    .dwattr $C$DW$101, DW_AT_low_pc(0x00)
-    1155                    .dwattr $C$DW$101, DW_AT_name("sd_")
+    1155                    .dwattr $C$DW$101, DW_AT_name("uart_write_byte")
     1156                    .dwattr $C$DW$101, DW_AT_TI_call
-    1157 000004 12B0          CALL      #sd_                  ; [] |100| 
+    1157 000004 12B0          CALL      #uart_write_byte                  ; [] |100| 
          000006 0000!
     1158                                                      ; [] |100| 
     1159                    .dwpsn  file "..\CDC.h",line 100,column 25,is_stmt,isa 0
@@ -2447,15 +2447,15 @@ C:\Users\mauricio\AppData\Local\Temp\0876010                         PAGE   41
     1939                    .dwendentry
     1940                    .dwendtag $C$DW$151
     1941            
-    1942 000000               .sect   ".text:borrar"
+    1942 000000               .sect   ".text:line_jump"
     1943                    .align  2
     1944                    .clink
-    1945                    .global borrar
+    1945                    .global line_jump
     1946            
-    1947            $C$DW$158       .dwtag  DW_TAG_subprogram, DW_AT_name("borrar")
-    1948                    .dwattr $C$DW$158, DW_AT_low_pc(borrar)
+    1947            $C$DW$158       .dwtag  DW_TAG_subprogram, DW_AT_name("line_jump")
+    1948                    .dwattr $C$DW$158, DW_AT_low_pc(line_jump)
     1949                    .dwattr $C$DW$158, DW_AT_high_pc(0x00)
-    1950                    .dwattr $C$DW$158, DW_AT_TI_symbol_name("borrar")
+    1950                    .dwattr $C$DW$158, DW_AT_TI_symbol_name("line_jump")
     1951                    .dwattr $C$DW$158, DW_AT_external
     1952                    .dwattr $C$DW$158, DW_AT_TI_begin_file("..\CDC.h")
 MSP430 Assembler PC v4.2.1 Sat Jan 28 11:33:17 2017
@@ -2469,18 +2469,18 @@ C:\Users\mauricio\AppData\Local\Temp\0876010                         PAGE   42
     1956                    .dwattr $C$DW$158, DW_AT_decl_line(0x9b)
     1957                    .dwattr $C$DW$158, DW_AT_decl_column(0x06)
     1958                    .dwattr $C$DW$158, DW_AT_TI_max_frame_size(0x02)
-    1959                    .dwpsn  file "..\CDC.h",line 155,column 14,is_stmt,address borrar,isa 0
+    1959                    .dwpsn  file "..\CDC.h",line 155,column 14,is_stmt,address line_jump,isa 0
     1960            
-    1961                    .dwfde $C$DW$CIE, borrar
+    1961                    .dwfde $C$DW$CIE, line_jump
     1962            
     1963            ;*****************************************************************************
-    1964            ;* FUNCTION NAME: borrar                                                     *
+    1964            ;* FUNCTION NAME: line_jump                                                     *
     1965            ;*                                                                           *
     1966            ;*   Regs Modified     : SP,SR,r12                                           *
     1967            ;*   Regs Used         : SP,SR,r12                                           *
     1968            ;*   Local Frame Size  : 0 Args + 0 Auto + 0 Save = 0 byte                   *
     1969            ;*****************************************************************************
-    1970 000000       borrar:
+    1970 000000       line_jump:
     1971            ;* --------------------------------------------------------------------------*
     1972                    .dwcfi  cfa_offset, 2
     1973                    .dwcfi  save_reg_to_mem, 16, -2
@@ -2489,9 +2489,9 @@ C:\Users\mauricio\AppData\Local\Temp\0876010                         PAGE   42
          000002 000D 
     1976            $C$DW$159       .dwtag  DW_TAG_TI_branch
     1977                    .dwattr $C$DW$159, DW_AT_low_pc(0x00)
-    1978                    .dwattr $C$DW$159, DW_AT_name("sd_")
+    1978                    .dwattr $C$DW$159, DW_AT_name("uart_write_byte")
     1979                    .dwattr $C$DW$159, DW_AT_TI_call
-    1980 000004 12B0          CALL      #sd_                  ; [] |155| 
+    1980 000004 12B0          CALL      #uart_write_byte                  ; [] |155| 
          000006 0000!
     1981                                                      ; [] |155| 
     1982                    .dwpsn  file "..\CDC.h",line 155,column 23,is_stmt,isa 0
@@ -5709,9 +5709,9 @@ C:\Users\mauricio\AppData\Local\Temp\0876010                         PAGE   96
     4503                    .dwpsn  file "../main.c",line 135,column 50,is_stmt,isa 0
     4504            $C$DW$320       .dwtag  DW_TAG_TI_branch
     4505                    .dwattr $C$DW$320, DW_AT_low_pc(0x00)
-    4506                    .dwattr $C$DW$320, DW_AT_name("borrar")
+    4506                    .dwattr $C$DW$320, DW_AT_name("line_jump")
     4507                    .dwattr $C$DW$320, DW_AT_TI_call
-    4508 000072 12B0          CALL      #borrar               ; [] |135| 
+    4508 000072 12B0          CALL      #line_jump               ; [] |135| 
          000074 0000!
     4509                                                      ; [] |135| 
     4510                    .dwpsn  file "../main.c",line 133,column 20,is_stmt,isa 0
