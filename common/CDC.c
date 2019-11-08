@@ -1,48 +1,12 @@
-/*
- * CDC._UD=(datoint&0x000f);h
- *
- *  Created on: 18/10/2014
- *      Author: mauricio
- *
- *      CDC is an acronym for Communication and Data Converter
- *      This library contains the functions necessary to handle in a easy way the
- *      transfer of data(char strings, decimal numer, hexadecimal, special character,etc.) in
- *      uart-mode, basically this library transform your int, unsigned int or  float in a
- *      string of char type variable, and send it for you.
- *
- *------------------------------FUNCTIONS-----------------------------
- *ESPACIO();
- *BORRAR();
- *
- *
- *
- *
- */
-#ifndef CDC_H_
-#define CDC_H_
-/*Function List
- *
- * borrar();
- * espacio();
- * c2ui();
- * ec();
- * enviardato();
- * int2hex();
- * printchar2c();
- * printfloar();
- * printlong();
- * printuint();
- * readint();
- * twoc2dec();
- * string2int();
- *
- * */
+#include "CDH.h"
+
+
 char aux_char[7];
 char aux_char1[10];
 char soyunvector[];
 
 
- char signo;
+char signo;
 unsigned char _UD,_U,_D,_UM,_C,_DM;
 unsigned long u,d,c,um,dm,cm,uM,dM,cM;
 unsigned int auxSR=0;
@@ -226,5 +190,3 @@ void printfloat(float twoto3)
 	aux_char[5]=(char)(_U+48);
 	ec(aux_char);
 }
-
-#endif /* CDC_H_ */
