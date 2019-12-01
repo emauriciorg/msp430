@@ -1,1 +1,1 @@
-"./main.obj" "../lnk_msp430g2553.cmd" -l"libc.a" 
+"./src/main.obj" "./src/one_wire.obj" "./src/uart_interface.obj" "../lnk_msp430g2553.cmd" -llibc.a 

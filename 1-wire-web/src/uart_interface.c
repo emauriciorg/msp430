@@ -1,5 +1,5 @@
 #include "CDC.h"
-
+#include "msp430g2553.h"
 
 /*
 this library makes no use of sprintf or sprinf (stdio.h) to reduce the
