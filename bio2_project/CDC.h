@@ -26,7 +26,7 @@
  * espacio();
  * c2ui();
  * ec();
- * sd_();
+ * uart_write();
  * int2hex();
  * printchar2c();
  * printfloar();
@@ -50,7 +50,10 @@ unsigned int dataSR1=0;
 unsigned int dataSR2=0;
 unsigned  char iSR=0;
 
-void sd_(char dato){UCA0TXBUF = dato;while (!(IFG2&UCA0TXIFG));}
+void uart_write(char dato) {
+	UCA0TXBUF = dato;
+	while (!(IFG2&UCA0TXIFG));
+}
 
 int string2int(char iamstring)
 {
@@ -69,7 +72,7 @@ void ec(char *cadena)
 	c = cadena;
 	while ((c != 0) && (*c != 0))
 	{
-		sd_(*c);
+		uart_write(*c);
 		c++;
 	}
 }
@@ -97,7 +100,7 @@ unsigned int c2ui( char *c2uc){
 	return iamres;
 }
 
-void espacio(){sd_(' ');}
+void espacio(){uart_write(' ');}
 
 void printlong(unsigned long longtochar)
 {
@@ -152,7 +155,7 @@ void int2hex(unsigned int datoint)
 	ec(aux_char);
 }
 
-void borrar(){sd_(13);}
+void borrar(){uart_write(13);}
 
 void printint( int intchar1)
 {
