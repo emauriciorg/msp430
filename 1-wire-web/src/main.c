@@ -134,7 +134,7 @@ void main(void)
 
 	for (i=0; i<8; i++) {	// writes byte, one bit at a time
 		scratchpad[i]= owReadByte();
-	//	ec("working ");printuint( scratchpad[i]);line_jump();
+	//	uart_send_string("working ");print_uint( scratchpad[i]);line_jump();
 	}
 
 	owReset();	// Stop reading

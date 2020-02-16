@@ -9,9 +9,9 @@
 	#define FBF_H_
 
 	void inicio(void);
-	void	clk(void);
+	void	clk_init(void);
 	void Uart(void);
-	void Enin(void);
+	void enable_interrupts(void);
 
 	void Uart()
 		{
@@ -20,10 +20,10 @@
 			UCA0CTL1 = UCSWRST;
 			UCA0CTL1 |= 0x80;                     // SMCLK
 			/*UCA0BR0 = 130;                            // 16MHz 9600 PREESCALAR
-			UCA0BR1 = 6;                             //(UCAxBR0 + UCAxBR1 × 256)
+			UCA0BR1 = 6;                             //(UCAxBR0 + UCAxBR1 ï¿½ 256)
 			*/
 			UCA0BR0 = 130;                            // 16MHz 9600 PREESCALAR
-			UCA0BR1 = 6;                             //(UCAxBR0 + UCAxBR1 × 256)
+			UCA0BR1 = 6;                             //(UCAxBR0 + UCAxBR1 ï¿½ 256)
 
 			UCA0MCTL =0x0c;                        // Modulation UCBRSx = 1
 			UCA0CTL1 &= ~UCSWRST;
@@ -31,13 +31,13 @@
 		}
 
 
- void Enin()
+ void enable_interrupts()
  		{
  			_BIS_SR(GIE);
  			__enable_interrupt();
  			__bis_SR_register(GIE);
  		}
-	void clk()
+	void clk_init()
 		{
 			WDTCTL = WDTPW | WDTHOLD;                 // Stop WDT
 			BCSCTL1 =CALBC1_16MHZ;
@@ -49,9 +49,9 @@
 
 	void inicio()
 	{
-		clk();
+		clk_init();
 		Uart();
-	    Enin();
+	    enable_interrupts();
 	}
 
 

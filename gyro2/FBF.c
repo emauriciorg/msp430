@@ -91,7 +91,7 @@ void configport2(void)
 }
 
 
-void uart(void)
+void uart_init(void)
 {
 	P1SEL |=(BIT1 | BIT2);
 	P1SEL2 |=(BIT1 | BIT2);
@@ -105,7 +105,7 @@ void uart(void)
 	IE2 |= 0;//UCA0TXIE;
 }
 
-void clk(void)
+void clk_init(void)
 {
 	WDTCTL = WDTPW + WDTHOLD;                 // Stop WDT
 	BCSCTL1 =CALBC1_16MHZ;
@@ -173,9 +173,9 @@ void i2cmaster(void)
 
 void inicio()
 {
-	clk();
+	clk_init();
 	Adc();
 	digitalio();
-	uart();
+	uart_init();
 	timer0();
 }

@@ -37,7 +37,7 @@ char dirR='N';
 			TACCTL0|=TACLR;
 			SerOK=0;
 		}
-void Enin();
+void enable_interrupts();
 
 
 
@@ -86,20 +86,20 @@ void nobrain()
 
 }
 
-void clk()
+void clk_init()
 			{
 				WDTCTL = WDTPW | WDTHOLD;
 				BCSCTL1 =CALBC1_16MHZ;
 				BCSCTL2 =0;
 				DCOCTL = CALDCO_16MHZ;
 			}
-void uart();
+void uart_init();
 	int main(void)
 	{
 
-		clk();
-		uart();
-		Enin();
+		clk_init();
+		uart_init();
+		enable_interrupts();
 		P2SEL2&=~(0xff);
 		P2SEL&=~(0xff);
 		P2DIR|=(EN_T|M11|M12|M21|M22);
@@ -123,13 +123,13 @@ void uart();
 
 
 
-	   void Enin()
+	   void enable_interrupts()
 	 		{
 	 			_BIS_SR(GIE);
 	 			__enable_interrupt();
 	 			__bis_SR_register(GIE);
 	 		}
-	  void uart()
+	  void uart_init()
 		   {
 				P1SEL |= ( BIT1|BIT2);
 				P1SEL2 |= (BIT1| BIT2);

@@ -46,7 +46,7 @@
 	{
 		ADC10CTL1 =INCH_5|ADC10SSEL_2 	|ADC10DIV_7; //  |CONSEQ_3Channel 5, ADC10CLK/4
 		ADC10CTL0 = ADC10SHT_3|MSC|ADC10IE|ADC10ON|ADC10SR|REFBURST;
-		ADC10AE0 |= 0x0038;                        //P1.5 ADC optionç
+		ADC10AE0 |= 0x0038;                        //P1.5 ADC optionï¿½
 	}
 
 	void inicioADC(){
@@ -101,7 +101,7 @@
 	}
 
 
-	void uart()
+	void uart_init()
 	{
 		P1SEL |=(BIT1 | BIT2);
 		P1SEL2 |=(BIT1 | BIT2);
@@ -109,13 +109,13 @@
 		UCA0CTL1 = UCSWRST;
 		UCA0CTL1 |= UCSSEL_2;                     // SMCLK
 		UCA0BR0 = 208;//130;                            // 16MHz 9600 PREESCALAR
-		UCA0BR1 = 0;//6;                             //(UCAxBR0 + UCAxBR1 × 256)
+		UCA0BR1 = 0;//6;                             //(UCAxBR0 + UCAxBR1 ï¿½ 256)
 		UCA0MCTL =0X00;//0x0c;//UCBRS0;                        // Modulation UCBRSx = 1
 		UCA0CTL1 &= ~UCSWRST;
 		IE2 |= 0;//UCA0TXIE;
 	}
 
-	void clk()
+	void clk_init()
 	{
 		WDTCTL = WDTPW + WDTHOLD;                 // Stop WDT
 		BCSCTL1 =CALBC1_16MHZ;
@@ -168,9 +168,9 @@
 
 	void inicio()
 	{
-		clk();
+		clk_init();
 		digitalio();
-		uart();
+		uart_init();
 	}
 
 

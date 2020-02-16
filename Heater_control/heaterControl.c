@@ -13,10 +13,10 @@ unsigned int 	TempC[7]={0};
 unsigned int 	TempCA[5]={0};
 /*************************************FUNCTION DECLARATION******************************************************/
     void TempSample();
-    void clk();
-    void uart();
-    void en_timer();
-    void Enin();
+    void clk_init();
+    void uart_init();
+    void enable_timer();
+    void enable_interrupts();
     void sermotor();
     void timer0_en();
     void ADC10setup();
@@ -28,7 +28,7 @@ unsigned int 	TempCA[5]={0};
 /****************************************MAIN CODE**************************************************************/
 	int main(void)
 	{
-		clk();
+		clk_init();
 
 	    P2SEL2&=~(BIT1|BIT2);
 		P2SEL&=~(BIT1|BIT2);
@@ -39,7 +39,7 @@ unsigned int 	TempCA[5]={0};
 		   TACCR0	 = 40;
 		   TACCTL0 =OUTMOD_7;
 		   TACCR1=0;
-		 	Enin();
+		 	enable_interrupts();
 
 		 do{
 
@@ -76,15 +76,15 @@ unsigned int 	TempCA[5]={0};
 			P1SEL&=~(BIT4);
 			P1SEL2&=~(BIT4);
 
-		//	uart();
+		//	uart_init();
 
 		ADC10setup();
 
-		en_timer();
+		enable_timer();
 
 	 	TempCA[3]=35;
 
-	 	Enin();
+	 	enable_interrupts();
 		while(1)
 		{
 
@@ -166,7 +166,7 @@ unsigned int 	TempCA[5]={0};
 		}
 
    			}
-	void en_timer()
+	void enable_timer()
 			{
 			TA1CTL	 = ID_3|TASSEL_2|MC_1; //UP mode
 			TA1CCR0	 = 2000;
@@ -186,14 +186,14 @@ unsigned int 	TempCA[5]={0};
 
 			}
 
-	  void uart()
+	  void uart_init()
 		   {
 				P1SEL |= ( BIT1|BIT2);
 				P1SEL2 |= (BIT1| BIT2);
 				UCA0CTL1 = UCSWRST;
 				UCA0CTL1 |= UCSSEL_2;                     // SMCLK
 				UCA0BR0 = 130;//65;                            // 16MHz 9600 PREESCALAR
-				UCA0BR1 = 6;//3;                             //(UCAxBR0 + UCAxBR1 × 256)
+				UCA0BR1 = 6;//3;                             //(UCAxBR0 + UCAxBR1 ï¿½ 256)
 				UCA0MCTL =6<<1;//UCBRS0;                        // Modulation UCBRSx = 1
 				UCA0CTL1 &= ~UCSWRST;
 				IE2 = UCA0RXIE;
@@ -213,13 +213,13 @@ unsigned int 	TempCA[5]={0};
 
 
 
-	   void Enin()
+	   void enable_interrupts()
 	 		{
 	 			_BIS_SR(GIE);
 	 			__enable_interrupt();
 	 			__bis_SR_register(GIE);
 	 		}
-	   void clk()
+	   void clk_init()
 			{
 				WDTCTL = WDTPW | WDTHOLD;
 				BCSCTL1 =CALBC1_16MHZ;

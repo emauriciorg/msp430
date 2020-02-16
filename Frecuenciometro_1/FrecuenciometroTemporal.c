@@ -20,7 +20,7 @@ volatile unsigned char SampleYIFG=0,SampleXIFG=0;
 
 int main(void)
 {
-clk();
+clk_init();
 
 /***Setup of LCD********/
 
@@ -64,7 +64,7 @@ SetCursorPosition(2, 8);
 PrintStr(" mHz");
 
 Timer1En();
-Enin();
+enable_interrupts();
  while(1)
  {
 

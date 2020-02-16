@@ -12,19 +12,19 @@ unsigned int volt=0,voltaux=0;
 int isum=0;
 	volatile unsigned char i_n=0;
 
-	void uart()
+	void uart_init()
 	{
 		P1SEL |= ( BIT1|BIT2);
 		P1SEL2 |= ( BIT1|BIT2);
 		UCA0CTL1 = UCSWRST;
 		UCA0CTL1 |= 0x80;                     // SMCLK
 		UCA0BR0 = 130;                            // 16MHz 9600 PREESCALAR
-		UCA0BR1 = 6;                             //(UCAxBR0 + UCAxBR1 × 256)
+		UCA0BR1 = 6;                             //(UCAxBR0 + UCAxBR1 ï¿½ 256)
 		UCA0MCTL =0x0c;//UCBRS0;                        // Modulation UCBRSx = 1
 		UCA0CTL1 &= ~UCSWRST;
 		IE2 |= UCA0RXIE;
 	}
-	void clk()
+	void clk_init()
 	{
 		WDTCTL = WDTPW | WDTHOLD;
 
@@ -37,8 +37,8 @@ int isum=0;
 
 	int main(void)
 	{
-		clk();
-uart();
+		clk_init();
+uart_init();
       Timer_block();
 
 

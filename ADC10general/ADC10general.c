@@ -15,7 +15,7 @@ volatile unsigned int nADC;
     	inicio();
     			ADC10CTL1 	 = 		INCH_7|ADC10DIV_4;//|CONSEQ_2	;           // CHANEL INPUT AND MODE
     			ADC10CTL0 	 = 		ADC10SHT_3|ADC10SR|REFBURST|MSC|REF2_5V|REFON | ADC10ON ;  // REFERENCE AND TIMING
-    			ADC10AE0 	|= 		BIT7;                        //ENABLE THE ANALOG CHANNEL ADC optionç
+    			ADC10AE0 	|= 		BIT7;                        //ENABLE THE ANALOG CHANNEL ADC optionï¿½
 
 
 
@@ -25,11 +25,11 @@ volatile unsigned int nADC;
     					nADC=ADC10MEM;
 	*/
     			nADC=10;
-    			enin();
+    			enable_interrupts();
     			while(1)
 		{
 
-    				   ec("Numero adc es ");  printuint(nADC);   borrar();
+    				   uart_send_string("Numero adc es ");  print_uint(nADC);   line_jump();
 			ADC10CTL0	|=		(ENC|ADC10SC ) ;
 			while((ADC10CTL0&ADC10IFG) !=ADC10IFG);
 			nADC=ADC10MEM;

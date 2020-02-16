@@ -11,25 +11,25 @@ char I_pos=0,	key_p1='P';
 unsigned int time_b=0,v_sel=0;
 unsigned int Vbat=0;
 /*************************************FUNCTION DECLARATION******************************************************/
-    void clk();
+    void clk_init();
     void DACPWM();
     void init_Buttons();
     void menu();
     void menu_1();
     void menu_2();
     char read_button();
-        void clk();
-        void uart();
-        void Enin();
+        void clk_init();
+        void uart_init();
+        void enable_interrupts();
         void sample_buttons();
         void InicioADC10();
         void Timer_module();
         void read_battey();
-        void en_timer();
+        void enable_timer();
     /****************************************MAIN CODE**************************************************************/
 	int main(void)
 	{
-		clk();
+		clk_init();
 		__disable_interrupt();
 
 
@@ -38,12 +38,12 @@ unsigned int Vbat=0;
 		PrintStr("Test LCD");
 	 	ClearDisplay();
 
-	 	uart();
+	 	uart_init();
 		//init_Buttons();
 		//sample_buttons();
 		Timer_module();
-		en_timer();
-		Enin();
+		enable_timer();
+		enable_interrupts();
 
 
 
@@ -65,7 +65,7 @@ unsigned int Vbat=0;
 			PrintStr("Test LCD");
 			SetCursorPosition(1, 0);
 					Lph_ui(day_t);putme(':'); Lph_ui(hour_t);putme(':'); Lph_ui(min_t);putme(':'); Lph_ui(sec_t);//c_lc();
-					p_ui(day_t);uart_write_byte(':'); p_ui(hour_t);uart_write_byte(':'); p_ui(min_t);uart_write_byte(':'); p_ui(sec_t);borrar();
+					p_ui(day_t);uart_write_byte(':'); p_ui(hour_t);uart_write_byte(':'); p_ui(min_t);uart_write_byte(':'); p_ui(sec_t);line_jump();
 					_delay_cycles(16000000);//10000);
 
 
@@ -81,14 +81,14 @@ unsigned int Vbat=0;
 
 /***********************************END OF MAIN RUTINE**************************************************/
 
-	   void Enin()
+	   void enable_interrupts()
 	 		{
 	 			_BIS_SR(GIE);
 	 			__enable_interrupt();
 	 			__bis_SR_register(GIE);
 	 		}
 
-	   void clk()
+	   void clk_init()
 			{
 				WDTCTL = WDTPW | WDTHOLD;
 				BCSCTL1 =CALBC1_16MHZ;
@@ -166,16 +166,16 @@ unsigned int Vbat=0;
 
 */
 
-			   ec("Capacidad ");p_ui((hour_t+(min_t/60))*v_sel);
-			  	ec(" volts1 ");p_ui(Vbat);ec(" estado ");uart_write_byte(Estado[I_pos]);borrar();
+			   uart_send_string("Capacidad ");p_ui((hour_t+(min_t/60))*v_sel);
+			  	uart_send_string(" volts1 ");p_ui(Vbat);uart_send_string(" estado ");uart_write_byte(Estado[I_pos]);line_jump();
 
 			   }
 		   void menu_1()
 		   {
 
 
-			   ec("volts ");p_ui(TACCR1);
-			   ec(" Amps ");p_ui(Vout);s_pc();p_ui(hour_t);s_pc();p_ui(min_t);s_pc();p_ui(sec_t);borrar();
+			   uart_send_string("volts ");p_ui(TACCR1);
+			   uart_send_string(" Amps ");p_ui(Vout);s_pc();p_ui(hour_t);s_pc();p_ui(min_t);s_pc();p_ui(sec_t);line_jump();
 
 				/*SetCursorPosition(0, 0);
 				PrintStr("Amps  ");
@@ -198,8 +198,8 @@ unsigned int Vbat=0;
 				do{
 
 
-					 ec("volts ");p_ui(TACCR1aux);
-							 ec(" Amps ");p_ui(Vout);s_pc();p_ui(sec_t);s_pc();p_ui(min_t);s_pc();p_ui(hour_t);borrar();
+					 uart_send_string("volts ");p_ui(TACCR1aux);
+							 uart_send_string(" Amps ");p_ui(Vout);s_pc();p_ui(sec_t);s_pc();p_ui(min_t);s_pc();p_ui(hour_t);line_jump();
 
 					_delay_cycles(2000000);
 					key_p=read_button();
@@ -222,7 +222,7 @@ unsigned int Vbat=0;
 				TACCR1=TACCR1aux;
 
 			}
-			void en_timer()
+			void enable_timer()
 					{
 					TA1CTL	 = ID_3|TASSEL_2|MC_1; //UP mode
 					TA1CCR0	 = 2000;
@@ -269,7 +269,7 @@ unsigned int Vbat=0;
 
 		 	   	   }
 */
-		  void uart()
+		  void uart_init()
 			   {
 					P1SEL |= ( BIT1|BIT2);
 					P1SEL2 |= (BIT1| BIT2);

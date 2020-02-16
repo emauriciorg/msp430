@@ -15,10 +15,10 @@ volatile unsigned int an3=200,an4=40,an5=80,an6=40,an7=80,an8=40,countt,DES,G_IR
 
 /*Patrones de caminata basados en el mapeo de angulos*/
 
-void uart();
+void uart_init();
 
 
-void Enin();
+void enable_interrupts();
 
 	/*Funcion para manipular 8 servos*/
 
@@ -52,7 +52,7 @@ void Enin();
 
 
 
-    void clk()
+    void clk_init()
 	{
 		WDTCTL = WDTPW | WDTHOLD;
 		BCSCTL1 =CALBC1_16MHZ;
@@ -76,9 +76,9 @@ void DelaySecond(int Second)
     int main(void)
 	{
     	volatile int icount=20,itimes=0;
-		clk();
-		uart();
-		Enin();
+		clk_init();
+		uart_init();
+		enable_interrupts();
 		/*Habilita los pines que controlan los servos*/
 		P2SEL2&=~(ServoOne|ServoTwo);
 		P2SEL&= ~(ServoOne|ServoTwo);
@@ -89,27 +89,27 @@ void DelaySecond(int Second)
 		{
 
 		TwoServo(an1,an2);
-	    ec("motor1:");PrintUInt(an1);ec(" motor2 :");PrintUInt(an2);clc_();
+	    uart_send_string("motor1:");PrintUInt(an1);uart_send_string(" motor2 :");PrintUInt(an2);clc_();
 	  	}
 	
 	}
 
 
 
-	   void Enin()
+	   void enable_interrupts()
 	 		{
 	 			_BIS_SR(GIE);
 	 			__enable_interrupt();
 	 			__bis_SR_register(GIE);
 	 		}
-	  void uart()
+	  void uart_init()
 		   {
 				P1SEL |= ( BIT1|BIT2);
 				P1SEL2 |= (BIT1| BIT2);
 				UCA0CTL1 = UCSWRST;
 				UCA0CTL1 |= UCSSEL_2;                     // SMCLK
 				UCA0BR0 = 130;//65;                            // 16MHz 9600 PREESCALAR
-				UCA0BR1 = 6;//3;                             //(UCAxBR0 + UCAxBR1 × 256)
+				UCA0BR1 = 6;//3;                             //(UCAxBR0 + UCAxBR1 ï¿½ 256)
 				UCA0MCTL =6<<1;//UCBRS0;                        // Modulation UCBRSx = 1
 				UCA0CTL1 &= ~UCSWRST;
 				IE2 = UCA0RXIE;

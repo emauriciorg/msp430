@@ -82,7 +82,7 @@ __interrupt void ADC10_ISR (void)
 {
  ADC10CTL0&=~ADC10IFG;
  dataa=(ADC10MEM*330/1024);
- /*if(count==4){count=0;volt=volt/4;ec("voltaje ");espacio();printint(volt);borrar();
+ /*if(count==4){count=0;volt=volt/4;uart_send_string("voltaje ");espacio();printint(volt);line_jump();
 }else{count++;volt=ADC10MEM+volt;}
  */
 }
@@ -112,7 +112,7 @@ if(timer1count==10){timer1count=0;P1OUT^=0X40;}else{timer1count++;}
 
 */
 
-/*uart mode
+/*uart_init mode
 
 #pragma vector = USCIAB0TX_VECTOR
 __interrupt void USCIAB0TX_ISR(void)

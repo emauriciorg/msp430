@@ -15,7 +15,7 @@
  *      Analog almost all channels with a single reading or multi-reading
  *      Timer0 and Timer3
  *      pwm,capture/compare
- *      uart
+ *      uart_init
  *      i2c master mode
  *
  */

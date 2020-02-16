@@ -6,9 +6,9 @@
 
 	int main(void)
 	{
-		clk();
-		uart();
-		Enin();
+		clk_init();
+		uart_init();
+		enable_interrupts();
 
 
 

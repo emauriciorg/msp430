@@ -15,7 +15,7 @@
  *      Analog almost all channels with a single reading or multi-reading
  *      Timer0 and Timer3
  *      pwm,capture/compare
- *      uart
+ *      uart_init
  *      i2c master mode
  *
  */
@@ -29,7 +29,7 @@
 		{
 			ADC10CTL1 	 = 		INCH_7|ADC10DIV_4|CONSEQ_2	;           // CHANEL INPUT AND MODE
 			ADC10CTL0 	 = 		ADC10SHT_3|ADC10SR|REFBURST|MSC|REF2_5V|REFON | ADC10ON | ADC10IE;  // REFERENCE AND TIMING
-			ADC10AE0 	|= 		BIT7;                        //ENABLE THE ANALOG CHANNEL ADC optionç
+			ADC10AE0 	|= 		BIT7;                        //ENABLE THE ANALOG CHANNEL ADC optionï¿½
 		}
 
 		void initADC10()
@@ -67,7 +67,7 @@
 			//  TXData = 0x00;                            // Holds TX data
 		}
 
-		void enin()
+		void enable_interrupts()
 		{
 			_BIS_SR(GIE);
 			__enable_interrupt();
@@ -89,20 +89,20 @@
 			P2REN=0X0000;
 		}
 
-		void uart()
+		void uart_init()
 		{
 			P1SEL |= (BIT1 | BIT2);
 			P1SEL2 |= (BIT1 | BIT2);
 			UCA0CTL1 = UCSWRST;
 			UCA0CTL1 |= 0x80;                     // SMCLK
 			UCA0BR0 = 130;                            // 16MHz 9600 PREESCALAR
-			UCA0BR1 = 6;                             //(UCAxBR0 + UCAxBR1 × 256)
+			UCA0BR1 = 6;                             //(UCAxBR0 + UCAxBR1 ï¿½ 256)
 			UCA0MCTL =0x0c;//UCBRS0;                        // Modulation UCBRSx = 1
 			UCA0CTL1 &= ~UCSWRST;
 			IE2 |= UCA0RXIE;
 		}
 
-		void clk()
+		void clk_init()
 		{
 			WDTCTL = WDTPW | WDTHOLD;                 // Stop WDT
 			BCSCTL1 =CALBC1_16MHZ;
@@ -156,9 +156,9 @@
 		void inicio()
 		{
 		//	configtimer();
-			clk();
+			clk_init();
 		//	ADC10f();
-			uart();
+			uart_init();
 
 		}
 

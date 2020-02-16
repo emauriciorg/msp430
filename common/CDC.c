@@ -27,10 +27,10 @@ void readint(unsigned int dataSR){	if(iSR==5){iSR=0;  dataSR2=dataSR1;CCR0=dataS
 
 
 
-void ec(char *cadena)
+void uart_send_string(char *string)
 {
 	char *c;
-	c = cadena;
+	c = string;
 	while ((c != 0) && (*c != 0))
 	{
 		uart_write_byte(*c);
@@ -85,7 +85,7 @@ void printlong(unsigned long longtochar)
 	aux_char1[7]=(char)(d+48);
 	aux_char1[8]=(char)(u+48);
 
-	ec(aux_char1);
+	uart_send_string(aux_char1);
 
 	aux_char1[0]=8;
 	aux_char1[1]=48;
@@ -113,7 +113,7 @@ void int2hex(unsigned int datoint)
 	aux_char[3]=(char)(_UM);
 	aux_char[2]=(char)(_DM);
 	aux_char[1]=(char)(_D);
-	ec(aux_char);
+	uart_send_string(aux_char);
 }
 
 void clc_(){uart_write_byte(13);}
@@ -133,7 +133,7 @@ unsigned int intchar2=(unsigned int)(intchar1);
 	aux_char[3]=(char)(_C+48);
 	aux_char[4]=(char)(_D+48);
 	aux_char[5]=(char)(_U+48);
-	ec(aux_char);
+	uart_send_string(aux_char);
 }
 
 void printchar2c(unsigned int int2cchar)
@@ -152,7 +152,7 @@ void printchar2c(unsigned int int2cchar)
 	aux_char[3]=(char)(_C+48);
 	aux_char[4]=(char)(_D+48);
 	aux_char[5]=(char)(_U+48);
-	ec(aux_char);
+	uart_send_string(aux_char);
 }
 
 
@@ -170,7 +170,7 @@ void p_ui(unsigned int intchar1)
 	aux_char[4]=(char)(_D+48);
 	aux_char[5]=(char)(_U+48);
 	aux_char[0]=48;
-	ec(aux_char);
+	uart_send_string(aux_char);
 }
 
 void printfloat(float twoto3)
@@ -188,5 +188,5 @@ void printfloat(float twoto3)
 	aux_char[3]=46;
 	aux_char[4]=(char)(_D+48);
 	aux_char[5]=(char)(_U+48);
-	ec(aux_char);
+	uart_send_string(aux_char);
 }

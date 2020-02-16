@@ -6,17 +6,17 @@ unsigned int 		Vin=1020,Vmax=1020,VES1=510,VES2=612,VES3=795,Vout=100;
 
 
 /*************************************FUNCTION DECLARATION******************************************************/
-    void clk();
-    void uart();
-    void Enin();
+    void clk_init();
+    void uart_init();
+    void enable_interrupts();
 
 void ws2812(char);
 void writeLed(char , char , char );
 int main(void)
 	{
-		clk();
-    	//uart();
-		//Enin();
+		clk_init();
+    	//uart_init();
+		//enable_interrupts();
 
 
   P2DIR=0X0F;
@@ -92,7 +92,7 @@ int main(void)
 				}
 	}
 
-	  void uart()
+	  void uart_init()
 		   {
 				P1SEL |= ( BIT1|BIT2);
 				P1SEL2 |= (BIT1| BIT2);
@@ -120,13 +120,13 @@ int main(void)
 
 			}
 
-	   void Enin()
+	   void enable_interrupts()
 	 		{
 	 			_BIS_SR(GIE);
 	 			__enable_interrupt();
 	 			__bis_SR_register(GIE);
 	 		}
-	   void clk()
+	   void clk_init()
 			{
 				WDTCTL = WDTPW | WDTHOLD;
 				BCSCTL1 =CALBC1_16MHZ;

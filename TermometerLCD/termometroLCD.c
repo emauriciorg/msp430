@@ -88,8 +88,8 @@ void main(void)
 
 	ADC10CTL1 	 = 		INCH_5|ADC10DIV_7|CONSEQ_2	;           // CHANEL INPUT AND MODE
 			ADC10CTL0 	 = 		ADC10SHT_3|MSC| ADC10ON | ADC10IE;  // REFERENCE AND TIMING
-			ADC10AE0 	|= 		BIT5;                        //ENABLE THE ANALOG CHANNEL ADC optionç
-	enin();
+			ADC10AE0 	|= 		BIT5;                        //ENABLE THE ANALOG CHANNEL ADC optionï¿½
+	enable_interrupts();
 	inicioADC();
 
 
@@ -110,7 +110,7 @@ void main(void)
 TempSample();
 
  				//controlTemp(TempC[2]);
- 				ec("temp ");printuint(TempC[6]);espacio();printuint(TempCA[3]); borrar();
+ 				uart_send_string("temp ");print_uint(TempC[6]);espacio();print_uint(TempCA[3]); line_jump();
 
  				_delay_cycles(10000);
 
@@ -159,7 +159,7 @@ void main()
 		  avg_adc[6]=(avg_adc[5]+avg_adc[1]+avg_adc[2]+avg_adc[3]+  avg_adc[4])/5;
 
 
-			ec("temp ");printuint(avg_adc[6]); borrar();
+			uart_send_string("temp ");print_uint(avg_adc[6]); line_jump();
 	  }
 }
 */

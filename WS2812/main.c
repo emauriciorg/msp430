@@ -49,7 +49,7 @@ int main(void)
 		for(j=0;j<=NUMBER_OF_LEDS;j++){
 			for(i=0;i<=NUMBER_OF_LEDS;i++){
 
-				//	ec("el numero de leds es");p_ui(NUMBER_OF_LEDS);p_ui(i);clc_();
+				//	uart_send_string("el numero de leds es");p_ui(NUMBER_OF_LEDS);p_ui(i);clc_();
 				//		writeLed(LedRed,LedGreen,LedBlue);
 
 				if((i) == (j-1)) {

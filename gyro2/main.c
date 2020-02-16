@@ -42,10 +42,10 @@ int main(void)
 		}
 
 
-		ec(" X: ");printuint(twoc2dec(GX1));espacio();printuint(twoc2dec(anguloAproxX));espacio();uart_write_byte(signo);
-		ec(" Y: ");printuint(twoc2dec(GY1));espacio();printuint(twoc2dec(anguloAproxY));espacio();uart_write_byte(signo);
-		ec(" Z: ");printuint(twoc2dec(GZ1));espacio();printuint(twoc2dec(anguloAproxZ));espacio();uart_write_byte(signo);borrar();
-		ec("REG1 es ");printuint((registro1+'0'));borrar();
+		uart_send_string(" X: ");print_uint(twoc2dec(GX1));espacio();print_uint(twoc2dec(anguloAproxX));espacio();uart_write_byte(signo);
+		uart_send_string(" Y: ");print_uint(twoc2dec(GY1));espacio();print_uint(twoc2dec(anguloAproxY));espacio();uart_write_byte(signo);
+		uart_send_string(" Z: ");print_uint(twoc2dec(GZ1));espacio();print_uint(twoc2dec(anguloAproxZ));espacio();uart_write_byte(signo);line_jump();
+		uart_send_string("REG1 es ");print_uint((registro1+'0'));line_jump();
 	}
 }
 

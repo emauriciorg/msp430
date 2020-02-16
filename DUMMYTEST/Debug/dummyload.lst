@@ -1268,15 +1268,15 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   22
     1137                    .dwendentry
     1138                    .dwendtag $C$DW$97
     1139            
-    1140 000000               .sect   ".text:ec"
+    1140 000000               .sect   ".text:uart_send_string"
     1141                    .align  2
     1142                    .clink
-    1143                    .global ec
+    1143                    .global uart_send_string
     1144            
-    1145            $C$DW$102       .dwtag  DW_TAG_subprogram, DW_AT_name("ec")
-    1146                    .dwattr $C$DW$102, DW_AT_low_pc(ec)
+    1145            $C$DW$102       .dwtag  DW_TAG_subprogram, DW_AT_name("uart_send_string")
+    1146                    .dwattr $C$DW$102, DW_AT_low_pc(uart_send_string)
     1147                    .dwattr $C$DW$102, DW_AT_high_pc(0x00)
-    1148                    .dwattr $C$DW$102, DW_AT_TI_symbol_name("ec")
+    1148                    .dwattr $C$DW$102, DW_AT_TI_symbol_name("uart_send_string")
     1149                    .dwattr $C$DW$102, DW_AT_external
     1150                    .dwattr $C$DW$102, DW_AT_TI_begin_file("..\CDC.h")
     1151                    .dwattr $C$DW$102, DW_AT_TI_begin_line(0x42)
@@ -1285,28 +1285,28 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   22
     1154                    .dwattr $C$DW$102, DW_AT_decl_line(0x42)
     1155                    .dwattr $C$DW$102, DW_AT_decl_column(0x06)
     1156                    .dwattr $C$DW$102, DW_AT_TI_max_frame_size(0x02)
-    1157                    .dwpsn  file "..\CDC.h",line 67,column 1,is_stmt,address ec,isa 0
+    1157                    .dwpsn  file "..\CDC.h",line 67,column 1,is_stmt,address uart_send_string,isa 0
     1158            
-    1159                    .dwfde $C$DW$CIE, ec
-    1160            $C$DW$103       .dwtag  DW_TAG_formal_parameter, DW_AT_name("cadena")
-    1161                    .dwattr $C$DW$103, DW_AT_TI_symbol_name("cadena")
+    1159                    .dwfde $C$DW$CIE, uart_send_string
+    1160            $C$DW$103       .dwtag  DW_TAG_formal_parameter, DW_AT_name("string")
+    1161                    .dwattr $C$DW$103, DW_AT_TI_symbol_name("string")
     1162                    .dwattr $C$DW$103, DW_AT_type(*$C$DW$T$26)
     1163                    .dwattr $C$DW$103, DW_AT_location[DW_OP_reg12]
     1164            
     1165            ;*****************************************************************************
-    1166            ;* FUNCTION NAME: ec                                                         *
+    1166            ;* FUNCTION NAME: uart_send_string                                                         *
     1167            ;*                                                                           *
     1168            ;*   Regs Modified     : SP,SR,r12,r15                                       *
     1169            ;*   Regs Used         : SP,SR,r12,r15                                       *
     1170            ;*   Local Frame Size  : 0 Args + 0 Auto + 0 Save = 0 byte                   *
     1171            ;*****************************************************************************
-    1172 000000       ec:
+    1172 000000       uart_send_string:
     1173            ;* --------------------------------------------------------------------------*
     1174                    .dwcfi  cfa_offset, 2
     1175                    .dwcfi  save_reg_to_mem, 16, -2
-    1176            ;* r12   assigned to cadena
-    1177            $C$DW$104       .dwtag  DW_TAG_variable, DW_AT_name("cadena")
-    1178                    .dwattr $C$DW$104, DW_AT_TI_symbol_name("cadena")
+    1176            ;* r12   assigned to string
+    1177            $C$DW$104       .dwtag  DW_TAG_variable, DW_AT_name("string")
+    1178                    .dwattr $C$DW$104, DW_AT_TI_symbol_name("string")
     1179                    .dwattr $C$DW$104, DW_AT_type(*$C$DW$T$26)
     1180                    .dwattr $C$DW$104, DW_AT_location[DW_OP_reg12]
     1181            ;* r15   assigned to c
@@ -2495,9 +2495,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   42
          0003f6 0000!
     2041            $C$DW$169       .dwtag  DW_TAG_TI_branch
     2042                    .dwattr $C$DW$169, DW_AT_low_pc(0x00)
-    2043                    .dwattr $C$DW$169, DW_AT_name("ec")
+    2043                    .dwattr $C$DW$169, DW_AT_name("uart_send_string")
     2044                    .dwattr $C$DW$169, DW_AT_TI_call
-    2045 0003f8 12B0          CALL      #ec                   ; [] |124| 
+    2045 0003f8 12B0          CALL      #uart_send_string                   ; [] |124| 
          0003fa 0000!
     2046                                                      ; [] |124| 
     2047                    .dwpsn  file "..\CDC.h",line 126,column 2,is_stmt,isa 0
@@ -2740,9 +2740,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   46
          0000a0 0000!
     2209            $C$DW$175       .dwtag  DW_TAG_TI_branch
     2210                    .dwattr $C$DW$175, DW_AT_low_pc(0x00)
-    2211                    .dwattr $C$DW$175, DW_AT_name("ec")
+    2211                    .dwattr $C$DW$175, DW_AT_name("uart_send_string")
     2212                    .dwattr $C$DW$175, DW_AT_TI_call
-    2213 0000a2 12B0          CALL      #ec                   ; [] |152| 
+    2213 0000a2 12B0          CALL      #uart_send_string                   ; [] |152| 
          0000a4 0000!
     2214                                                      ; [] |152| 
     2215                    .dwpsn  file "..\CDC.h",line 153,column 1,is_stmt,isa 0
@@ -2757,7 +2757,7 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   46
     2224                    .dwendentry
     2225                    .dwendtag $C$DW$170
     2226            
-    2227 000000               .sect   ".text:borrar"
+    2227 000000               .sect   ".text:line_jump"
 MSP430 Assembler PC v4.2.1 Sat Jan 28 11:33:39 2017
 
 Tools Copyright (c) 2003-2013 Texas Instruments Incorporated
@@ -2765,12 +2765,12 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   47
 
     2228                    .align  2
     2229                    .clink
-    2230                    .global borrar
+    2230                    .global line_jump
     2231            
-    2232            $C$DW$177       .dwtag  DW_TAG_subprogram, DW_AT_name("borrar")
-    2233                    .dwattr $C$DW$177, DW_AT_low_pc(borrar)
+    2232            $C$DW$177       .dwtag  DW_TAG_subprogram, DW_AT_name("line_jump")
+    2233                    .dwattr $C$DW$177, DW_AT_low_pc(line_jump)
     2234                    .dwattr $C$DW$177, DW_AT_high_pc(0x00)
-    2235                    .dwattr $C$DW$177, DW_AT_TI_symbol_name("borrar")
+    2235                    .dwattr $C$DW$177, DW_AT_TI_symbol_name("line_jump")
     2236                    .dwattr $C$DW$177, DW_AT_external
     2237                    .dwattr $C$DW$177, DW_AT_TI_begin_file("..\CDC.h")
     2238                    .dwattr $C$DW$177, DW_AT_TI_begin_line(0x9b)
@@ -2779,18 +2779,18 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   47
     2241                    .dwattr $C$DW$177, DW_AT_decl_line(0x9b)
     2242                    .dwattr $C$DW$177, DW_AT_decl_column(0x06)
     2243                    .dwattr $C$DW$177, DW_AT_TI_max_frame_size(0x02)
-    2244                    .dwpsn  file "..\CDC.h",line 155,column 14,is_stmt,address borrar,isa 0
+    2244                    .dwpsn  file "..\CDC.h",line 155,column 14,is_stmt,address line_jump,isa 0
     2245            
-    2246                    .dwfde $C$DW$CIE, borrar
+    2246                    .dwfde $C$DW$CIE, line_jump
     2247            
     2248            ;*****************************************************************************
-    2249            ;* FUNCTION NAME: borrar                                                     *
+    2249            ;* FUNCTION NAME: line_jump                                                     *
     2250            ;*                                                                           *
     2251            ;*   Regs Modified     : SP,SR,r12                                           *
     2252            ;*   Regs Used         : SP,SR,r12                                           *
     2253            ;*   Local Frame Size  : 0 Args + 0 Auto + 0 Save = 0 byte                   *
     2254            ;*****************************************************************************
-    2255 000000       borrar:
+    2255 000000       line_jump:
     2256            ;* --------------------------------------------------------------------------*
     2257                    .dwcfi  cfa_offset, 2
     2258                    .dwcfi  save_reg_to_mem, 16, -2
@@ -3107,9 +3107,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   52
          00010c 0000!
     2484            $C$DW$198       .dwtag  DW_TAG_TI_branch
     2485                    .dwattr $C$DW$198, DW_AT_low_pc(0x00)
-    2486                    .dwattr $C$DW$198, DW_AT_name("ec")
+    2486                    .dwattr $C$DW$198, DW_AT_name("uart_send_string")
     2487                    .dwattr $C$DW$198, DW_AT_TI_call
-    2488 00010e 12B0          CALL      #ec                   ; [] |172| 
+    2488 00010e 12B0          CALL      #uart_send_string                   ; [] |172| 
          000110 0000!
     2489                                                      ; [] |172| 
     2490                    .dwpsn  file "..\CDC.h",line 173,column 1,is_stmt,isa 0
@@ -3413,9 +3413,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   57
          000112 0000!
     2705            $C$DW$217       .dwtag  DW_TAG_TI_branch
     2706                    .dwattr $C$DW$217, DW_AT_low_pc(0x00)
-    2707                    .dwattr $C$DW$217, DW_AT_name("ec")
+    2707                    .dwattr $C$DW$217, DW_AT_name("uart_send_string")
     2708                    .dwattr $C$DW$217, DW_AT_TI_call
-    2709 000114 12B0          CALL      #ec                   ; [] |191| 
+    2709 000114 12B0          CALL      #uart_send_string                   ; [] |191| 
          000116 0000!
     2710                                                      ; [] |191| 
 MSP430 Assembler PC v4.2.1 Sat Jan 28 11:33:39 2017
@@ -3724,9 +3724,9 @@ Tools Copyright (c) 2003-2013 Texas Instruments Incorporated
 C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   63
 
     2925                    .dwattr $C$DW$236, DW_AT_low_pc(0x00)
-    2926                    .dwattr $C$DW$236, DW_AT_name("ec")
+    2926                    .dwattr $C$DW$236, DW_AT_name("uart_send_string")
     2927                    .dwattr $C$DW$236, DW_AT_TI_call
-    2928 000114 12B0          CALL      #ec                   ; [] |209| 
+    2928 000114 12B0          CALL      #uart_send_string                   ; [] |209| 
          000116 0000!
     2929                                                      ; [] |209| 
     2930                    .dwpsn  file "..\CDC.h",line 210,column 1,is_stmt,isa 0
@@ -4006,9 +4006,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   67
          0000f4 0000!
     3130            $C$DW$253       .dwtag  DW_TAG_TI_branch
     3131                    .dwattr $C$DW$253, DW_AT_low_pc(0x00)
-    3132                    .dwattr $C$DW$253, DW_AT_name("ec")
+    3132                    .dwattr $C$DW$253, DW_AT_name("uart_send_string")
     3133                    .dwattr $C$DW$253, DW_AT_TI_call
-    3134 0000f6 12B0          CALL      #ec                   ; [] |227| 
+    3134 0000f6 12B0          CALL      #uart_send_string                   ; [] |227| 
          0000f8 0000!
     3135                                                      ; [] |227| 
     3136                    .dwpsn  file "..\CDC.h",line 228,column 1,is_stmt,isa 0
@@ -5361,9 +5361,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   90
     4237                    .dwpsn  file "../dummyload.c",line 32,column 3,is_stmt,isa 0
     4238            $C$DW$331       .dwtag  DW_TAG_TI_branch
     4239                    .dwattr $C$DW$331, DW_AT_low_pc(0x00)
-    4240                    .dwattr $C$DW$331, DW_AT_name("clk")
+    4240                    .dwattr $C$DW$331, DW_AT_name("clk_init")
     4241                    .dwattr $C$DW$331, DW_AT_TI_call
-    4242 000000 12B0          CALL      #clk                  ; [] |32| 
+    4242 000000 12B0          CALL      #clk_init                  ; [] |32| 
          000002 0000!
     4243                                                      ; [] |32| 
     4244                    .dwpsn  file "../dummyload.c",line 33,column 3,is_stmt,isa 0
@@ -5413,9 +5413,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   91
     4278                    .dwpsn  file "../dummyload.c",line 41,column 4,is_stmt,isa 0
     4279            $C$DW$336       .dwtag  DW_TAG_TI_branch
     4280                    .dwattr $C$DW$336, DW_AT_low_pc(0x00)
-    4281                    .dwattr $C$DW$336, DW_AT_name("uart")
+    4281                    .dwattr $C$DW$336, DW_AT_name("uart_init")
     4282                    .dwattr $C$DW$336, DW_AT_TI_call
-    4283 000020 12B0          CALL      #uart                 ; [] |41| 
+    4283 000020 12B0          CALL      #uart_init                 ; [] |41| 
          000022 0000!
     4284                                                      ; [] |41| 
     4285                    .dwpsn  file "../dummyload.c",line 44,column 3,is_stmt,isa 0
@@ -5429,17 +5429,17 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   91
     4292                    .dwpsn  file "../dummyload.c",line 45,column 3,is_stmt,isa 0
     4293            $C$DW$338       .dwtag  DW_TAG_TI_branch
     4294                    .dwattr $C$DW$338, DW_AT_low_pc(0x00)
-    4295                    .dwattr $C$DW$338, DW_AT_name("en_timer")
+    4295                    .dwattr $C$DW$338, DW_AT_name("enable_timer")
     4296                    .dwattr $C$DW$338, DW_AT_TI_call
-    4297 000028 12B0          CALL      #en_timer             ; [] |45| 
+    4297 000028 12B0          CALL      #enable_timer             ; [] |45| 
          00002a 0000!
     4298                                                      ; [] |45| 
     4299                    .dwpsn  file "../dummyload.c",line 46,column 3,is_stmt,isa 0
     4300            $C$DW$339       .dwtag  DW_TAG_TI_branch
     4301                    .dwattr $C$DW$339, DW_AT_low_pc(0x00)
-    4302                    .dwattr $C$DW$339, DW_AT_name("Enin")
+    4302                    .dwattr $C$DW$339, DW_AT_name("enable_interrupts")
     4303                    .dwattr $C$DW$339, DW_AT_TI_call
-    4304 00002c 12B0          CALL      #Enin                 ; [] |46| 
+    4304 00002c 12B0          CALL      #enable_interrupts                 ; [] |46| 
          00002e 0000!
     4305                                                      ; [] |46| 
     4306            ;* --------------------------------------------------------------------------*
@@ -5646,9 +5646,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   95
     4455                    .dwpsn  file "../dummyload.c",line 68,column 106,is_stmt,isa 0
     4456            $C$DW$357       .dwtag  DW_TAG_TI_branch
     4457                    .dwattr $C$DW$357, DW_AT_low_pc(0x00)
-    4458                    .dwattr $C$DW$357, DW_AT_name("borrar")
+    4458                    .dwattr $C$DW$357, DW_AT_name("line_jump")
     4459                    .dwattr $C$DW$357, DW_AT_TI_call
-    4460 0000b8 12B0          CALL      #borrar               ; [] |68| 
+    4460 0000b8 12B0          CALL      #line_jump               ; [] |68| 
          0000ba 0000!
     4461                                                      ; [] |68| 
     4462                    .dwpsn  file "../dummyload.c",line 69,column 6,is_stmt,isa 0
@@ -5679,15 +5679,15 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   95
     4485                    .dwendentry
     4486                    .dwendtag $C$DW$330
     4487            
-    4488 000000               .sect   ".text:Enin"
+    4488 000000               .sect   ".text:enable_interrupts"
     4489                    .align  2
     4490                    .clink
-    4491                    .global Enin
+    4491                    .global enable_interrupts
     4492            
-    4493            $C$DW$358       .dwtag  DW_TAG_subprogram, DW_AT_name("Enin")
-    4494                    .dwattr $C$DW$358, DW_AT_low_pc(Enin)
+    4493            $C$DW$358       .dwtag  DW_TAG_subprogram, DW_AT_name("enable_interrupts")
+    4494                    .dwattr $C$DW$358, DW_AT_low_pc(enable_interrupts)
     4495                    .dwattr $C$DW$358, DW_AT_high_pc(0x00)
-    4496                    .dwattr $C$DW$358, DW_AT_TI_symbol_name("Enin")
+    4496                    .dwattr $C$DW$358, DW_AT_TI_symbol_name("enable_interrupts")
     4497                    .dwattr $C$DW$358, DW_AT_external
     4498                    .dwattr $C$DW$358, DW_AT_TI_begin_file("../dummyload.c")
     4499                    .dwattr $C$DW$358, DW_AT_TI_begin_line(0x54)
@@ -5696,23 +5696,23 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   95
     4502                    .dwattr $C$DW$358, DW_AT_decl_line(0x54)
     4503                    .dwattr $C$DW$358, DW_AT_decl_column(0x0a)
     4504                    .dwattr $C$DW$358, DW_AT_TI_max_frame_size(0x02)
-    4505                    .dwpsn  file "../dummyload.c",line 85,column 5,is_stmt,address Enin,isa 0
+    4505                    .dwpsn  file "../dummyload.c",line 85,column 5,is_stmt,address enable_interrupts,isa 0
     4506            
 MSP430 Assembler PC v4.2.1 Sat Jan 28 11:33:39 2017
 
 Tools Copyright (c) 2003-2013 Texas Instruments Incorporated
 C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   96
 
-    4507                    .dwfde $C$DW$CIE, Enin
+    4507                    .dwfde $C$DW$CIE, enable_interrupts
     4508            
     4509            ;*****************************************************************************
-    4510            ;* FUNCTION NAME: Enin                                                       *
+    4510            ;* FUNCTION NAME: enable_interrupts                                                       *
     4511            ;*                                                                           *
     4512            ;*   Regs Modified     : SP,SR                                               *
     4513            ;*   Regs Used         : SP,SR                                               *
     4514            ;*   Local Frame Size  : 0 Args + 0 Auto + 0 Save = 0 byte                   *
     4515            ;*****************************************************************************
-    4516 000000       Enin:
+    4516 000000       enable_interrupts:
     4517            ;* --------------------------------------------------------------------------*
     4518                    .dwcfi  cfa_offset, 2
     4519                    .dwcfi  save_reg_to_mem, 16, -2
@@ -5734,15 +5734,15 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   96
     4535                    .dwendentry
     4536                    .dwendtag $C$DW$358
     4537            
-    4538 000000               .sect   ".text:clk"
+    4538 000000               .sect   ".text:clk_init"
     4539                    .align  2
     4540                    .clink
-    4541                    .global clk
+    4541                    .global clk_init
     4542            
-    4543            $C$DW$360       .dwtag  DW_TAG_subprogram, DW_AT_name("clk")
-    4544                    .dwattr $C$DW$360, DW_AT_low_pc(clk)
+    4543            $C$DW$360       .dwtag  DW_TAG_subprogram, DW_AT_name("clk_init")
+    4544                    .dwattr $C$DW$360, DW_AT_low_pc(clk_init)
     4545                    .dwattr $C$DW$360, DW_AT_high_pc(0x00)
-    4546                    .dwattr $C$DW$360, DW_AT_TI_symbol_name("clk")
+    4546                    .dwattr $C$DW$360, DW_AT_TI_symbol_name("clk_init")
     4547                    .dwattr $C$DW$360, DW_AT_external
     4548                    .dwattr $C$DW$360, DW_AT_TI_begin_file("../dummyload.c")
     4549                    .dwattr $C$DW$360, DW_AT_TI_begin_line(0x5b)
@@ -5751,12 +5751,12 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   96
     4552                    .dwattr $C$DW$360, DW_AT_decl_line(0x5b)
     4553                    .dwattr $C$DW$360, DW_AT_decl_column(0x0a)
     4554                    .dwattr $C$DW$360, DW_AT_TI_max_frame_size(0x02)
-    4555                    .dwpsn  file "../dummyload.c",line 92,column 4,is_stmt,address clk,isa 0
+    4555                    .dwpsn  file "../dummyload.c",line 92,column 4,is_stmt,address clk_init,isa 0
     4556            
-    4557                    .dwfde $C$DW$CIE, clk
+    4557                    .dwfde $C$DW$CIE, clk_init
     4558            
     4559            ;*****************************************************************************
-    4560            ;* FUNCTION NAME: clk                                                        *
+    4560            ;* FUNCTION NAME: clk_init                                                        *
     4561            ;*                                                                           *
 MSP430 Assembler PC v4.2.1 Sat Jan 28 11:33:39 2017
 
@@ -5767,7 +5767,7 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   97
     4563            ;*   Regs Used         : SP                                                  *
     4564            ;*   Local Frame Size  : 0 Args + 0 Auto + 0 Save = 0 byte                   *
     4565            ;*****************************************************************************
-    4566 000000       clk:
+    4566 000000       clk_init:
     4567            ;* --------------------------------------------------------------------------*
     4568                    .dwcfi  cfa_offset, 2
     4569                    .dwcfi  save_reg_to_mem, 16, -2
@@ -6243,9 +6243,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE  104
 Tools Copyright (c) 2003-2013 Texas Instruments Incorporated
 C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE  105
 
-    4942                    .dwattr $C$DW$378, DW_AT_name("ec")
+    4942                    .dwattr $C$DW$378, DW_AT_name("uart_send_string")
     4943                    .dwattr $C$DW$378, DW_AT_TI_call
-    4944 000004 12B0          CALL      #ec                   ; [] |169| 
+    4944 000004 12B0          CALL      #uart_send_string                   ; [] |169| 
          000006 0000!
     4945                                                      ; [] |169| 
     4946                    .dwpsn  file "../dummyload.c",line 169,column 24,is_stmt,isa 0
@@ -6284,9 +6284,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE  105
          000028 0000!
     4972            $C$DW$382       .dwtag  DW_TAG_TI_branch
     4973                    .dwattr $C$DW$382, DW_AT_low_pc(0x00)
-    4974                    .dwattr $C$DW$382, DW_AT_name("ec")
+    4974                    .dwattr $C$DW$382, DW_AT_name("uart_send_string")
     4975                    .dwattr $C$DW$382, DW_AT_TI_call
-    4976 00002a 12B0          CALL      #ec                   ; [] |170| 
+    4976 00002a 12B0          CALL      #uart_send_string                   ; [] |170| 
          00002c 0000!
     4977                                                      ; [] |170| 
     4978                    .dwpsn  file "../dummyload.c",line 170,column 22,is_stmt,isa 0
@@ -6309,9 +6309,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE  106
          000038 0000!
     4988            $C$DW$384       .dwtag  DW_TAG_TI_branch
     4989                    .dwattr $C$DW$384, DW_AT_low_pc(0x00)
-    4990                    .dwattr $C$DW$384, DW_AT_name("ec")
+    4990                    .dwattr $C$DW$384, DW_AT_name("uart_send_string")
     4991                    .dwattr $C$DW$384, DW_AT_TI_call
-    4992 00003a 12B0          CALL      #ec                   ; [] |170| 
+    4992 00003a 12B0          CALL      #uart_send_string                   ; [] |170| 
          00003c 0000!
     4993                                                      ; [] |170| 
     4994                    .dwpsn  file "../dummyload.c",line 170,column 48,is_stmt,isa 0
@@ -6329,9 +6329,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE  106
     5003                    .dwpsn  file "../dummyload.c",line 170,column 74,is_stmt,isa 0
     5004            $C$DW$386       .dwtag  DW_TAG_TI_branch
     5005                    .dwattr $C$DW$386, DW_AT_low_pc(0x00)
-    5006                    .dwattr $C$DW$386, DW_AT_name("borrar")
+    5006                    .dwattr $C$DW$386, DW_AT_name("line_jump")
     5007                    .dwattr $C$DW$386, DW_AT_TI_call
-    5008 00004a 12B0          CALL      #borrar               ; [] |170| 
+    5008 00004a 12B0          CALL      #line_jump               ; [] |170| 
          00004c 0000!
     5009                                                      ; [] |170| 
     5010                    .dwpsn  file "../dummyload.c",line 172,column 7,is_stmt,isa 0
@@ -6388,9 +6388,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE  107
          000002 0000!
     5056            $C$DW$389       .dwtag  DW_TAG_TI_branch
     5057                    .dwattr $C$DW$389, DW_AT_low_pc(0x00)
-    5058                    .dwattr $C$DW$389, DW_AT_name("ec")
+    5058                    .dwattr $C$DW$389, DW_AT_name("uart_send_string")
     5059                    .dwattr $C$DW$389, DW_AT_TI_call
-    5060 000004 12B0          CALL      #ec                   ; [] |177| 
+    5060 000004 12B0          CALL      #uart_send_string                   ; [] |177| 
          000006 0000!
     5061                                                      ; [] |177| 
     5062                    .dwpsn  file "../dummyload.c",line 177,column 20,is_stmt,isa 0
@@ -6408,9 +6408,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE  107
          000012 0000!
     5072            $C$DW$391       .dwtag  DW_TAG_TI_branch
     5073                    .dwattr $C$DW$391, DW_AT_low_pc(0x00)
-    5074                    .dwattr $C$DW$391, DW_AT_name("ec")
+    5074                    .dwattr $C$DW$391, DW_AT_name("uart_send_string")
     5075                    .dwattr $C$DW$391, DW_AT_TI_call
-    5076 000014 12B0          CALL      #ec                   ; [] |178| 
+    5076 000014 12B0          CALL      #uart_send_string                   ; [] |178| 
          000016 0000!
     5077                                                      ; [] |178| 
     5078                    .dwpsn  file "../dummyload.c",line 178,column 20,is_stmt,isa 0
@@ -6490,9 +6490,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE  109
     5131                    .dwpsn  file "../dummyload.c",line 178,column 89,is_stmt,isa 0
     5132            $C$DW$399       .dwtag  DW_TAG_TI_branch
     5133                    .dwattr $C$DW$399, DW_AT_low_pc(0x00)
-    5134                    .dwattr $C$DW$399, DW_AT_name("borrar")
+    5134                    .dwattr $C$DW$399, DW_AT_name("line_jump")
     5135                    .dwattr $C$DW$399, DW_AT_TI_call
-    5136 000044 12B0          CALL      #borrar               ; [] |178| 
+    5136 000044 12B0          CALL      #line_jump               ; [] |178| 
          000046 0000!
     5137                                                      ; [] |178| 
     5138            ;* --------------------------------------------------------------------------*
@@ -6581,9 +6581,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE  110
          000014 0000!
     5212            $C$DW$404       .dwtag  DW_TAG_TI_branch
     5213                    .dwattr $C$DW$404, DW_AT_low_pc(0x00)
-    5214                    .dwattr $C$DW$404, DW_AT_name("ec")
+    5214                    .dwattr $C$DW$404, DW_AT_name("uart_send_string")
     5215                    .dwattr $C$DW$404, DW_AT_TI_call
-    5216 000016 12B0          CALL      #ec                   ; [] |201| 
+    5216 000016 12B0          CALL      #uart_send_string                   ; [] |201| 
          000018 0000!
     5217                                                      ; [] |201| 
     5218                    .dwpsn  file "../dummyload.c",line 201,column 20,is_stmt,isa 0
@@ -6606,9 +6606,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE  111
          000024 0000!
     5228            $C$DW$406       .dwtag  DW_TAG_TI_branch
     5229                    .dwattr $C$DW$406, DW_AT_low_pc(0x00)
-    5230                    .dwattr $C$DW$406, DW_AT_name("ec")
+    5230                    .dwattr $C$DW$406, DW_AT_name("uart_send_string")
     5231                    .dwattr $C$DW$406, DW_AT_TI_call
-    5232 000026 12B0          CALL      #ec                   ; [] |202| 
+    5232 000026 12B0          CALL      #uart_send_string                   ; [] |202| 
          000028 0000!
     5233                                                      ; [] |202| 
     5234                    .dwpsn  file "../dummyload.c",line 202,column 22,is_stmt,isa 0
@@ -6683,9 +6683,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE  112
     5287                    .dwpsn  file "../dummyload.c",line 202,column 91,is_stmt,isa 0
     5288            $C$DW$414       .dwtag  DW_TAG_TI_branch
     5289                    .dwattr $C$DW$414, DW_AT_low_pc(0x00)
-    5290                    .dwattr $C$DW$414, DW_AT_name("borrar")
+    5290                    .dwattr $C$DW$414, DW_AT_name("line_jump")
     5291                    .dwattr $C$DW$414, DW_AT_TI_call
-    5292 000056 12B0          CALL      #borrar               ; [] |202| 
+    5292 000056 12B0          CALL      #line_jump               ; [] |202| 
          000058 0000!
     5293                                                      ; [] |202| 
     5294            ;* --------------------------------------------------------------------------*
@@ -6789,15 +6789,15 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE  114
     5365                    .dwendentry
     5366                    .dwendtag $C$DW$401
     5367            
-    5368 000000               .sect   ".text:en_timer"
+    5368 000000               .sect   ".text:enable_timer"
     5369                    .align  2
     5370                    .clink
-    5371                    .global en_timer
+    5371                    .global enable_timer
     5372            
-    5373            $C$DW$417       .dwtag  DW_TAG_subprogram, DW_AT_name("en_timer")
-    5374                    .dwattr $C$DW$417, DW_AT_low_pc(en_timer)
+    5373            $C$DW$417       .dwtag  DW_TAG_subprogram, DW_AT_name("enable_timer")
+    5374                    .dwattr $C$DW$417, DW_AT_low_pc(enable_timer)
     5375                    .dwattr $C$DW$417, DW_AT_high_pc(0x00)
-    5376                    .dwattr $C$DW$417, DW_AT_TI_symbol_name("en_timer")
+    5376                    .dwattr $C$DW$417, DW_AT_TI_symbol_name("enable_timer")
     5377                    .dwattr $C$DW$417, DW_AT_external
     5378                    .dwattr $C$DW$417, DW_AT_TI_begin_file("../dummyload.c")
     5379                    .dwattr $C$DW$417, DW_AT_TI_begin_line(0xe1)
@@ -6806,18 +6806,18 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE  114
     5382                    .dwattr $C$DW$417, DW_AT_decl_line(0xe1)
     5383                    .dwattr $C$DW$417, DW_AT_decl_column(0x09)
     5384                    .dwattr $C$DW$417, DW_AT_TI_max_frame_size(0x02)
-    5385                    .dwpsn  file "../dummyload.c",line 226,column 6,is_stmt,address en_timer,isa 0
+    5385                    .dwpsn  file "../dummyload.c",line 226,column 6,is_stmt,address enable_timer,isa 0
     5386            
-    5387                    .dwfde $C$DW$CIE, en_timer
+    5387                    .dwfde $C$DW$CIE, enable_timer
     5388            
     5389            ;*****************************************************************************
-    5390            ;* FUNCTION NAME: en_timer                                                   *
+    5390            ;* FUNCTION NAME: enable_timer                                                   *
     5391            ;*                                                                           *
     5392            ;*   Regs Modified     : SP                                                  *
     5393            ;*   Regs Used         : SP                                                  *
     5394            ;*   Local Frame Size  : 0 Args + 0 Auto + 0 Save = 0 byte                   *
     5395            ;*****************************************************************************
-    5396 000000       en_timer:
+    5396 000000       enable_timer:
     5397            ;* --------------------------------------------------------------------------*
     5398                    .dwcfi  cfa_offset, 2
     5399                    .dwcfi  save_reg_to_mem, 16, -2
@@ -6924,15 +6924,15 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE  116
     5479                    .dwendentry
     5480                    .dwendtag $C$DW$419
     5481            
-    5482 000000               .sect   ".text:uart"
+    5482 000000               .sect   ".text:uart_init"
     5483                    .align  2
     5484                    .clink
-    5485                    .global uart
+    5485                    .global uart_init
     5486            
-    5487            $C$DW$421       .dwtag  DW_TAG_subprogram, DW_AT_name("uart")
-    5488                    .dwattr $C$DW$421, DW_AT_low_pc(uart)
+    5487            $C$DW$421       .dwtag  DW_TAG_subprogram, DW_AT_name("uart_init")
+    5488                    .dwattr $C$DW$421, DW_AT_low_pc(uart_init)
     5489                    .dwattr $C$DW$421, DW_AT_high_pc(0x00)
-    5490                    .dwattr $C$DW$421, DW_AT_TI_symbol_name("uart")
+    5490                    .dwattr $C$DW$421, DW_AT_TI_symbol_name("uart_init")
     5491                    .dwattr $C$DW$421, DW_AT_external
     5492                    .dwattr $C$DW$421, DW_AT_TI_begin_file("../dummyload.c")
     5493                    .dwattr $C$DW$421, DW_AT_TI_begin_line(0x110)
@@ -6941,18 +6941,18 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE  116
     5496                    .dwattr $C$DW$421, DW_AT_decl_line(0x110)
     5497                    .dwattr $C$DW$421, DW_AT_decl_column(0x0a)
     5498                    .dwattr $C$DW$421, DW_AT_TI_max_frame_size(0x02)
-    5499                    .dwpsn  file "../dummyload.c",line 273,column 7,is_stmt,address uart,isa 0
+    5499                    .dwpsn  file "../dummyload.c",line 273,column 7,is_stmt,address uart_init,isa 0
     5500            
-    5501                    .dwfde $C$DW$CIE, uart
+    5501                    .dwfde $C$DW$CIE, uart_init
     5502            
     5503            ;*****************************************************************************
-    5504            ;* FUNCTION NAME: uart                                                       *
+    5504            ;* FUNCTION NAME: uart_init                                                       *
     5505            ;*                                                                           *
     5506            ;*   Regs Modified     : SP                                                  *
     5507            ;*   Regs Used         : SP                                                  *
     5508            ;*   Local Frame Size  : 0 Args + 0 Auto + 0 Save = 0 byte                   *
     5509            ;*****************************************************************************
-    5510 000000       uart:
+    5510 000000       uart_init:
     5511            ;* --------------------------------------------------------------------------*
     5512                    .dwcfi  cfa_offset, 2
     5513                    .dwcfi  save_reg_to_mem, 16, -2

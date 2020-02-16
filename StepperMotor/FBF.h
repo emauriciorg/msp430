@@ -15,7 +15,7 @@
 *      Analog almost all channels with a single reading or multi-reading
 *      Timer0 and Timer3
 *      pwm,capture/compare
-*      uart
+*      uart_init
 *      i2c master mode
 *
 */
@@ -45,7 +45,7 @@ void InitUart(void)
  UCA0CTL1 = UCSWRST;
  UCA0CTL1 |= UCSSEL_2;                     // SMCLK
  UCA0BR0 = 130;//65;                            // 16MHz 9600 PREESCALAR
- UCA0BR1 = 6;//3;                             //(UCAxBR0 + UCAxBR1 × 256)
+ UCA0BR1 = 6;//3;                             //(UCAxBR0 + UCAxBR1 ï¿½ 256)
  UCA0MCTL =6<<1;//UCBRS0;                        // Modulation UCBRSx = 1
  UCA0CTL1 &= ~UCSWRST;
  IE2 = UCA0RXIE;

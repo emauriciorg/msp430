@@ -7,7 +7,7 @@
  *      CDC is an acronym for Communication and Data Converter
  *      This library contains the functions necessary to handle in a easy way the
  *      transfer of data(char strings, decimal numer, hexadecimal, special character,etc.) in
- *      uart-mode, basically this library transform your int, unsigned int or  float in a
+ *      uart_init-mode, basically this library transform your int, unsigned int or  float in a
  *      string of char type variable, and send it for you.
  *
  *------------------------------FUNCTIONS-----------------------------
@@ -25,13 +25,13 @@
  * line_jump();
  * espacio();
  * c2ui();
- * ec();
+ * uart_send_string();
  * uart_write_byte();
  * int2hex();
  * printchar2c();
  * printfloar();
  * printlong();
- * printuint();
+ * print_uint();
  * readint();
  * twoc2dec();
  * string2int();

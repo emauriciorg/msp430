@@ -1,5 +1,5 @@
 #include <msp430g2553.h>
-#include"CDC.h"// uart library---prints numbers, ascii, hex, bin ,strings....
+#include"CDC.h"// uart_init library---prints numbers, ascii, hex, bin ,strings....
 #include"Timer.h"//generates delay functions based on timer
 #include"DHT11.h"
 
@@ -10,18 +10,18 @@ volatile char DES=0;
 
 	void readSensor();
 
-	void clk();
-	void uart();
-	void Enin();
+	void clk_init();
+	void uart_init();
+	void enable_interrupts();
 
 
 
 	int main(void)
 	{
 
-		clk();
-		uart();
-	 	Enin();
+		clk_init();
+		uart_init();
+	 	enable_interrupts();
 
 	 	P1SEL&=~BIT0;
 	 	P1SEL2&=~BIT0;
@@ -31,7 +31,7 @@ volatile char DES=0;
 	 	while(1)
 		{
 
-	 		ec("DATA ");p_ui(byte0);s_pc();p_ui(byte1);s_pc();p_ui(byte2);s_pc();p_ui(byte3);s_pc();p_ui(byte4);clc_();
+	 		uart_send_string("DATA ");p_ui(byte0);s_pc();p_ui(byte1);s_pc();p_ui(byte2);s_pc();p_ui(byte3);s_pc();p_ui(byte4);clc_();
 
 
 
@@ -40,7 +40,7 @@ volatile char DES=0;
 
 
 
-	void clk()
+	void clk_init()
 				{
 					WDTCTL = WDTPW | WDTHOLD;
 					BCSCTL1 =CALBC1_16MHZ;
@@ -51,14 +51,14 @@ volatile char DES=0;
 
 
 
-	  void uart()
+	  void uart_init()
 		   {
 				P1SEL |= ( BIT1|BIT2);
 				P1SEL2 |= (BIT1| BIT2);
 				UCA0CTL1 = UCSWRST;
 				UCA0CTL1 |= UCSSEL_2;                     // SMCLK
 				UCA0BR0 = 130;//65;                            // 16MHz 9600 PREESCALAR
-				UCA0BR1 = 6;//3;                             //(UCAxBR0 + UCAxBR1 × 256)
+				UCA0BR1 = 6;//3;                             //(UCAxBR0 + UCAxBR1 ï¿½ 256)
 				UCA0MCTL =6<<1;//UCBRS0;                        // Modulation UCBRSx = 1
 				UCA0CTL1 &= ~UCSWRST;
 				IE2 = UCA0RXIE;
@@ -66,7 +66,7 @@ volatile char DES=0;
 
 	
 
-	   void Enin()
+	   void enable_interrupts()
 	 		{
 	 			_BIS_SR(GIE);
 	 			__enable_interrupt();

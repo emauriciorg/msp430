@@ -77,7 +77,7 @@ void legpattern();
 			TACTL|=TACLR;
 			SerOK=0;
 		}
-void Enin();
+void enable_interrupts();
 
 	/*Funcion para manipular 8 servos*/
 
@@ -147,14 +147,14 @@ void Enin();
    		SerOK=0;
      }
 
-    void clk()
+    void clk_init()
 			{
 				WDTCTL = WDTPW | WDTHOLD;
 				BCSCTL1 =CALBC1_16MHZ;
 				BCSCTL2 =0;
 				DCOCTL = CALDCO_16MHZ;
 			}
-    void uart();
+    void uart_init();
 void DelaySecond(int Second)
 {
 	volatile int CounterS;
@@ -169,9 +169,9 @@ void DelaySecond(int Second)
     int main(void)
 	{
 volatile int icount=20,itimes=0;
-		clk();
-		uart();
-		Enin();
+		clk_init();
+		uart_init();
+		enable_interrupts();
 		/*Habilita los pines que controlan los servos*/
 		P2SEL2&=~(OServoOne|OServoTwo|ServoOne|ServoTwo|OServoOne1|OServoTwo2|ServoOne1|ServoTwo2);
 		P2SEL&= ~(OServoOne|OServoTwo|ServoOne|ServoTwo|OServoOne1|OServoTwo2|ServoOne1|ServoTwo2);
@@ -187,13 +187,13 @@ volatile int icount=20,itimes=0;
 	   //for(itimes=0;itimes<=4;itimes++){
 	    //	DelaySecond(icount);
 	    //an1=111;an2=111;
-	   // ec("servos:");PrintUInt(an1);s_pc();PrintUInt(an2);s_pc();PrintUInt(an3);clc_();
+	   // uart_send_string("servos:");PrintUInt(an1);s_pc();PrintUInt(an2);s_pc();PrintUInt(an3);clc_();
 		//TwoServo(an1,an2);
 		//DelaySecond(icount);
 	    //an1=50;an2=28;
 	    //TwoServo(an1,an2);
-	    //	ec("servos:");PrintUInt(an1);s_pc();PrintUInt(an2);s_pc();PrintUInt(an3);s_pc();PrintUInt(an4);clc_();
-	    //ec("servos:");PrintUInt(an1);s_pc();PrintUInt(an2);s_pc();PrintUInt(an3);clc_();
+	    //	uart_send_string("servos:");PrintUInt(an1);s_pc();PrintUInt(an2);s_pc();PrintUInt(an3);s_pc();PrintUInt(an4);clc_();
+	    //uart_send_string("servos:");PrintUInt(an1);s_pc();PrintUInt(an2);s_pc();PrintUInt(an3);clc_();
 	  // }
 
 	    }
@@ -203,20 +203,20 @@ volatile int icount=20,itimes=0;
 
 
 
-	   void Enin()
+	   void enable_interrupts()
 	 		{
 	 			_BIS_SR(GIE);
 	 			__enable_interrupt();
 	 			__bis_SR_register(GIE);
 	 		}
-	  void uart()
+	  void uart_init()
 		   {
 				P1SEL |= ( BIT1|BIT2);
 				P1SEL2 |= (BIT1| BIT2);
 				UCA0CTL1 = UCSWRST;
 				UCA0CTL1 |= UCSSEL_2;                     // SMCLK
 				UCA0BR0 = 130;//65;                            // 16MHz 9600 PREESCALAR
-				UCA0BR1 = 6;//3;                             //(UCAxBR0 + UCAxBR1 × 256)
+				UCA0BR1 = 6;//3;                             //(UCAxBR0 + UCAxBR1 ï¿½ 256)
 				UCA0MCTL =6<<1;//UCBRS0;                        // Modulation UCBRSx = 1
 				UCA0CTL1 &= ~UCSWRST;
 				IE2 = UCA0RXIE;
@@ -240,7 +240,7 @@ volatile int icount=20,itimes=0;
 
 				servo(an1,an2,an3,an4,an5,an6,an7,an8);
 
-				ec("servos:");PrintUInt(an1);s_pc();PrintUInt(an2);s_pc();PrintUInt(an3);s_pc();PrintUInt(an4);clc_();
+				uart_send_string("servos:");PrintUInt(an1);s_pc();PrintUInt(an2);s_pc();PrintUInt(an3);s_pc();PrintUInt(an4);clc_();
 
 				_delay_cycles(8000000);
 			}

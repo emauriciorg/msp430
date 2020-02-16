@@ -157,7 +157,7 @@ return data_validity;
 
 void main(){
 inicio();
-//8Mhz clk frequency
+//8Mhz clk_init frequency
 	while(1)
 	{
 	/*	P1OUT|=DHT11;
@@ -182,7 +182,7 @@ inicio();
 		}while();
 */
 
-	    ec("waiting");borrar();
+	    uart_send_string("waiting");line_jump();
 	}
 
 }

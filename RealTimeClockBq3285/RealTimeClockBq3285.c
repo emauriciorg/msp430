@@ -139,8 +139,8 @@ int main(void)
 	{
 		IFG2&=~UCA0RXIFG;
 		write_t(0x0A,0x07);
-		borrar();ec(" Done A ");
+		line_jump();uart_send_string(" Done A ");
 
 		write_t(0x0B,0x08);
-		ec(" Done B");
+		uart_send_string(" Done B");
 	}

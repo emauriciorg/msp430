@@ -53,10 +53,10 @@ void readint(unsigned int dataSR)
 
 
 
-void print_str(char *cadena)
+void print_str(char *string)
 {
 	char *c;
-	c = cadena;
+	c = string;
 	while ((c != 0) && (*c != 0))
 	{
 		uart_write_byte(*c);
@@ -191,7 +191,7 @@ void printchar2c(unsigned int int2cchar)
 }
 
 
-void printuint(unsigned int intchar1)
+void print_uint(unsigned int intchar1)
 {
 	_DM =(intchar1/10000);
 	_UM =((intchar1-(_DM*10000))/1000);

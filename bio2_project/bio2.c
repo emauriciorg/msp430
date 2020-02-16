@@ -49,7 +49,7 @@ void ADC10_init()
 }
 
 
-void enable_interrutps(void)
+void enable_interrupts(void)
 {
 	_BIS_SR(GIE);
 	__enable_interrupt();
@@ -77,7 +77,7 @@ int main(void)
 	ADC10_init();
 	uart_init();
 
-	enable_interrutps();
+	enable_interrupts();
 	ADC10_enable();
 
 	while(1)

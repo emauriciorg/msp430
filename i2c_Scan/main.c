@@ -8,27 +8,27 @@ unsigned char slaveAdress;
 
 	void gw(unsigned char AGR, unsigned char V2R )//
 	{
-		//ec("sending request ");
+		//uart_send_string("sending request ");
 		UCB0I2CSA = SADHW;
 		while (UCB0CTL1 & UCTXSTP);
-		//ec("stp");
+		//uart_send_string("stp");
 		UCB0CTL1 |= (UCTR | UCTXSTT);
 
-		if(UCNACKIFG&UXB0STAT){UCB0I2CSA = SADHW;}else{ec("encontrado en ")}
+		if(UCNACKIFG&UXB0STAT){UCB0I2CSA = SADHW;}else{uart_send_string("encontrado en ")}
 
 		while((IFG2&UCB0TXIFG)==0);
 		UCB0TXBUF  =AGR;
-	  //  ec(" dta");
+	  //  uart_send_string(" dta");
 
 		while((IFG2&UCB0TXIFG)==0);
 		UCB0TXBUF  =V2R;
-		//ec(" dtv");
+		//uart_send_string(" dtv");
 
 		while((IFG2&UCB0TXIFG)==0);
-		//ec(" tbe");
+		//uart_send_string(" tbe");
 
 		while (UCB0CTL1 & UCTXSTT);
-		//ec(" stt");
+		//uart_send_string(" stt");
 
 		UCB0CTL1 |=  UCTXSTP;
 		UCB0I2CSA = SADHR;

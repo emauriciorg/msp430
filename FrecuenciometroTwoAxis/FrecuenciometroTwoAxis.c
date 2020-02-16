@@ -56,11 +56,11 @@ int main(void)
 	 {
 		if(CountX1!=0)
 		{
-			PrintString("X");printuint((KFrequency/CountX1)*10);PrintString(" mHz ");PrintString("T ");printuint(CountX1*KPeriod);PrintString(" mS ");borrar();
+			PrintString("X");print_uint((KFrequency/CountX1)*10);PrintString(" mHz ");PrintString("T ");print_uint(CountX1*KPeriod);PrintString(" mS ");line_jump();
 		}
 		if(CountX1!=0)
 		{
-			PrintString("Y");printuint((KFrequency/CountX1)*10);PrintString(" mHz ");PrintString("T");printuint(CountX1*KPeriod);PrintString(" mS ");borrar();
+			PrintString("Y");print_uint((KFrequency/CountX1)*10);PrintString(" mHz ");PrintString("T");print_uint(CountX1*KPeriod);PrintString(" mS ");line_jump();
 		}
 	 }
 }

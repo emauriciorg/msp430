@@ -55,13 +55,13 @@ int main(void)
 		 switch(StopTimer)
 		 {
 		 case '0': {
-		*/		    /*PrintString(" rpm ");printuint((20000/CountX1)*6);*/
+		*/		    /*PrintString(" rpm ");print_uint((20000/CountX1)*6);*/
 			if(CountX1!=0){
-		 PrintString(" Frecuencia ");printuint((KFrequency/CountX1)*10);PrintString(" mHz ");PrintString("Tiempo ");printuint(CountX1*KPeriod);PrintString(" mS ");borrar();
-			}//PrintString("Tiempo ");printuint(CountX*50);PrintString(" mS");PrintString(" Frecuencia ");printuint(20000/CountX);PrintString(" mHz");borrar();
+		 PrintString(" Frecuencia ");print_uint((KFrequency/CountX1)*10);PrintString(" mHz ");PrintString("Tiempo ");print_uint(CountX1*KPeriod);PrintString(" mS ");line_jump();
+			}//PrintString("Tiempo ");print_uint(CountX*50);PrintString(" mS");PrintString(" Frecuencia ");print_uint(20000/CountX);PrintString(" mHz");line_jump();
 		/*	 	   }break;
 		 case '1': {
-			       PrintString("No detectado                                                                                           ");borrar();TA1CCR0=0;
+			       PrintString("No detectado                                                                                           ");line_jump();TA1CCR0=0;
 			       }break;
 		 }
 */

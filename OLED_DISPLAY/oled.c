@@ -55,7 +55,7 @@ unsigned int T1,T2,T3;
 				 IE2=0;
 			}
 
-    void Enin();
+    void enable_interrupts();
 
 /*
 	void setGyro();
@@ -81,7 +81,7 @@ unsigned int T1,T2,T3;
 //		timer0();
 		i2cmaster();
 
-	 	Enin();
+	 	enable_interrupts();
 
 	 	setHour();
 		while(1)
@@ -92,12 +92,12 @@ unsigned int T1,T2,T3;
    			SetCursorPosition(2, 0);
    			Lp_ui(twoc2dec(GX1));putme(' ');putme(signo);
 */
-   			ec(" hora ");/*p_ui(hour_t);*/
+   			uart_send_string(" hora ");/*p_ui(hour_t);*/
    			putmes(BCDtoChar((hour_t&0xf0)>>4));putmes(BCDtoChar(hour_t&0x0f));putmes(':');
    			putmes(BCDtoChar((min_t&0xf0)>>4));putmes(BCDtoChar(min_t&0x0f));putmes(':');
    			putmes(BCDtoChar((sec_t&0xf0)>>4));putmes(BCDtoChar(sec_t&0x0f));c_lc();
-			//ec(" Y: ");printuint(twoc2dec(GY1));espacio();printuint(twoc2dec(anguloAproxY));espacio();uart_write_byte(signo);
-			//ec(" Z: ");printuint(twoc2dec(GZ1));espacio();printuint(twoc2dec(anguloAproxZ));espacio();uart_write_byte(signo);borrar();
+			//uart_send_string(" Y: ");print_uint(twoc2dec(GY1));espacio();print_uint(twoc2dec(anguloAproxY));espacio();uart_write_byte(signo);
+			//uart_send_string(" Z: ");print_uint(twoc2dec(GZ1));espacio();print_uint(twoc2dec(anguloAproxZ));espacio();uart_write_byte(signo);line_jump();
 			sec_t=gr(secc);
 			min_t=gr(minn);
 			hour_t=gr(horr);
@@ -166,7 +166,7 @@ unsigned int T1,T2,T3;
 	      }
 
 
-	void en_timer()
+	void enable_timer()
 			{
 			TA1CTL	 = ID_3|TASSEL_2|MC_1; //UP mode
 			TA1CCR0	 = 2000;
@@ -174,7 +174,7 @@ unsigned int T1,T2,T3;
 			TA1CCR1=000;
 			}
 
-	   void Enin()
+	   void enable_interrupts()
 	 		{
 	 			_BIS_SR(GIE);
 	 			__enable_interrupt();

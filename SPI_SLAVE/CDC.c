@@ -20,7 +20,7 @@ void UartConf()
  UCA0CTL1 = UCSWRST;
  UCA0CTL1 |= UCSSEL_2;                     // SMCLK
  UCA0BR0 = 130;//65;                            // 16MHz 9600 PREESCALAR
- UCA0BR1 = 6;//3;                             //(UCAxBR0 + UCAxBR1 × 256)
+ UCA0BR1 = 6;//3;                             //(UCAxBR0 + UCAxBR1 ï¿½ 256)
  UCA0MCTL =6<<1;//UCBRS0;                        // Modulation UCBRSx = 1
  UCA0CTL1 &= ~UCSWRST;
  IE2 = UCA0RXIE;
@@ -32,10 +32,10 @@ int String2Int(char iamstring)
 	iamint=( iamstring-48)+iamint;
 	return iamint;
 }
-void PrintStr(char *cadena)
+void PrintStr(char *string)
 {
 	char *c;
-	c = cadena;
+	c = string;
 	while ((c != 0) && (*c != 0))
 	{
 		SingleChar(*c);

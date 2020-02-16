@@ -15,7 +15,7 @@
  *      Analog almost all channels with a single reading or multi-reading
  *      Timer0 and Timer3
  *      pwm,capture/compare
- *      uart
+ *      uart_init
  *      i2c master mode
  *
  */
@@ -36,7 +36,7 @@ void Adc(){
 	ADC10AE0 = 0x10;
 
 
-	//P1.5 ADC optionç
+	//P1.5 ADC optionï¿½
 }
 
 void I2CReceiver(){
@@ -68,7 +68,7 @@ void I2Ctransmitter(){
       //TXData = 0x00;                            // Holds TX data
 }
 
-void enin()
+void enable_interrupts()
 {
 	_BIS_SR(GIE);
 	__enable_interrupt();
@@ -95,20 +95,20 @@ void configport()
 	P2REN		=0X00;
 }
 
-void uart()
+void uart_init()
 {
 	P1SEL |= ( BIT2);
 	P1SEL2 |= ( BIT2);
 	UCA0CTL1 = UCSWRST;
 	UCA0CTL1 |= 0x80;                     // SMCLK
 	UCA0BR0 = 104;                            // 16MHz 9600 PREESCALAR
-	UCA0BR1 = 0;                             //(UCAxBR0 + UCAxBR1 × 256)
+	UCA0BR1 = 0;                             //(UCAxBR0 + UCAxBR1 ï¿½ 256)
 	UCA0MCTL =1<<1;//UCBRS0;                        // Modulation UCBRSx = 1
 	UCA0CTL1 &= ~UCSWRST;
 	IE2 |= UCA0RXIE;
 }
 
-void clk()
+void clk_init()
 {
 	WDTCTL = WDTPW | WDTHOLD;                 // Stop WDT
 	BCSCTL1 =CALBC1_1MHZ;
@@ -160,12 +160,12 @@ void configtimer3(){
 
 void inicio()
 {
-	clk();
-	uart();
+	clk_init();
+	uart_init();
 	//configport();
    //Adc();
 	//timer0();
-	//enin();
+	//enable_interrupts();
 }
 
 

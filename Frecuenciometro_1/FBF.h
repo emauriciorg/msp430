@@ -15,7 +15,7 @@
 *      Analog almost all channels with a single reading or multi-reading
 *      Timer0 and Timer3
 *      pwm,capture/compare
-*      uart
+*      uart_init
 *      i2c master mode
 *
 */
@@ -27,7 +27,7 @@
 
 
 
-void Enin()
+void enable_interrupts()
 {
 _BIS_SR(GIE);
 __enable_interrupt();
@@ -38,7 +38,7 @@ void DesEnin()
 {
 __disable_interrupt();
 }
-void clk()
+void clk_init()
 {
 WDTCTL = WDTPW | WDTHOLD;
 BCSCTL1 =CALBC1_16MHZ;

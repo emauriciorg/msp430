@@ -22,10 +22,10 @@ void uart_write_byte(char dato){
 
 
 
-void PrintString(char *cadena)
+void PrintString(char *string)
 {
     char *c;
-    c = cadena;
+    c = string;
 
     while ((c != 0) && (*c != 0))
     {
@@ -104,7 +104,7 @@ void int2hex(unsigned int datoint){
 
 		 }
 
-void borrar(){
+void line_jump(){
 	uart_write_byte(13);
 }
 void printint(int intchar){
@@ -129,7 +129,7 @@ void printint(int intchar){
 
 
 
-void printuint(unsigned int intchar1)
+void print_uint(unsigned int intchar1)
 {
     char AuxPrintUInt[5];
 	_DM=(intchar1/10000);

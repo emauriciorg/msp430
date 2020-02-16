@@ -37,7 +37,7 @@ unsigned int delayAmount = 0;
 long loopTime = 0;
 
 
-void Enin(){
+void enable_interrupts(){
 
 	_BIS_SR(GIE);
 		 			__enable_interrupt();
@@ -53,7 +53,7 @@ void delay_mio(unsigned int nmicros){
 	   TACCR0	 = nmicros;
 	   TACCTL0 =OUTMOD_7;
 	   TACCR1=0;
-	 	Enin();
+	 	enable_interrupts();
 
 	 do{
 
@@ -194,7 +194,7 @@ void march()
     beep(speakerPin, f, 375);
     beep(speakerPin, c, 125);
     beep(speakerPin, a, 1000);
-    //and we're done \ó/
+    //and we're done \ï¿½/
 }
 //http://home.mit.bme.hu/~bako/tonecalc/tonecalc.htm
 int main( void )

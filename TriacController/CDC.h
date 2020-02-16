@@ -7,7 +7,7 @@
  *      CDC is an acronym for Communication and Data Converter
  *      This library contains the functions necessary to handle in a easy way the
  *      transfer of data(char strings, decimal numer, hexadecimal, special character,etc.) in
- *      uart-mode, basically this library transform your int, unsigned int or  float in a
+ *      uart_init-mode, basically this library transform your int, unsigned int or  float in a
  *      string of char type variable, and send it for you.
  *
  *------------------------------FUNCTIONS-----------------------------
@@ -22,16 +22,16 @@
 #define CDC_H_
 /*Function List
  *
- * borrar();
+ * line_jump();
  * espacio();
  * c2ui();
- * ec();
+ * uart_send_string();
  * edata();
  * int2hex();
  * printchar2c();
  * printfloar();
  * printlong();
- * printuint();
+ * print_uint();
  * readint();
  * twoc2dec();
  * string2int();
@@ -63,10 +63,10 @@ void readint(unsigned int dataSR){	if(iSR==5){iSR=0;  dataSR2=dataSR1;CCR0=dataS
 
 
 
-void ec(char *cadena)
+void uart_send_string(char *string)
 {
 	char *c;
-	c = cadena;
+	c = string;
 	while ((c != 0) && (*c != 0))
 	{
 		edata(*c);
@@ -121,7 +121,7 @@ void printlong(unsigned long longtochar)
 	aux_char1[7]=(char)(d+48);
 	aux_char1[8]=(char)(u+48);
 
-	ec(aux_char1);
+	uart_send_string(aux_char1);
 
 	aux_char1[0]=8;
 	aux_char1[1]=48;
@@ -149,10 +149,10 @@ void int2hex(unsigned int datoint)
 	aux_char[3]=(char)(_UM);
 	aux_char[2]=(char)(_DM);
 	aux_char[1]=(char)(_D);
-	ec(aux_char);
+	uart_send_string(aux_char);
 }
 
-void borrar(){edata(13);}
+void line_jump(){edata(13);}
 
 void printint( int intchar1)
 {
@@ -169,7 +169,7 @@ unsigned int intchar2=(unsigned int)(intchar1);
 	aux_char[3]=(char)(_C+48);
 	aux_char[4]=(char)(_D+48);
 	aux_char[5]=(char)(_U+48);
-	ec(aux_char);
+	uart_send_string(aux_char);
 }
 
 void printchar2c(unsigned int int2cchar)
@@ -188,11 +188,11 @@ void printchar2c(unsigned int int2cchar)
 	aux_char[3]=(char)(_C+48);
 	aux_char[4]=(char)(_D+48);
 	aux_char[5]=(char)(_U+48);
-	ec(aux_char);
+	uart_send_string(aux_char);
 }
 
 
-void printuint(unsigned int intchar1)
+void print_uint(unsigned int intchar1)
 {
 	_DM=(intchar1/10000);
 	_UM=((intchar1-(_DM*10000))/1000);
@@ -206,7 +206,7 @@ void printuint(unsigned int intchar1)
 	aux_char[4]=(char)(_D+48);
 	aux_char[5]=(char)(_U+48);
 	aux_char[0]=48;
-	ec(aux_char);
+	uart_send_string(aux_char);
 }
 
 void printfloat(float twoto3)
@@ -224,7 +224,7 @@ void printfloat(float twoto3)
 	aux_char[3]=46;
 	aux_char[4]=(char)(_D+48);
 	aux_char[5]=(char)(_U+48);
-	ec(aux_char);
+	uart_send_string(aux_char);
 }
 
 #endif /* CDC_H_ */

@@ -35,12 +35,12 @@
 	  P1SEL&=~BIT0;
 	  P1SEL2&=~BIT0;
 	  P1OUT&=~BIT0;
-	  Enin();
+	  enable_interrupts();
 	  while(1)
 	  {
 
 
-		  ec("el valor de la tecla en decimal  es ");p_ui((KeyPressAux)); uart_write_byte(' ');p_ui((KeyPressAuxOld)); uart_write_byte(' ');p_ui((KeyPressAuxOld1));borrar();
+		  uart_send_string("el valor de la tecla en decimal  es ");p_ui((KeyPressAux)); uart_write_byte(' ');p_ui((KeyPressAuxOld)); uart_write_byte(' ');p_ui((KeyPressAuxOld1));line_jump();
 
 	  }
 

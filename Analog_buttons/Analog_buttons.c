@@ -9,9 +9,9 @@ char I_pos=0,	key_p1='P';
 
 void CalButtons();
 void TempSample();
-    void clk();
-    void uart();
-    void Enin();
+    void clk_init();
+    void uart_init();
+    void enable_interrupts();
 void menu();
 void menu_1();
 void menu_2();
@@ -22,9 +22,9 @@ void menu_2();
 /****************************************MAIN CODE**************************************************************/
 	int main(void)
 	{
-		clk();
+		clk_init();
 
-			uart();
+			uart_init();
 
 
 
@@ -34,7 +34,7 @@ void menu_2();
 
 		ADC10setup();
 
-		Enin();
+		enable_interrupts();
 
 
 
@@ -98,7 +98,7 @@ void menu_2();
 
 
 
-	  void uart()
+	  void uart_init()
 		   {
 				P1SEL |= ( BIT1|BIT2);
 				P1SEL2 |= (BIT1| BIT2);
@@ -112,13 +112,13 @@ void menu_2();
 		   }
 
 
-	   void Enin()
+	   void enable_interrupts()
 	 		{
 	 			_BIS_SR(GIE);
 	 			__enable_interrupt();
 	 			__bis_SR_register(GIE);
 	 		}
-	   void clk()
+	   void clk_init()
 			{
 				WDTCTL = WDTPW | WDTHOLD;
 				BCSCTL1 =CALBC1_16MHZ;
@@ -130,14 +130,14 @@ void menu_2();
 	   void menu_2()
 		   {
 
-			 ec("menu 2 , here goes something");ec(" something else");uart_write_byte(10);clc_();
+			 uart_send_string("menu 2 , here goes something");uart_send_string(" something else");uart_write_byte(10);clc_();
 
 
 		   }
 	   void menu_1()
 	   {
 
-		 ec("menu 1,");p_ui(Vout);clc_();
+		 uart_send_string("menu 1,");p_ui(Vout);clc_();
 
 
 	   }

@@ -7,14 +7,14 @@ volatile char sec_t=0,min_t=0,hour_t=0,day_t=0;
 volatile unsigned int COUNTT=100,countt=0,COUNTT1=10,countt1=0,count_t=0;
 
 
-	void uart()
+	void uart_init()
 		{
 			P1SEL |= ( BIT1|BIT2);
 			P1SEL2 |= ( BIT1|	BIT2);
 			UCA0CTL1 = UCSWRST;
 			UCA0CTL1 |= 0x80;                     // SMCLK
 			UCA0BR0 = 130;                            // 16MHz 9600 PREESCALAR
-			UCA0BR1 = 6;                             //(UCAxBR0 + UCAxBR1 × 256)
+			UCA0BR1 = 6;                             //(UCAxBR0 + UCAxBR1 ï¿½ 256)
 			UCA0MCTL =0x0c;//UCBRS0;                        // Modulation UCBRSx = 1
 			UCA0CTL1 &= ~UCSWRST;
 			IE2 = UCA0RXIE;
@@ -54,7 +54,7 @@ volatile unsigned int COUNTT=100,countt=0,COUNTT1=10,countt1=0,count_t=0;
  		   TACCR1=0;
 
  }
- void en_timer()
+ void enable_timer()
 		{
 		    TA1CTL	 = ID_3|TASSEL_2|MC_1; //UP mode
 		    TA1CCR0	 = 2000;
@@ -69,13 +69,13 @@ volatile unsigned int COUNTT=100,countt=0,COUNTT1=10,countt1=0,count_t=0;
  void set_time_sec(unsigned int second_s){}
 
 
-		void Enin()
+		void enable_interrupts()
  		{
  			_BIS_SR(GIE);
  			__enable_interrupt();
  			__bis_SR_register(GIE);
  		}
-	void clk()
+	void clk_init()
 		{
 			WDTCTL = WDTPW | WDTHOLD;                 // Stop WDT
 			BCSCTL1 =CALBC1_16MHZ;
@@ -87,20 +87,20 @@ volatile unsigned int COUNTT=100,countt=0,COUNTT1=10,countt1=0,count_t=0;
 
 	int main(void)
 	{
-		clk();
+		clk_init();
 
-		//uart();
-
-
+		//uart_init();
 
 
 
 
 
 
-					 en_timer();
+
+
+					 enable_timer();
 						 timer0_en();
-				 	Enin();
+				 	enable_interrupts();
 				 					while(1){
 
 

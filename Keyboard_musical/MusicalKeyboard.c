@@ -57,13 +57,13 @@ P2IES|=KClk; // INTERRUPT EDGE SELECT  EDGE SELECTS THE INTERRUPT EDGE FOR THE C
 			  P1SEL2&=~BIT0;
 			  P1OUT&=~BIT0;
 
-				enin();
+				enable_interrupts();
 
 			while(1)	{
 
 //				byteRx='1';
 
-			ec("ESPERANDO ");printuint(byteRx);borrar();
+			uart_send_string("ESPERANDO ");print_uint(byteRx);line_jump();
 			}
 
 		}

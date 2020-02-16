@@ -7,7 +7,7 @@
  *      CDC is an acronym for Communication and Data Converter
  *      This library contains the functions necessary to handle in a easy way the
  *      transfer of data(char strings, decimal numer, hexadecimal, special character,etc.) in
- *      uart-mode, basically this library transform your int, unsigned int or  float in a
+ *      uart_init-mode, basically this library transform your int, unsigned int or  float in a
  *      string of char type variable, and send it for you.
  *
  *------------------------------FUNCTIONS-----------------------------
@@ -43,10 +43,10 @@ int string2int(char iamstring)
 
 void readint(unsigned int dataSR){	if(iSR==5){iSR=0;  dataSR2=dataSR1;CCR0=dataSR2;dataSR1=0;TACCTL0|=CCIE;	TACTL|=TAIE;}else{dataSR1= (dataSR-48)+(dataSR1*10);iSR++;}}
 
-void ec(char *cadena)
+void uart_send_string(char *string)
 {
 	char *c;
-	c = cadena;
+	c = string;
 	while ((c != 0) && (*c != 0))
 	{
 		uart_write_byte(*c);
@@ -70,7 +70,7 @@ void espacio(){uart_write_byte(' ');}
 
 
 
-void borrar(){uart_write_byte(13);}
+void line_jump(){uart_write_byte(13);}
 
 void printint(int intchar)
 {
@@ -86,7 +86,7 @@ void printint(int intchar)
 	aux_char[3]=(char)(_C+48);
 	aux_char[4]=(char)(_D+48);
 	aux_char[5]=(char)(_U+48);
-	ec(aux_char);
+	uart_send_string(aux_char);
 }
 
 void printint2c(unsigned int int2cchar)
@@ -104,11 +104,11 @@ void printint2c(unsigned int int2cchar)
 	aux_char[3]=(char)(_C+48);
 	aux_char[4]=(char)(_D+48);
 	aux_char[5]=(char)(_U+48);
-	ec(aux_char);
+	uart_send_string(aux_char);
 }
 
 
-void printuint(unsigned int intchar1)
+void print_uint(unsigned int intchar1)
 {
 	_DM=(intchar1/10000);
 	_UM=((intchar1-(_DM*10000))/1000);
@@ -122,7 +122,7 @@ void printuint(unsigned int intchar1)
 	aux_char[4]=(char)(_D+48);
 	aux_char[5]=(char)(_U+48);
 	aux_char[0]=48;
-	ec(aux_char);
+	uart_send_string(aux_char);
 }
 
 void printfloat(float twoto3)
@@ -140,7 +140,7 @@ void printfloat(float twoto3)
 	aux_char[3]=46;
 	aux_char[4]=(char)(_D+48);
 	aux_char[5]=(char)(_U+48);
-	ec(aux_char);
+	uart_send_string(aux_char);
 }
 
 #endif /* CDC_H_ */

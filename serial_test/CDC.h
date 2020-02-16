@@ -7,7 +7,7 @@
  *      CDC is an acronym for Communication and Data Converter
  *      This library contains the functions nPrintStringessary to handle in a easy way the
  *      transfer of data(char strings, dPrintStringimal numer, hexadPrintStringimal, spPrintStringial character,etc.) in
- *      uart-mode, basically this library transform your int, unsigned int or  float in a
+ *      uart_init-mode, basically this library transform your int, unsigned int or  float in a
  *      string of char type variable, and send it for you.
  *
  *------------------------------FUNCTIONS-----------------------------
@@ -31,7 +31,7 @@
  * printchar2c();
  * printfloar();
  * printlong();
- * printuint();
+ * print_uint();
  * readint();
  * twoc2dPrintString();
  * string2int();
@@ -63,10 +63,10 @@ void readint(unsigned int dataSR){	if(iSR==5){iSR=0;  dataSR2=dataSR1;CCR0=dataS
 
 
 
-void PrintString(char *cadena)
+void PrintString(char *string)
 {
 	char *c;
-	c = cadena;
+	c = string;
 	while ((c != 0) && (*c != 0))
 	{
 		edata(*c);
@@ -192,7 +192,7 @@ void printchar2c(unsigned int int2cchar)
 }
 
 
-void printuint(unsigned int intchar1)
+void print_uint(unsigned int intchar1)
 {
 	_DM=(intchar1/10000);
 	_UM=((intchar1-(_DM*10000))/1000);

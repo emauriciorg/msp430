@@ -66,7 +66,7 @@ unsigned char senuu[32]={
 
 //				byteRx='1';
 
-			ec("ESPERANDO");borrar();
+			uart_send_string("ESPERANDO");line_jump();
 			}
 
 		}
