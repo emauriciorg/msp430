@@ -2,7 +2,7 @@
 * @file		interrupciones.h
 * @author	Manuel Caballero
 * @date 	2/2/2015
-* @brief 	Variables de las rutinas de interrupción.
+* @brief 	Variables de las rutinas de interrupciï¿½n.
 * \copyright
 * 	AqueronteBlog@gmail.com
 *
@@ -17,14 +17,14 @@
 #include <msp430.h>
 #include <stdint.h>
 
-#define opTemInterna	0			/**<  Estado opTemInterna: 	Petición de lectura del sensor interno de temperatura  */
+#define opTemInterna	0			/**<  Estado opTemInterna: 	Peticiï¿½n de lectura del sensor interno de temperatura  */
 #define opRESET			1			/**<  Estado RESET: 		realiza un RESET al dispositivo nRF24L01+  */
-#define	opEnviarDatos	2			/**<  Estado Enviar Datos: 	envia paquete por el dispositivo nRF24L01+  */
-#define	opCheckTx		3			/**<  Estado CheckTx: 		comprueba que la transmisión ha sido satisfactoria  */
+#define	opuart_write_bytes	2			/**<  Estado Enviar Datos: 	envia paquete por el dispositivo nRF24L01+  */
+#define	opCheckTx		3			/**<  Estado CheckTx: 		comprueba que la transmisiï¿½n ha sido satisfactoria  */
 #define	opLED			4			/**<  Estado LED: 			Cambia el estado del LED1  */
 
 
-// Prototipo de subrutina de interrupción
+// Prototipo de subrutina de interrupciï¿½n
 
 
 // Variable externa

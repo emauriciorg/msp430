@@ -32,7 +32,7 @@ unsigned int dataSR1=0;
 unsigned int dataSR2=0;
 unsigned  char iSR=0;
 
-void enviardato(char dato){UCA0TXBUF = dato;while (((IFG2&UCA0TXIFG)==0));}
+void uart_write_byte(char dato){UCA0TXBUF = dato;while (((IFG2&UCA0TXIFG)==0));}
 
 int string2int(char iamstring)
 {
@@ -49,7 +49,7 @@ void ec(char *cadena)
 	c = cadena;
 	while ((c != 0) && (*c != 0))
 	{
-		enviardato(*c);
+		uart_write_byte(*c);
 		c++;
 	}
 }
@@ -66,7 +66,7 @@ unsigned int c2ui( char *c2uc){
 	return iamres;
 }
 
-void espacio(){enviardato(' ');}
+void espacio(){uart_write_byte(' ');}
 
 void printlong(unsigned long longtochar)
 {
@@ -121,7 +121,7 @@ void int2hex(unsigned int datoint)
 	ec(aux_char);
 }
 
-void borrar(){enviardato(13);}
+void borrar(){uart_write_byte(13);}
 
 void printint(int intchar)
 {

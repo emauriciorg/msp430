@@ -110,7 +110,7 @@ void uart();
 
 
 		//servo(an1,an2,an3);
-		enviardato(dirR);enviardato('X');clc_();
+		uart_write_byte(dirR);uart_write_byte('X');clc_();
 		/*    FUNCION AI BASIC
 			if(automa==1)
 			{
@@ -136,7 +136,7 @@ void uart();
 				UCA0CTL1 = UCSWRST;
 				UCA0CTL1 |= UCSSEL_2;                     // SMCLK
 				UCA0BR0 = 130;//65;                            // 16MHz 9600 PREESCALAR
-				UCA0BR1 = 6;//3;                             //(UCAxBR0 + UCAxBR1 × 256)
+				UCA0BR1 = 6;//3;                             //(UCAxBR0 + UCAxBR1 ï¿½ 256)
 				UCA0MCTL =6<<1;//UCBRS0;                        // Modulation UCBRSx = 1
 				UCA0CTL1 &= ~UCSWRST;
 				IE2 = UCA0RXIE;

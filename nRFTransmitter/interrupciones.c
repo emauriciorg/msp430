@@ -23,9 +23,9 @@
  *  		   que estado debe ejecutar:
  *
  *  		   		- opRESET:			Orden de realizar un reset al registro STATUS del nRF24L01+
- *  		   							( necesario cada vez que se envía o recibe un paquete ).
+ *  		   							( necesario cada vez que se envï¿½a o recibe un paquete ).
  *
- *					- opEnviarDatos:	Orden de enviar datos por el nRF24L01+.
+ *					- opuart_write_bytes:	Orden de enviar datos por el nRF24L01+.
  *
  *					- opCheckTx:		Orden de realizar una lectura al registro STATUS del nRF24L01+.
  *
@@ -33,10 +33,10 @@
  *
  *					- default:			Vuelta a empezar.
  *
- *			   El servicio de interrupción del TA0 estará deshabilitado hasta
+ *			   El servicio de interrupciï¿½n del TA0 estarï¿½ deshabilitado hasta
  *			   que se realice la orden prevista.
  *
- *			   Una vez completada la orden, se volverá a habilitar desde el programa principal ( main ).
+ *			   Una vez completada la orden, se volverï¿½ a habilitar desde el programa principal ( main ).
  *
  *  \author    Manuel Caballero
  *  \version   0.0
@@ -46,21 +46,21 @@
 __interrupt void TA0_ISR(void)
 {
   TA0CTL   =  MC_0;   				// TimerA0 Stop mode
-  TA0CTL  &= ~( TAIFG + TAIE );   	// Reset flag y Servicio de interrupción OFF
+  TA0CTL  &= ~( TAIFG + TAIE );   	// Reset flag y Servicio de interrupciï¿½n OFF
 
   switch ( OpFlow ){
   case opRESET:
   // Ya se ha realizado un RESET del registro STATUS del nRF24L01+, ahora podemos enviar datos.
-	  OpFlow = opEnviarDatos;
+	  OpFlow = opuart_write_bytes;
 	  break;
 
-  case opEnviarDatos:
+  case opuart_write_bytes:
   // Ya se han enviado los datos, ahora vamos a leer el registro STATUS del nRF24L01+
 	  OpFlow = opCheckTx;
 	  break;
 
   case opCheckTx:
-  // Ya se leído el registro STATUS, ahora vamos a encender el LED Rojo o no ( según la lectura del registro STATUS )
+  // Ya se leï¿½do el registro STATUS, ahora vamos a encender el LED Rojo o no ( segï¿½n la lectura del registro STATUS )
 	  OpFlow = opLED;
 	  break;
 
@@ -85,43 +85,43 @@ __interrupt void TA0_ISR(void)
 
 /**
  *  \brief     void ADC10_ISR ADC10 interrupt service routine
- *  \details   Conversión de temperatura realizada.
+ *  \details   Conversiï¿½n de temperatura realizada.
  *
  *  		   Lectura del sensor interno de temperatura del uC que se
- *  		   almacena en la variable externa vector W_Buffer. Según el datasheet
+ *  		   almacena en la variable externa vector W_Buffer. Segï¿½n el datasheet
  *  		   de la familia en la que pertenece nuestro uC (slau144j.pdf), la
- *  		   expresión que describe al sensor de temperatura interno es
+ *  		   expresiï¿½n que describe al sensor de temperatura interno es
  *  		   la siguiente:
  *
- *  		      V_temp = 0.00355·(Temp_ºC) + 0.986
+ *  		      V_temp = 0.00355ï¿½(Temp_ï¿½C) + 0.986
  *
- *  		   Despejamos la variable que nos interesa (Temp_ºC), para ello,
+ *  		   Despejamos la variable que nos interesa (Temp_ï¿½C), para ello,
  *  		   se recomienda las siguientes recomendaciones:
  *
- *  		     · Trabajar en mV.
- *  		     · Redondear a números enteros.
+ *  		     ï¿½ Trabajar en mV.
+ *  		     ï¿½ Redondear a nï¿½meros enteros.
  *
- *  		   Una vez dispuesto lo anterior, tenemos la siguiente expresión:
+ *  		   Una vez dispuesto lo anterior, tenemos la siguiente expresiï¿½n:
  *
- *  		      Temp_ºC = ((V_temp - 672)*423)/1023;
+ *  		      Temp_ï¿½C = ((V_temp - 672)*423)/1023;
  *
- *  		   El tiempo total de muestreo y conversión viene dada por la
- *  		   siguiente expresión:
+ *  		   El tiempo total de muestreo y conversiï¿½n viene dada por la
+ *  		   siguiente expresiï¿½n:
  *
  *  		       t_sample&conversion = t_sync + t_sample + t_convert
  *
  *  		   Donde, en nuestro caso:
  *
- *  		      · t_sync:     1 x ADC10CLK (Siempre es este valor)
- *  		      · t_sample:   64 x ADC10CLKs
- *  		      · t_convert:  13 x ADC10CLKs
- *  		      · t_total:    (1 + 64 + 13) x ADC10CLKs = 78 x ADC10CLKs
+ *  		      ï¿½ t_sync:     1 x ADC10CLK (Siempre es este valor)
+ *  		      ï¿½ t_sample:   64 x ADC10CLKs
+ *  		      ï¿½ t_convert:  13 x ADC10CLKs
+ *  		      ï¿½ t_total:    (1 + 64 + 13) x ADC10CLKs = 78 x ADC10CLKs
  *
  *  		   Nuestro reloj es: ~5/3 ~ 1.67MHz
  *
- *  		   Por lo tanto, el tiempo total consumido será:
+ *  		   Por lo tanto, el tiempo total consumido serï¿½:
  *
- *  		      · t_total:   78 x ADC10CLKs = 78/(5/3 MHz) ~ 46.8us
+ *  		      ï¿½ t_total:   78 x ADC10CLKs = 78/(5/3 MHz) ~ 46.8us
  *
  *  \author    Manuel Caballero
  *  \version   0.0

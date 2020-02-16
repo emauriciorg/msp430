@@ -35,7 +35,7 @@ unsigned  char iSR=0;
 int string2int(char);
 void uart();
 
-void enviardato(char dato){UCA0TXBUF = dato;while (!(IFG2&UCA0TXIFG));}
+void uart_write_byte(char dato){UCA0TXBUF = dato;while (!(IFG2&UCA0TXIFG));}
 
 void uart()
 {
@@ -44,7 +44,7 @@ void uart()
   UCA0CTL1 = UCSWRST;
   UCA0CTL1 |= UCSSEL_2;                     // SMCLK
   UCA0BR0 = 65;                            // 16MHz 9600 PREESCALAR
-  UCA0BR1 = 3;                             //(UCAxBR0 + UCAxBR1 × 256)
+  UCA0BR1 = 3;                             //(UCAxBR0 + UCAxBR1 ï¿½ 256)
   UCA0MCTL =2<<1;//UCBRS0;                        // Modulation UCBRSx = 1
   UCA0CTL1 &= ~UCSWRST;
   IE2 = UCA0RXIE;
@@ -65,7 +65,7 @@ void ec(char *cadena)
 	c = cadena;
 	while ((c != 0) && (*c != 0))
 	{
-		enviardato(*c);
+		uart_write_byte(*c);
 		c++;
 	}
 }
@@ -82,7 +82,7 @@ unsigned int c2ui( char *c2uc){
 	return iamres;
 }
 
-void s_pc(){enviardato(' ');}
+void s_pc(){uart_write_byte(' ');}
 
 void printlong(unsigned long longtochar)
 {
@@ -137,7 +137,7 @@ void int2hex(unsigned int datoint)
 	ec(aux_char);
 }
 
-void c_lc(){enviardato(13);}
+void c_lc(){uart_write_byte(13);}
 
 void printint(int intchar)
 {
@@ -199,8 +199,8 @@ void ph_ui(unsigned int intchar1)
 	_D=(intchar1/10);
 	_U=(intchar1-(_D*10));
 
-	enviardato((char)(_D+48));
-	enviardato((char)(_U+48));
+	uart_write_byte((char)(_D+48));
+	uart_write_byte((char)(_U+48));
 
 }
 

@@ -54,7 +54,7 @@ void menu_2();
 			_delay_cycles(2000000);
 
 
-			//enviardato(read_button());s_pc();p_ui(Vin);s_pc();p_ui(Vmax);s_pc();p_ui(VES1);s_pc();p_ui(VES2);s_pc();p_ui(VES3);clc_();
+			//uart_write_byte(read_button());s_pc();p_ui(Vin);s_pc();p_ui(Vmax);s_pc();p_ui(VES1);s_pc();p_ui(VES2);s_pc();p_ui(VES3);clc_();
 
 
 
@@ -105,7 +105,7 @@ void menu_2();
 				UCA0CTL1 = UCSWRST;
 				UCA0CTL1 |= UCSSEL_2;                     // SMCLK
 				UCA0BR0 = 130;//65;                            // 16MHz 9600 PREESCALAR
-				UCA0BR1 = 6;//3;                             //(UCAxBR0 + UCAxBR1 × 256)
+				UCA0BR1 = 6;//3;                             //(UCAxBR0 + UCAxBR1 ï¿½ 256)
 				UCA0MCTL =6<<1;//UCBRS0;                        // Modulation UCBRSx = 1
 				UCA0CTL1 &= ~UCSWRST;
 				IE2 = UCA0RXIE;
@@ -130,7 +130,7 @@ void menu_2();
 	   void menu_2()
 		   {
 
-			 ec("menu 2 , here goes something");ec(" something else");enviardato(10);clc_();
+			 ec("menu 2 , here goes something");ec(" something else");uart_write_byte(10);clc_();
 
 
 		   }

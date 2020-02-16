@@ -17,7 +17,7 @@ while(1)
 
 
 
-ec("Position ");EnviarDato(PositionA+'0');s_pc();EnviarDato(PositionB+'0');clc_();
+ec("Position ");uart_write_byte(PositionA+'0');s_pc();uart_write_byte(PositionB+'0');clc_();
 if(Rifg==1){rotate();}else{
 SendStepperMotor(PositionA,PositionB);}
 

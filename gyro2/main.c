@@ -42,9 +42,9 @@ int main(void)
 		}
 
 
-		ec(" X: ");printuint(twoc2dec(GX1));espacio();printuint(twoc2dec(anguloAproxX));espacio();enviardato(signo);
-		ec(" Y: ");printuint(twoc2dec(GY1));espacio();printuint(twoc2dec(anguloAproxY));espacio();enviardato(signo);
-		ec(" Z: ");printuint(twoc2dec(GZ1));espacio();printuint(twoc2dec(anguloAproxZ));espacio();enviardato(signo);borrar();
+		ec(" X: ");printuint(twoc2dec(GX1));espacio();printuint(twoc2dec(anguloAproxX));espacio();uart_write_byte(signo);
+		ec(" Y: ");printuint(twoc2dec(GY1));espacio();printuint(twoc2dec(anguloAproxY));espacio();uart_write_byte(signo);
+		ec(" Z: ");printuint(twoc2dec(GZ1));espacio();printuint(twoc2dec(anguloAproxZ));espacio();uart_write_byte(signo);borrar();
 		ec("REG1 es ");printuint((registro1+'0'));borrar();
 	}
 }

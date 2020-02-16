@@ -35,7 +35,7 @@ extern volatile char UartInput;
  * espacio();
  * c2ui();
  * printstr();
- * enviardato();
+ * uart_write_byte();
  * int2hex();
  * printchar2c();
  * printfloar();

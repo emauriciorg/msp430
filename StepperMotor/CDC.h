@@ -26,7 +26,7 @@
  * espacio();
  * c2ui();
  * ec();
- * EnviarDato();
+ * uart_write_byte();
  * int2hex();
  * printchar2c();
  * printfloar();
@@ -57,7 +57,7 @@ void clc_(void);
 void s_pc(void);
 unsigned int c2ui(char *);
 void ec(char *);
-void EnviarDato(char);
+void uart_write_byte(char);
 void int2hex(unsigned int datoint);
 void printchar2c(unsigned int);
 void printfloar(float twoto3);
@@ -70,7 +70,7 @@ int string2int(char);
 
 
 
-void EnviarDato(char dato){UCA0TXBUF = dato;while (!(IFG2&UCA0TXIFG));}
+void uart_write_byte(char dato){UCA0TXBUF = dato;while (!(IFG2&UCA0TXIFG));}
 
 int string2int(char iamstring)
 {
@@ -89,7 +89,7 @@ void ec(char *cadena)
 	c = cadena;
 	while ((c != 0) && (*c != 0))
 	{
-		EnviarDato(*c);
+		uart_write_byte(*c);
 		c++;
 	}
 }
@@ -117,7 +117,7 @@ unsigned int c2ui( char *c2uc){
 	return iamres;
 }
 
-void s_pc(){EnviarDato(' ');}
+void s_pc(){uart_write_byte(' ');}
 
 void printlong(unsigned long longtochar)
 {
@@ -172,7 +172,7 @@ void int2hex(unsigned int datoint)
 	ec(aux_char);
 }
 
-void clc_(){EnviarDato(13);}
+void clc_(){uart_write_byte(13);}
 
 void printint( int intchar1)
 {

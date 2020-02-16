@@ -65,7 +65,7 @@ unsigned int Vbat=0;
 			PrintStr("Test LCD");
 			SetCursorPosition(1, 0);
 					Lph_ui(day_t);putme(':'); Lph_ui(hour_t);putme(':'); Lph_ui(min_t);putme(':'); Lph_ui(sec_t);//c_lc();
-					p_ui(day_t);enviardato(':'); p_ui(hour_t);enviardato(':'); p_ui(min_t);enviardato(':'); p_ui(sec_t);borrar();
+					p_ui(day_t);uart_write_byte(':'); p_ui(hour_t);uart_write_byte(':'); p_ui(min_t);uart_write_byte(':'); p_ui(sec_t);borrar();
 					_delay_cycles(16000000);//10000);
 
 
@@ -167,7 +167,7 @@ unsigned int Vbat=0;
 */
 
 			   ec("Capacidad ");p_ui((hour_t+(min_t/60))*v_sel);
-			  	ec(" volts1 ");p_ui(Vbat);ec(" estado ");enviardato(Estado[I_pos]);borrar();
+			  	ec(" volts1 ");p_ui(Vbat);ec(" estado ");uart_write_byte(Estado[I_pos]);borrar();
 
 			   }
 		   void menu_1()
@@ -276,7 +276,7 @@ unsigned int Vbat=0;
 					UCA0CTL1 = UCSWRST;
 					UCA0CTL1 |= UCSSEL_2;                     // SMCLK
 					UCA0BR0 = 130;//65;                            // 16MHz 9600 PREESCALAR
-					UCA0BR1 = 6;//3;                             //(UCAxBR0 + UCAxBR1 × 256)
+					UCA0BR1 = 6;//3;                             //(UCAxBR0 + UCAxBR1 ï¿½ 256)
 					UCA0MCTL =6<<1;//UCBRS0;                        // Modulation UCBRSx = 1
 					UCA0CTL1 &= ~UCSWRST;
 					IE2 = UCA0RXIE;

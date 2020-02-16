@@ -26,7 +26,7 @@
  * espacio();
  * c2ui();
  * ec();
- * enviardato();
+ * uart_write_byte();
  * int2hex();
  * printchar2c();
  * printfloar();

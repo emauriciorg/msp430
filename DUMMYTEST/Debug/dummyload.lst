@@ -1004,15 +1004,15 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   17
      918                    .dwattr $C$DW$88, DW_AT_decl_line(0x0c)
      919                    .dwattr $C$DW$88, DW_AT_decl_column(0x0e)
      920            ;       C:\ti\ccsv5\tools\compiler\msp430_4.2.1\bin\opt430.exe C:\\Users\\mauricio\\AppData\\Local\\Te
-     921 000000               .sect   ".text:enviardato"
+     921 000000               .sect   ".text:uart_write_byte"
      922                    .align  2
      923                    .clink
-     924                    .global enviardato
+     924                    .global uart_write_byte
      925            
-     926            $C$DW$89        .dwtag  DW_TAG_subprogram, DW_AT_name("enviardato")
-     927                    .dwattr $C$DW$89, DW_AT_low_pc(enviardato)
+     926            $C$DW$89        .dwtag  DW_TAG_subprogram, DW_AT_name("uart_write_byte")
+     927                    .dwattr $C$DW$89, DW_AT_low_pc(uart_write_byte)
      928                    .dwattr $C$DW$89, DW_AT_high_pc(0x00)
-     929                    .dwattr $C$DW$89, DW_AT_TI_symbol_name("enviardato")
+     929                    .dwattr $C$DW$89, DW_AT_TI_symbol_name("uart_write_byte")
      930                    .dwattr $C$DW$89, DW_AT_external
      931                    .dwattr $C$DW$89, DW_AT_TI_begin_file("..\CDC.h")
      932                    .dwattr $C$DW$89, DW_AT_TI_begin_line(0x35)
@@ -1026,22 +1026,22 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   18
      935                    .dwattr $C$DW$89, DW_AT_decl_line(0x35)
      936                    .dwattr $C$DW$89, DW_AT_decl_column(0x06)
      937                    .dwattr $C$DW$89, DW_AT_TI_max_frame_size(0x02)
-     938                    .dwpsn  file "..\CDC.h",line 53,column 27,is_stmt,address enviardato,isa 0
+     938                    .dwpsn  file "..\CDC.h",line 53,column 27,is_stmt,address uart_write_byte,isa 0
      939            
-     940                    .dwfde $C$DW$CIE, enviardato
+     940                    .dwfde $C$DW$CIE, uart_write_byte
      941            $C$DW$90        .dwtag  DW_TAG_formal_parameter, DW_AT_name("dato")
      942                    .dwattr $C$DW$90, DW_AT_TI_symbol_name("dato")
      943                    .dwattr $C$DW$90, DW_AT_type(*$C$DW$T$6)
      944                    .dwattr $C$DW$90, DW_AT_location[DW_OP_reg12]
      945            
      946            ;*****************************************************************************
-     947            ;* FUNCTION NAME: enviardato                                                 *
+     947            ;* FUNCTION NAME: uart_write_byte                                                 *
      948            ;*                                                                           *
      949            ;*   Regs Modified     : SP,SR                                               *
      950            ;*   Regs Used         : SP,SR,r12                                           *
      951            ;*   Local Frame Size  : 0 Args + 0 Auto + 0 Save = 0 byte                   *
      952            ;*****************************************************************************
-     953 000000       enviardato:
+     953 000000       uart_write_byte:
      954            ;* --------------------------------------------------------------------------*
      955                    .dwcfi  cfa_offset, 2
      956                    .dwcfi  save_reg_to_mem, 16, -2
@@ -1330,9 +1330,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   23
     1194 000004 4F6C          MOV.B     @r15,r12              ; [] |72| 
     1195            $C$DW$106       .dwtag  DW_TAG_TI_branch
     1196                    .dwattr $C$DW$106, DW_AT_low_pc(0x00)
-    1197                    .dwattr $C$DW$106, DW_AT_name("enviardato")
+    1197                    .dwattr $C$DW$106, DW_AT_name("uart_write_byte")
     1198                    .dwattr $C$DW$106, DW_AT_TI_call
-    1199 000006 12B0          CALL      #enviardato           ; [] |72| 
+    1199 000006 12B0          CALL      #uart_write_byte           ; [] |72| 
          000008 0000!
     1200                                                      ; [] |72| 
     1201                    .dwpsn  file "..\CDC.h",line 73,column 3,is_stmt,isa 0
@@ -1605,9 +1605,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   27
          000002 0020 
     1438            $C$DW$120       .dwtag  DW_TAG_TI_branch
     1439                    .dwattr $C$DW$120, DW_AT_low_pc(0x00)
-    1440                    .dwattr $C$DW$120, DW_AT_name("enviardato")
+    1440                    .dwattr $C$DW$120, DW_AT_name("uart_write_byte")
     1441                    .dwattr $C$DW$120, DW_AT_TI_call
-    1442 000004 12B0          CALL      #enviardato           ; [] |100| 
+    1442 000004 12B0          CALL      #uart_write_byte           ; [] |100| 
          000006 0000!
     1443                                                      ; [] |100| 
     1444                    .dwpsn  file "..\CDC.h",line 100,column 29,is_stmt,isa 0
@@ -2799,9 +2799,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   47
          000002 000D 
     2261            $C$DW$178       .dwtag  DW_TAG_TI_branch
     2262                    .dwattr $C$DW$178, DW_AT_low_pc(0x00)
-    2263                    .dwattr $C$DW$178, DW_AT_name("enviardato")
+    2263                    .dwattr $C$DW$178, DW_AT_name("uart_write_byte")
     2264                    .dwattr $C$DW$178, DW_AT_TI_call
-    2265 000004 12B0          CALL      #enviardato           ; [] |155| 
+    2265 000004 12B0          CALL      #uart_write_byte           ; [] |155| 
          000006 0000!
     2266                                                      ; [] |155| 
     2267                    .dwpsn  file "..\CDC.h",line 155,column 30,is_stmt,isa 0
@@ -5583,9 +5583,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   93
 Tools Copyright (c) 2003-2013 Texas Instruments Incorporated
 C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   94
 
-    4411                    .dwattr $C$DW$351, DW_AT_name("enviardato")
+    4411                    .dwattr $C$DW$351, DW_AT_name("uart_write_byte")
     4412                    .dwattr $C$DW$351, DW_AT_TI_call
-    4413 00008c 12B0          CALL      #enviardato           ; [] |68| 
+    4413 00008c 12B0          CALL      #uart_write_byte           ; [] |68| 
          00008e 0000!
     4414                                                      ; [] |68| 
     4415                    .dwpsn  file "../dummyload.c",line 68,column 35,is_stmt,isa 0
@@ -5603,9 +5603,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   94
          00009a 003A 
     4425            $C$DW$353       .dwtag  DW_TAG_TI_branch
     4426                    .dwattr $C$DW$353, DW_AT_low_pc(0x00)
-    4427                    .dwattr $C$DW$353, DW_AT_name("enviardato")
+    4427                    .dwattr $C$DW$353, DW_AT_name("uart_write_byte")
     4428                    .dwattr $C$DW$353, DW_AT_TI_call
-    4429 00009c 12B0          CALL      #enviardato           ; [] |68| 
+    4429 00009c 12B0          CALL      #uart_write_byte           ; [] |68| 
          00009e 0000!
     4430                                                      ; [] |68| 
     4431                    .dwpsn  file "../dummyload.c",line 68,column 65,is_stmt,isa 0
@@ -5623,9 +5623,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   94
          0000aa 003A 
     4441            $C$DW$355       .dwtag  DW_TAG_TI_branch
     4442                    .dwattr $C$DW$355, DW_AT_low_pc(0x00)
-    4443                    .dwattr $C$DW$355, DW_AT_name("enviardato")
+    4443                    .dwattr $C$DW$355, DW_AT_name("uart_write_byte")
     4444                    .dwattr $C$DW$355, DW_AT_TI_call
-    4445 0000ac 12B0          CALL      #enviardato           ; [] |68| 
+    4445 0000ac 12B0          CALL      #uart_write_byte           ; [] |68| 
          0000ae 0000!
     4446                                                      ; [] |68| 
     4447                    .dwpsn  file "../dummyload.c",line 68,column 94,is_stmt,isa 0
@@ -6321,9 +6321,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE  106
          000044 0000!
     4997            $C$DW$385       .dwtag  DW_TAG_TI_branch
     4998                    .dwattr $C$DW$385, DW_AT_low_pc(0x00)
-    4999                    .dwattr $C$DW$385, DW_AT_name("enviardato")
+    4999                    .dwattr $C$DW$385, DW_AT_name("uart_write_byte")
     5000                    .dwattr $C$DW$385, DW_AT_TI_call
-    5001 000046 12B0          CALL      #enviardato           ; [] |170| 
+    5001 000046 12B0          CALL      #uart_write_byte           ; [] |170| 
          000048 0000!
     5002                                                      ; [] |170| 
     5003                    .dwpsn  file "../dummyload.c",line 170,column 74,is_stmt,isa 0

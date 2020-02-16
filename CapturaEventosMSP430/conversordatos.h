@@ -15,7 +15,7 @@ unsigned char entero;
 unsigned char _UD,_U,_D,_UM,_C,_DM;
 unsigned long u,d,c,um,dm,cm,uM,dM,cM;
 
-void enviardato(char dato){
+void uart_write_byte(char dato){
 	UCA0TXBUF = dato;
     while (!(IFG2&UCA0TXIFG));
 }
@@ -29,12 +29,12 @@ void PrintString(char *cadena)
 
     while ((c != 0) && (*c != 0))
     {
-        enviardato(*c);
+        uart_write_byte(*c);
         c++;
     }
 }
 
-void espacio(){enviardato(' ');}
+void espacio(){uart_write_byte(' ');}
 
 void printlong(unsigned long longtochar){
 
@@ -105,7 +105,7 @@ void int2hex(unsigned int datoint){
 		 }
 
 void borrar(){
-	enviardato(13);
+	uart_write_byte(13);
 }
 void printint(int intchar){
 

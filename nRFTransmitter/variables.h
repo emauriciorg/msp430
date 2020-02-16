@@ -15,28 +15,28 @@
 * se mantenga la autoria del autor.
 */
 
-#define opTemInterna	0			/**<  Estado opTemInterna: 	Petición de lectura del sensor interno de temperatura  */
+#define opTemInterna	0			/**<  Estado opTemInterna: 	Peticiï¿½n de lectura del sensor interno de temperatura  */
 #define opRESET			1			/**<  Estado RESET: 		realiza un RESET al dispositivo nRF24L01+  */
-#define	opEnviarDatos	2			/**<  Estado Enviar Datos: 	envia paquete por el dispositivo nRF24L01+  */
-#define	opCheckTx		3			/**<  Estado CheckTx: 		comprueba que la transmisión ha sido satisfactoria  */
+#define	opuart_write_bytes	2			/**<  Estado Enviar Datos: 	envia paquete por el dispositivo nRF24L01+  */
+#define	opCheckTx		3			/**<  Estado CheckTx: 		comprueba que la transmisiï¿½n ha sido satisfactoria  */
 #define	opLED			4			/**<  Estado LED: 			Cambia el estado del LED1  */
 
 
-#define	ERROR			0xFF		/**<  Comando ERROR: 		ha habido un error en la transmisión  */
+#define	ERROR			0xFF		/**<  Comando ERROR: 		ha habido un error en la transmisiï¿½n  */
 #define	RESET			0x00		/**<  Comando RESET: 		realiza un reset a la variable  */
 
 /**
  *  \brief     Variables Globales
  *  \details
- * 				- OpFlow:		Dicha variable se emplea conjutamente en el servicio de interrupción
- *                  	 		del TimerA TA0, para indicar que acción a realizar:
+ * 				- OpFlow:		Dicha variable se emplea conjutamente en el servicio de interrupciï¿½n
+ *                  	 		del TimerA TA0, para indicar que acciï¿½n a realizar:
  *
- *                  	 			- OpFlow = opEnviarDatos:	Se envía datos mediante nRF24L01+.
- *                  	 			- OpFlow = opCheckTX:		Se compreba que se ha realizado la transmisión.
+ *                  	 			- OpFlow = opuart_write_bytes:	Se envï¿½a datos mediante nRF24L01+.
+ *                  	 			- OpFlow = opCheckTX:		Se compreba que se ha realizado la transmisiï¿½n.
  *                  	 			- OpFlow = opLED:			Se enciende LED si se ha transmitido o no.
  *
- *                  	 											· Parpadeo LED Rojo: 		Tx perfecta ( ACK recibido también ).
- *                  	 											· NO Parpadeo LED Rojo:  	Tx fallo ( o no se ha enviado o ACK no recibido ).
+ *                  	 											ï¿½ Parpadeo LED Rojo: 		Tx perfecta ( ACK recibido tambiï¿½n ).
+ *                  	 											ï¿½ NO Parpadeo LED Rojo:  	Tx fallo ( o no se ha enviado o ACK no recibido ).
  *
  *								Se inicializa en el estado de opTemInterna ( OpFlow = 0 ).
  */

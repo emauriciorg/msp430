@@ -27,19 +27,19 @@
 /**
  *  \brief     void main( void )
  *  \details   Este programa consiste en realizar una lectura de datos del sensor interno
- *  		   de temperatura cada, aproximadamente 3 segundos y enviarlos inalámbricamente
+ *  		   de temperatura cada, aproximadamente 3 segundos y enviarlos inalï¿½mbricamente
  *  		   usando el dispositivo nRF24L01+.
  *
- *  		   En caso de que el envío sea satisfactorio, el LED1 ( LED Rojo de la Launchpad),
- *  		   realizará un parpadeo de, aproximadamente 0.1 s.
+ *  		   En caso de que el envï¿½o sea satisfactorio, el LED1 ( LED Rojo de la Launchpad),
+ *  		   realizarï¿½ un parpadeo de, aproximadamente 0.1 s.
  *
  *  \author    Manuel Caballero
  *  \version   0.0
  *  \date      4/2/2015
- *  \pre       El código presente es SOLO para el TRANSMISOR.
- *  \pre	   El dispositivo nRF24L01+ se conecta al periférico USCI_B0 en modo SPI del microcontrolador.
- *  \pre	   Asegurarse de que el LED1 ( LED Rojo ) está conectado al pin P1.0.
- *  \pre	   Asegurarse de que que concuerden las siguientes señales:
+ *  \pre       El cï¿½digo presente es SOLO para el TRANSMISOR.
+ *  \pre	   El dispositivo nRF24L01+ se conecta al perifï¿½rico USCI_B0 en modo SPI del microcontrolador.
+ *  \pre	   Asegurarse de que el LED1 ( LED Rojo ) estï¿½ conectado al pin P1.0.
+ *  \pre	   Asegurarse de que que concuerden las siguientes seï¿½ales:
  *
  *  				- CE   ( nRF24L01+ ):	P2.0
  *  				- CSN  ( nRF24L01+ ):	P2.1
@@ -82,17 +82,17 @@ void main( void )
 		TA0CTL  = TASSEL_1 + MC_1 + TACLR + TAIE;		// ACLK, upmode
 		break;
 
-	case opEnviarDatos:
-	// Envía paquetes
+	case opuart_write_bytes:
+	// Envï¿½a paquetes
 		pBuff = &W_Buffer [ 0 ];
-		nRF24L01_send ( pBuff, 2 );						// Envía temperatura interna ( 2-Bytes )
+		nRF24L01_send ( pBuff, 2 );						// Envï¿½a temperatura interna ( 2-Bytes )
 
 		TA0CCR0 = 12;		                			// TAIFG on around ~ 1 ms
 		TA0CTL  = TASSEL_1 + MC_1 + TACLR + TAIE;		// ACLK, upmode
 		break;
 
 	case opCheckTx:
-	// Comprueba que la transmisión ha sido un éxito
+	// Comprueba que la transmisiï¿½n ha sido un ï¿½xito
 		*pBuff = RESET;
 		pBuff = nRF24L01_WriteRead (R_REGISTER, STATUS, 0, 1);
 
@@ -107,7 +107,7 @@ void main( void )
 		break;
 
 	case opLED:
-	// Actúa el estado del LED1 ( si OK, enciende LED1 - Rojo - )
+	// Actï¿½a el estado del LED1 ( si OK, enciende LED1 - Rojo - )
 		if ( *pBuff == ERROR )
 			P1OUT	&=	~BIT0;
 		else
@@ -119,7 +119,7 @@ void main( void )
 
 	default:
 	case opTemInterna:
-	// Vuelta a empezar: lectuta temperatura interna + reset nRF24L01+ + envío de datos + cambio LED
+	// Vuelta a empezar: lectuta temperatura interna + reset nRF24L01+ + envï¿½o de datos + cambio LED
 	// cada ~ ( 3s - 46us - 1ms - 1ms - 1ms - 0.1s ~ 2.9s ).
 		P1OUT	&=	~BIT0;								// LED1 OFF
 
