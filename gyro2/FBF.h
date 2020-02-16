@@ -22,7 +22,7 @@ void uart_init(void);
 void clk_init(void);
 void port1interrupt(void);
 void port2interrupt(void);
-void eventosexternos(void);
+void external_events_init(void);
 void i2cmaster(void);
 void inicio(void);
 

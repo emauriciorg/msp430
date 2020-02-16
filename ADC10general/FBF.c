@@ -20,35 +20,30 @@
  *
  */
 
-#ifndef FBF_H_
-#define FBF_H_
 
-
-
-void inicioADC(){
-	ADC10CTL0 |= (ENC | ADC10SC);
-	}
-
-
-void Adc(){
-	ADC10CTL1 =INCH_5|ADC10SSEL_2|CONSEQ_3 	|ADC10DIV_7;        // Channel 5, ADC10CLK/4
-	ADC10CTL0 = ADC10SHT_3|MSC|ADC10IE|ADC10ON|ADC10SR|REFBURST;
-	ADC10AE0 = 0x10;
-
-
-	//P1.5 ADC option�
+void ADC10f()
+{
+	ADC10CTL1 	 = 		INCH_7|ADC10DIV_4|CONSEQ_2	;           // CHANEL INPUT AND MODE
+	ADC10CTL0 	 = 		ADC10SHT_3|ADC10SR|REFBURST|MSC|REF2_5V|REFON | ADC10ON | ADC10IE;  // REFERENCE AND TIMING
+	ADC10AE0 	|= 		BIT7;                        //ENABLE THE ANALOG CHANNEL ADC option�
 }
 
-void I2CReceiver(){
+void initADC10()
+{
+	ADC10CTL0	|=		(ENC|ADC10SC ) ;
+}
+
+void I2CReceiver()
+{
 
 
-	P1SEL |= BIT6 + BIT7;                     // Assign I2C pins to USCI_B0
-	  P1SEL2|= BIT6 + BIT7;                     // Assign I2C pins to USCI_B0
-	  UCB0CTL1 |= UCSWRST;                      // Enable SW reset
-	  UCB0CTL0 = UCMODE_3 + UCSYNC;             // I2C Slave, synchronous mode
-	  UCB0I2COA = 0x48;                         // Own Address is 048h
-	  UCB0CTL1 &= ~UCSWRST;                     // Clear SW reset, resume operation
-	  IE2 |= UCB0RXIE;                          // Enable RX interrupt
+	P1SEL       |=    	BIT6 + BIT7;                     // Assign I2C pins to USCI_B0
+	P1SEL2      |= 	    BIT6 + BIT7;                     // Assign I2C pins to USCI_B0
+	UCB0CTL1    |= 		UCSWRST;                      // Enable SW reset
+	UCB0CTL0     = 		UCMODE_3 + UCSYNC;             // I2C Slave, synchronous mode
+	UCB0I2COA    = 		0x48;                         // Own Address is 048h
+	UCB0CTL1    &= 		~UCSWRST;                     // Clear SW reset, resume operation
+	IE2 		|= 		UCB0RXIE;                          // Enable RX interrupt
 
 }
 
@@ -65,7 +60,7 @@ void I2Ctransmitter(){
 	  UCB0I2CSA = 0x48;                         // Slave Address is 048h
 	  UCB0CTL1 &= ~UCSWRST;                     // Clear SW reset, resume operation
 	  IE2 |= UCB0TXIE;                          // Enable TX interrupt
-      //TXData = 0x00;                            // Holds TX data
+	//  TXData = 0x00;                            // Holds TX data
 }
 
 void enable_interrupts()
@@ -79,52 +74,46 @@ void enable_interrupts()
 
 void configport()
 {
-	P1DIR|=(BIT7|BIT4|BIT5|BIT3);
-	P1DIR&=~BIT2;
-	P1SEL&=~(BIT2|BIT7|BIT4|BIT5|BIT3);
-	P1SEL2&=~(BIT2|BIT7|BIT4|BIT5|BIT3);
-
-    P1REN=BIT2;
-    P1OUT=0X00;
+	P1DIR|=0X40;
+	P1OUT=0X00;
 
 
-	P2DIR		=0XBF;
-	P2SEL 		=0X00;
-	P2SEL2 	=0X00;
-	P2OUT	=0X00;
-	P2REN		=0X00;
+	P2DIR=0XFF;
+	P2SEL =0X00;
+	P2SEL2 =0X00;
+	P2OUT=0X00;
+	P2REN=0X0000;
 }
 
 void uart_init()
 {
-	P1SEL |=(BIT1 | BIT2);
-	P1SEL2 |=(BIT1 | BIT2);
-
+	P1SEL |= (BIT1 | BIT2);
+	P1SEL2 |= (BIT1 | BIT2);
 	UCA0CTL1 = UCSWRST;
-	UCA0CTL1 |= UCSSEL_2;                     // SMCLK
-	UCA0BR0 = 208;//130;                            // 16MHz 9600 PREESCALAR
-	UCA0BR1 = 0;//6;                             //(UCAxBR0 + UCAxBR1 � 256)
-	UCA0MCTL =0X00;//0x0c;//UCBRS0;                        // Modulation UCBRSx = 1
+	UCA0CTL1 |= 0x80;                     // SMCLK
+	UCA0BR0 = 130;                            // 16MHz 9600 PREESCALAR
+	UCA0BR1 = 6;                             //(UCAxBR0 + UCAxBR1 � 256)
+	UCA0MCTL =0x0c;//UCBRS0;                        // Modulation UCBRSx = 1
 	UCA0CTL1 &= ~UCSWRST;
-	IE2 |= 0;//UCA0TXIE;
+	IE2 |= UCA0RXIE;
 }
 
 void clk_init()
 {
-	WDTCTL = WDTPW + WDTHOLD;                 // Stop WDT
+	WDTCTL = WDTPW | WDTHOLD;                 // Stop WDT
 	BCSCTL1 =CALBC1_16MHZ;
-	BCSCTL2 =DIVS_3;
+	BCSCTL2 =0x00;
 	DCOCTL = CALDCO_16MHZ;
-
 }
+
+
+
 
 void interrupcion()
 {
 	P2IE=0X03; //Habilita la interrupcion asociada a P1IFG
 	P2IFG=0X00; // set when a interrupt ocurrs
 	P2IES=0X0000; // INTERRUPT EDGE SELECT  EDGE SELECTS THE INTERRUPT EDGE FOR THE CORRESPONDIN I/O, 0 MEANS low-to-high transition, 1 means a high-to-low transition
-
-
 }
 
 
@@ -133,38 +122,23 @@ void external_events_init(){
 // this function recieve the input in rising/fall/both edges and store the count when it happend and when it ends, after that it gives to you a to values of
 //	count event one and event two it is on p2.0 pin which is the cci1 from timer3, this pin is on pull-down resistor.see times and etc.
 
-			P2OUT=0X00;
-			P2DIR&=(~0X01);
-			P2SEL|=0X01;
-			P2SEL2&=(~0X01);
-			P2REN=0X00;
-
-			TA1CTL=ID_3|TASSEL_2|MC_2;
-			TA1CCTL0=CAP|CM_3|CCIE|SCS;
+	P2OUT=0X00;
+	P2DIR&=(~0X01);
+	P2SEL|=0X01;
+	P2SEL2&=(~0X01);
+	P2REN=0X00;
+	TA1CTL=ID_3|TASSEL_2|MC_2;
+	TA1CCTL0=CAP|CM_3|CCIE|SCS;
 }
 
-
+void timer0(){
+	TA0CCR0=60000;
+	TACCTL0=CCIE; //no capture mode+CCIA+Asynchronous en capture mode+modo comparacion+
+	TACTL=ID_3|TASSEL_2|MC_1|TAIE;
+}
 
 void configtimer3(){
 	TA1CCR0=20000;
 	TA1CCTL0=CCIE; //no capture mode+CCIA+Asynchronous en capture mode+modo comparacion+
-	TA1CTL=ID_3|TASSEL_1|MC_1|TAIE;
+	TA1CTL=ID_3|TASSEL_2|MC_1|TAIE;
 }
-
-
-void inicio()
-{
-	clk_init();
-	uart_init();
-	//configport();
-   //Adc();
-	//timer0();
-	//enable_interrupts();
-}
-
-
-
-
-
-
-#endif /* FBF_H_ */

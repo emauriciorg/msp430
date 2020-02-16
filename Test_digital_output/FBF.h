@@ -118,7 +118,7 @@ void interrupcion()
 
 
 
-void eventosexternos(){
+void external_events_init(){
 // this function recieve the input in rising/fall/both edges and store the count when it happend and when it ends, after that it gives to you a to values of
 //	count event one and event two it is on p2.0 pin which is the cci1 from timer3, this pin is on pull-down resistor.see times and etc.
 

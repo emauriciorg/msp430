@@ -151,7 +151,7 @@
 		P2IES=0X0; // INTERRUPT EDGE SELECT  EDGE SELECTS THE INTERRUPT EDGE FOR THE CORRESPONDIN I/O, 0 MEANS low-to-high transition, 1 means a high-to-low transition
 	}
 
-	void eventosexternos()
+	void external_events_init()
 	{
 
 /*		P2OUT=0X00;
@@ -192,7 +192,7 @@
 	{
 		clk_init();
 		uart_init();
-		//eventosexternos();
+		//external_events_init();
 
 		 port1interrupt();
 

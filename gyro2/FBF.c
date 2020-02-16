@@ -137,7 +137,7 @@ void port2interrupt(void)
 	P2IES=0X0; // INTERRUPT EDGE SELECT  EDGE SELECTS THE INTERRUPT EDGE FOR THE CORRESPONDIN I/O, 0 MEANS low-to-high transition, 1 means a high-to-low transition
 }
 
-void eventosexternos(void)
+void external_events_init(void)
 {
 
 	P1OUT=0X00;

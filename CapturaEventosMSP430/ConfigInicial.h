@@ -91,7 +91,7 @@ void ConfUart()
 	UCA0CTL1 = UCSWRST;
 	UCA0CTL1 |= 0x80;                     // SMCLK
 	UCA0BR0 = 130;                            // 1MHz/ 9600 PREESCALAR
-	UCA0BR1 = 6;                             //(UCAxBR0 + UCAxBR1 × 256)
+	UCA0BR1 = 6;                             //(UCAxBR0 + UCAxBR1 ï¿½ 256)
 	UCA0MCTL =0x00;//UCBRS0;                        // Modulation UCBRSx = 1
 	UCA0CTL1 &= ~UCSWRST;
 	IE2 |= UCA0RXIE;
@@ -144,7 +144,7 @@ void timer(unsigned int counts)
 	TA1CTL=TASSEL_2|ID_3|MC_1|TAIE;
 }
 
-void eventosexternos()
+void external_events_init()
 {
 	P2DIR&=~(BIT1);
 	P2SEL|=(BIT1);
@@ -175,7 +175,7 @@ void inicio()
 
 	//port1interrupt();
     //port2interrupt();
-	eventosexternos();
+	external_events_init();
 	ConfUart();
 	EnableInterrupts();
 }
