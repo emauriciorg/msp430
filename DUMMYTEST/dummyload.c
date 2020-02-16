@@ -22,7 +22,7 @@ unsigned int Vbat=0;
         void uart_init();
         void enable_interrupts();
         void sample_buttons();
-        void InicioADC10();
+        void ADC10_enable();
         void Timer_module();
         void read_battey();
         void enable_timer();
@@ -103,7 +103,7 @@ unsigned int Vbat=0;
 	 		ADC10CTL1 	 = 		INCH_11|ADC10DIV_7;
 	 		ADC10CTL0 	 = 		ADC10SHT_3|MSC| ADC10ON  ;
 	 		ADC10AE0 	|= 		BIT5;
-	 		InicioADC10();
+	 		ADC10_enable();
 	     	while((ADC10CTL0&ADC10IFG) !=ADC10IFG);
 	 		Vmax=ADC10MEM;
 
@@ -116,7 +116,7 @@ unsigned int Vbat=0;
 	 	   }
 
 
-	   void InicioADC10()
+	   void ADC10_enable()
 		       {
 			     ADC10CTL0 |= (ENC | ADC10SC);
 			   }
@@ -138,7 +138,7 @@ unsigned int Vbat=0;
 		  ADC10CTL1 	 = 		INCH_4|ADC10DIV_7;
 		  ADC10CTL0 	 = 		ADC10SHT_3|MSC| ADC10ON  ;
 		  ADC10AE0 	= 		BIT4;
-		  InicioADC10();
+		  ADC10_enable();
 			while((ADC10CTL0&ADC10IFG) !=ADC10IFG);
 			Vbat=ADC10MEM;
 			}
@@ -240,7 +240,7 @@ unsigned int Vbat=0;
 		  /* char read_button()
 		 	   	   {
 
-		 	   		InicioADC10();
+		 	   		ADC10_enable();
 		 	   	    while((ADC10CTL0&ADC10IFG) !=ADC10IFG);
 		 	   		Vin=ADC10MEM;
 		 	   		if(Vin<900)

@@ -5862,9 +5862,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   98
     4639                    .dwpsn  file "../dummyload.c",line 106,column 5,is_stmt,isa 0
     4640            $C$DW$363       .dwtag  DW_TAG_TI_branch
     4641                    .dwattr $C$DW$363, DW_AT_low_pc(0x00)
-    4642                    .dwattr $C$DW$363, DW_AT_name("InicioADC10")
+    4642                    .dwattr $C$DW$363, DW_AT_name("ADC10_enable")
     4643                    .dwattr $C$DW$363, DW_AT_TI_call
-    4644 00001c 12B0          CALL      #InicioADC10          ; [] |106| 
+    4644 00001c 12B0          CALL      #ADC10_enable          ; [] |106| 
          00001e 0000!
     4645                                                      ; [] |106| 
     4646            ;* --------------------------------------------------------------------------*
@@ -5987,15 +5987,15 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE  100
     4729                    .dwendentry
     4730                    .dwendtag $C$DW$362
     4731            
-    4732 000000               .sect   ".text:InicioADC10"
+    4732 000000               .sect   ".text:ADC10_enable"
     4733                    .align  2
     4734                    .clink
-    4735                    .global InicioADC10
+    4735                    .global ADC10_enable
     4736            
-    4737            $C$DW$370       .dwtag  DW_TAG_subprogram, DW_AT_name("InicioADC10")
-    4738                    .dwattr $C$DW$370, DW_AT_low_pc(InicioADC10)
+    4737            $C$DW$370       .dwtag  DW_TAG_subprogram, DW_AT_name("ADC10_enable")
+    4738                    .dwattr $C$DW$370, DW_AT_low_pc(ADC10_enable)
     4739                    .dwattr $C$DW$370, DW_AT_high_pc(0x00)
-    4740                    .dwattr $C$DW$370, DW_AT_TI_symbol_name("InicioADC10")
+    4740                    .dwattr $C$DW$370, DW_AT_TI_symbol_name("ADC10_enable")
     4741                    .dwattr $C$DW$370, DW_AT_external
     4742                    .dwattr $C$DW$370, DW_AT_TI_begin_file("../dummyload.c")
 MSP430 Assembler PC v4.2.1 Sat Jan 28 11:33:39 2017
@@ -6009,18 +6009,18 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE  101
     4746                    .dwattr $C$DW$370, DW_AT_decl_line(0x77)
     4747                    .dwattr $C$DW$370, DW_AT_decl_column(0x0a)
     4748                    .dwattr $C$DW$370, DW_AT_TI_max_frame_size(0x02)
-    4749                    .dwpsn  file "../dummyload.c",line 120,column 10,is_stmt,address InicioADC10,isa 0
+    4749                    .dwpsn  file "../dummyload.c",line 120,column 10,is_stmt,address ADC10_enable,isa 0
     4750            
-    4751                    .dwfde $C$DW$CIE, InicioADC10
+    4751                    .dwfde $C$DW$CIE, ADC10_enable
     4752            
     4753            ;*****************************************************************************
-    4754            ;* FUNCTION NAME: InicioADC10                                                *
+    4754            ;* FUNCTION NAME: ADC10_enable                                                *
     4755            ;*                                                                           *
     4756            ;*   Regs Modified     : SP                                                  *
     4757            ;*   Regs Used         : SP                                                  *
     4758            ;*   Local Frame Size  : 0 Args + 0 Auto + 0 Save = 0 byte                   *
     4759            ;*****************************************************************************
-    4760 000000       InicioADC10:
+    4760 000000       ADC10_enable:
     4761            ;* --------------------------------------------------------------------------*
     4762                    .dwcfi  cfa_offset, 2
     4763                    .dwcfi  save_reg_to_mem, 16, -2
@@ -6159,9 +6159,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE  103
     4870                    .dwpsn  file "../dummyload.c",line 141,column 5,is_stmt,isa 0
     4871            $C$DW$375       .dwtag  DW_TAG_TI_branch
     4872                    .dwattr $C$DW$375, DW_AT_low_pc(0x00)
-    4873                    .dwattr $C$DW$375, DW_AT_name("InicioADC10")
+    4873                    .dwattr $C$DW$375, DW_AT_name("ADC10_enable")
     4874                    .dwattr $C$DW$375, DW_AT_TI_call
-    4875 000016 12B0          CALL      #InicioADC10          ; [] |141| 
+    4875 000016 12B0          CALL      #ADC10_enable          ; [] |141| 
          000018 0000!
     4876                                                      ; [] |141| 
     4877            ;* --------------------------------------------------------------------------*

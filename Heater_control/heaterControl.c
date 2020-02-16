@@ -21,7 +21,7 @@ unsigned int 	TempCA[5]={0};
     void timer0_en();
     void ADC10setup();
     void controlTemp(unsigned int);
-    void InicioADC10();
+    void ADC10_enable();
 	void servoCheck();
 	void showLCD();
 	void girar(char);
@@ -174,7 +174,7 @@ unsigned int 	TempCA[5]={0};
 			TA1CCR1=000;
 			}
 
-	  void InicioADC10()
+	  void ADC10_enable()
 	       {
 		     ADC10CTL0 |= (ENC | ADC10SC);
 		   }
@@ -229,7 +229,7 @@ unsigned int 	TempCA[5]={0};
 
 	   void TempSample()
 	   {
-		   	InicioADC10();
+		   	ADC10_enable();
 			while((ADC10CTL0&ADC10IFG) !=ADC10IFG);
 			TempVolt[0]=ADC10MEM;
 			ADC10CTL0&=~ADC10IFG;
