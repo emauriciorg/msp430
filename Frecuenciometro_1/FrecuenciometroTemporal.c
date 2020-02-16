@@ -42,7 +42,7 @@ P1SEL2&=~GreenLed;
 
 
 
-LcdInicio();
+lcd_init();
 P2SEL2=0X00;
 P2SEL=0X00;
 P2DIR=0XFF;

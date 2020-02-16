@@ -33,7 +33,7 @@ unsigned int Vbat=0;
 		__disable_interrupt();
 
 
-		LcdInicio();
+		lcd_init();
 		SetCursorPosition(0, 1);
 		PrintStr("Test LCD");
 	 	ClearDisplay();
@@ -64,7 +64,7 @@ unsigned int Vbat=0;
 			SetCursorPosition(0, 0);
 			PrintStr("Test LCD");
 			SetCursorPosition(1, 0);
-					Lph_ui(day_t);putme(':'); Lph_ui(hour_t);putme(':'); Lph_ui(min_t);putme(':'); Lph_ui(sec_t);//c_lc();
+					lcd_print_uint(day_t);putme(':'); lcd_print_uint(hour_t);putme(':'); lcd_print_uint(min_t);putme(':'); lcd_print_uint(sec_t);//c_lc();
 					p_ui(day_t);uart_write_byte(':'); p_ui(hour_t);uart_write_byte(':'); p_ui(min_t);uart_write_byte(':'); p_ui(sec_t);line_jump();
 					_delay_cycles(16000000);//10000);
 

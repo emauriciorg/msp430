@@ -97,7 +97,7 @@ volatile char  lauxdata=0,HIGHNIBLE=0,LOWNIBLE=0;
 void Ls_pc(){SendByte((' '),1);}
 void putme(char putme){SendByte((putme),1);}
 
-  void LcdInicio()
+  void lcd_init()
   {
 
 
@@ -182,7 +182,7 @@ SendByte(0x28,0);
  }
 
 
- void Lph_ui(unsigned int intchar1)
+ void lcd_print_uint(unsigned int intchar1)
  {
 
  	_D=(intchar1/10);

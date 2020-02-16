@@ -127,9 +127,9 @@ volatile unsigned int COUNTT=40,countt=0,COUNTT1=10,countt1=0,count_t=0;
 						   _delay_cycles(4000000);
 				/*SetCursorPosition(0, 0);
 				PrintStr("Temp ");
-				Lph_ui(25);
+				lcd_print_uint(25);
 				SetCursorPosition(2, 0);
-				Lph_ui(day_t);putme(':'); Lph_ui(hour_t);putme(':'); Lph_ui(min_t);putme(':'); Lph_ui(sec_t);//c_lc();
+				lcd_print_uint(day_t);putme(':'); lcd_print_uint(hour_t);putme(':'); lcd_print_uint(min_t);putme(':'); lcd_print_uint(sec_t);//c_lc();
 		_delay_cycles(4000000);
 				 */
 				 					}

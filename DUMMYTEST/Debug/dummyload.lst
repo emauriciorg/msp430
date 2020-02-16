@@ -4391,15 +4391,15 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   74
     3454                    .dwendentry
     3455                    .dwendtag $C$DW$268
     3456            
-    3457 000000               .sect   ".text:LcdInicio"
+    3457 000000               .sect   ".text:lcd_init"
     3458                    .align  2
     3459                    .clink
-    3460                    .global LcdInicio
+    3460                    .global lcd_init
     3461            
-    3462            $C$DW$272       .dwtag  DW_TAG_subprogram, DW_AT_name("LcdInicio")
-    3463                    .dwattr $C$DW$272, DW_AT_low_pc(LcdInicio)
+    3462            $C$DW$272       .dwtag  DW_TAG_subprogram, DW_AT_name("lcd_init")
+    3463                    .dwattr $C$DW$272, DW_AT_low_pc(lcd_init)
     3464                    .dwattr $C$DW$272, DW_AT_high_pc(0x00)
-    3465                    .dwattr $C$DW$272, DW_AT_TI_symbol_name("LcdInicio")
+    3465                    .dwattr $C$DW$272, DW_AT_TI_symbol_name("lcd_init")
     3466                    .dwattr $C$DW$272, DW_AT_external
     3467                    .dwattr $C$DW$272, DW_AT_TI_begin_file("..\lcd16x2.h")
     3468                    .dwattr $C$DW$272, DW_AT_TI_begin_line(0x4b)
@@ -4408,18 +4408,18 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   74
     3471                    .dwattr $C$DW$272, DW_AT_decl_line(0x4b)
     3472                    .dwattr $C$DW$272, DW_AT_decl_column(0x08)
     3473                    .dwattr $C$DW$272, DW_AT_TI_max_frame_size(0x02)
-    3474                    .dwpsn  file "..\lcd16x2.h",line 76,column 3,is_stmt,address LcdInicio,isa 0
+    3474                    .dwpsn  file "..\lcd16x2.h",line 76,column 3,is_stmt,address lcd_init,isa 0
     3475            
-    3476                    .dwfde $C$DW$CIE, LcdInicio
+    3476                    .dwfde $C$DW$CIE, lcd_init
     3477            
     3478            ;*****************************************************************************
-    3479            ;* FUNCTION NAME: LcdInicio                                                  *
+    3479            ;* FUNCTION NAME: lcd_init                                                  *
     3480            ;*                                                                           *
     3481            ;*   Regs Modified     : SP,SR,r12,r13,r15                                   *
     3482            ;*   Regs Used         : SP,SR,r12,r13,r15                                   *
     3483            ;*   Local Frame Size  : 0 Args + 0 Auto + 0 Save = 0 byte                   *
     3484            ;*****************************************************************************
-    3485 000000       LcdInicio:
+    3485 000000       lcd_init:
     3486            ;* --------------------------------------------------------------------------*
     3487                    .dwcfi  cfa_offset, 2
     3488                    .dwcfi  save_reg_to_mem, 16, -2
@@ -4886,15 +4886,15 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   82
     3873                    .dwendentry
     3874                    .dwendtag $C$DW$293
     3875            
-    3876 000000               .sect   ".text:Lph_ui"
+    3876 000000               .sect   ".text:lcd_print_uint"
     3877                    .align  2
     3878                    .clink
-    3879                    .global Lph_ui
+    3879                    .global lcd_print_uint
     3880            
-    3881            $C$DW$299       .dwtag  DW_TAG_subprogram, DW_AT_name("Lph_ui")
-    3882                    .dwattr $C$DW$299, DW_AT_low_pc(Lph_ui)
+    3881            $C$DW$299       .dwtag  DW_TAG_subprogram, DW_AT_name("lcd_print_uint")
+    3882                    .dwattr $C$DW$299, DW_AT_low_pc(lcd_print_uint)
     3883                    .dwattr $C$DW$299, DW_AT_high_pc(0x00)
-    3884                    .dwattr $C$DW$299, DW_AT_TI_symbol_name("Lph_ui")
+    3884                    .dwattr $C$DW$299, DW_AT_TI_symbol_name("lcd_print_uint")
     3885                    .dwattr $C$DW$299, DW_AT_external
     3886                    .dwattr $C$DW$299, DW_AT_TI_begin_file("..\lcd16x2.h")
     3887                    .dwattr $C$DW$299, DW_AT_TI_begin_line(0xab)
@@ -4903,16 +4903,16 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   82
     3890                    .dwattr $C$DW$299, DW_AT_decl_line(0xab)
     3891                    .dwattr $C$DW$299, DW_AT_decl_column(0x07)
     3892                    .dwattr $C$DW$299, DW_AT_TI_max_frame_size(0x02)
-    3893                    .dwpsn  file "..\lcd16x2.h",line 172,column 2,is_stmt,address Lph_ui,isa 0
+    3893                    .dwpsn  file "..\lcd16x2.h",line 172,column 2,is_stmt,address lcd_print_uint,isa 0
     3894            
-    3895                    .dwfde $C$DW$CIE, Lph_ui
+    3895                    .dwfde $C$DW$CIE, lcd_print_uint
     3896            $C$DW$300       .dwtag  DW_TAG_formal_parameter, DW_AT_name("intchar1")
     3897                    .dwattr $C$DW$300, DW_AT_TI_symbol_name("intchar1")
     3898                    .dwattr $C$DW$300, DW_AT_type(*$C$DW$T$11)
     3899                    .dwattr $C$DW$300, DW_AT_location[DW_OP_reg12]
     3900            
     3901            ;*****************************************************************************
-    3902            ;* FUNCTION NAME: Lph_ui                                                     *
+    3902            ;* FUNCTION NAME: lcd_print_uint                                                     *
     3903            ;*                                                                           *
     3904            ;*   Regs Modified     : SP,SR,r11,r12,r13,r14,r15                           *
     3905            ;*   Regs Used         : SP,SR,r11,r12,r13,r14,r15                           *
@@ -4923,7 +4923,7 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   82
 Tools Copyright (c) 2003-2013 Texas Instruments Incorporated
 C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   83
 
-    3908 000000       Lph_ui:
+    3908 000000       lcd_print_uint:
     3909            ;* --------------------------------------------------------------------------*
     3910                    .dwcfi  cfa_offset, 2
     3911                    .dwcfi  save_reg_to_mem, 16, -2
@@ -5372,9 +5372,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   90
     4247                    .dwpsn  file "../dummyload.c",line 36,column 3,is_stmt,isa 0
     4248            $C$DW$332       .dwtag  DW_TAG_TI_branch
     4249                    .dwattr $C$DW$332, DW_AT_low_pc(0x00)
-    4250                    .dwattr $C$DW$332, DW_AT_name("LcdInicio")
+    4250                    .dwattr $C$DW$332, DW_AT_name("lcd_init")
     4251                    .dwattr $C$DW$332, DW_AT_TI_call
-    4252 000008 12B0          CALL      #LcdInicio            ; [] |36| 
+    4252 000008 12B0          CALL      #lcd_init            ; [] |36| 
          00000a 0000!
     4253                                                      ; [] |36| 
     4254                    .dwpsn  file "../dummyload.c",line 37,column 3,is_stmt,isa 0
@@ -5492,9 +5492,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   92
          00004a 0000!
     4344            $C$DW$343       .dwtag  DW_TAG_TI_branch
     4345                    .dwattr $C$DW$343, DW_AT_low_pc(0x00)
-    4346                    .dwattr $C$DW$343, DW_AT_name("Lph_ui")
+    4346                    .dwattr $C$DW$343, DW_AT_name("lcd_print_uint")
     4347                    .dwattr $C$DW$343, DW_AT_TI_call
-    4348 00004c 12B0          CALL      #Lph_ui               ; [] |67| 
+    4348 00004c 12B0          CALL      #lcd_print_uint               ; [] |67| 
          00004e 0000!
     4349                                                      ; [] |67| 
     4350                    .dwpsn  file "../dummyload.c",line 67,column 20,is_stmt,isa 0
@@ -5512,9 +5512,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   92
          00005a 0000!
     4360            $C$DW$345       .dwtag  DW_TAG_TI_branch
     4361                    .dwattr $C$DW$345, DW_AT_low_pc(0x00)
-    4362                    .dwattr $C$DW$345, DW_AT_name("Lph_ui")
+    4362                    .dwattr $C$DW$345, DW_AT_name("lcd_print_uint")
     4363                    .dwattr $C$DW$345, DW_AT_TI_call
-    4364 00005c 12B0          CALL      #Lph_ui               ; [] |67| 
+    4364 00005c 12B0          CALL      #lcd_print_uint               ; [] |67| 
          00005e 0000!
     4365                                                      ; [] |67| 
     4366                    .dwpsn  file "../dummyload.c",line 67,column 47,is_stmt,isa 0
@@ -5537,9 +5537,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   93
          00006a 0000!
     4376            $C$DW$347       .dwtag  DW_TAG_TI_branch
     4377                    .dwattr $C$DW$347, DW_AT_low_pc(0x00)
-    4378                    .dwattr $C$DW$347, DW_AT_name("Lph_ui")
+    4378                    .dwattr $C$DW$347, DW_AT_name("lcd_print_uint")
     4379                    .dwattr $C$DW$347, DW_AT_TI_call
-    4380 00006c 12B0          CALL      #Lph_ui               ; [] |67| 
+    4380 00006c 12B0          CALL      #lcd_print_uint               ; [] |67| 
          00006e 0000!
     4381                                                      ; [] |67| 
     4382                    .dwpsn  file "../dummyload.c",line 67,column 73,is_stmt,isa 0
@@ -5557,9 +5557,9 @@ C:\Users\mauricio\AppData\Local\Temp\0410010                         PAGE   93
          00007a 0000!
     4392            $C$DW$349       .dwtag  DW_TAG_TI_branch
     4393                    .dwattr $C$DW$349, DW_AT_low_pc(0x00)
-    4394                    .dwattr $C$DW$349, DW_AT_name("Lph_ui")
+    4394                    .dwattr $C$DW$349, DW_AT_name("lcd_print_uint")
     4395                    .dwattr $C$DW$349, DW_AT_TI_call
-    4396 00007c 12B0          CALL      #Lph_ui               ; [] |67| 
+    4396 00007c 12B0          CALL      #lcd_print_uint               ; [] |67| 
          00007e 0000!
     4397                                                      ; [] |67| 
     4398                    .dwpsn  file "../dummyload.c",line 68,column 6,is_stmt,isa 0

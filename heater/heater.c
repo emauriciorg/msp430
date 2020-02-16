@@ -29,7 +29,7 @@ unsigned int 	TempCA[5]={0};
 	int main(void)
 	{
 		clk_init();
-		//LcdInicio();
+		//lcd_init();
 
 			P2SEL2=0X00;
 			P2SEL=0X00;
@@ -75,9 +75,9 @@ unsigned int 	TempCA[5]={0};
    		   {
    			SetCursorPosition(0, 0);
    			PrintStr("Temp ");
-   			Lph_ui(TempCA[3]);putme(' ');putme(side_t);/*TempC[6]);*/
+   			lcd_print_uint(TempCA[3]);putme(' ');putme(side_t);/*TempC[6]);*/
    			SetCursorPosition(2, 0);
-   			Lph_ui(day_t);putme(':'); Lph_ui(hour_t);putme(':'); Lph_ui(min_t);putme(':'); Lph_ui(sec_t);//c_lc();
+   			lcd_print_uint(day_t);putme(':'); lcd_print_uint(hour_t);putme(':'); lcd_print_uint(min_t);putme(':'); lcd_print_uint(sec_t);//c_lc();
    			P1OUT&=~BIT7;
    		   }
 

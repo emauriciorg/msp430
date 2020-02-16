@@ -15,10 +15,10 @@ void enable_interrupts();
 void menu();
 void menu_1();
 void menu_2();
-    void ADC10setup();
-    void ADC10_enable();
-  char read_button();
-  char evaluate_key();
+void ADC10setup();
+void ADC10_enable();
+char read_button();
+char evaluate_key();
 /****************************************MAIN CODE*****************************/
 int main(void)
 {
