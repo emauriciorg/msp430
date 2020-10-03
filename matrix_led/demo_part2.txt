@@ -29,11 +29,17 @@ Change Log:
 volatile unsigned char columns[8] = {0};
 
 //Variables to hold the direction of the dot according to the button
-volatile unsigned char  up=0;
-volatile unsigned char  down=0;
-volatile unsigned char  left=0;
-volatile unsigned char  right=0;
+char  up=0;
+char  down=0;
+char  left=0;
+char  right=0;
 
+volatile char button_pressed = 0;
+
+void debounce(void) {
+    volatile unsigned loops = 250; // Start the delay counter at 25,000
+    while (--loops > 0);             // Count down until the delay counter reaches 0
+}
 
 
 void delay(void) {
@@ -178,7 +184,7 @@ int main(void)
     rowcnt = 0;
     
     // for part 3 of the lab
-    columns[5]=0x08; //start point for last exercise
+//    columns[5]=0x08; //start point for last exercise
 
     // Enable interrupts
     enable_interrupts();
@@ -186,8 +192,15 @@ int main(void)
     while(1)                    // continuous loop
     {
 
-        delay();
+	if (button_pressed){
+		debounce();
+		button_pressed=0;
+	//    update_dot_pos();
 
+	    //To test part2 of the lab
+	    update_column();
+
+	}
         if(P2OUT & BIT6) // If row clock 1 -> place breakpoint here
             P2OUT &= ~BIT6;  //   Set row clock 0
         else {
@@ -234,7 +247,6 @@ __interrupt void Port_2(void)      // name of ISR
     // accessing P2IV automatically clears the pending interrupt flag with
     // the highest priority with P2IFG.0 being the highest and P2IFG.7 the lowest.
     
-
     switch(__even_in_range(P2IV,P2IV_P2IFG7))
     {
     case P2IV_NONE:   break;   // Vector  0: no interrupt
@@ -248,12 +260,13 @@ __interrupt void Port_2(void)      // name of ISR
     case P2IV_P2IFG7: break;   // Vector 16: P2.7
     default: break;
     }
-
-e// To test part 3 of the lab
-    update_dot_pos();
+    
+	button_pressed = true;
+// To test part 3 of the lab
+//    update_dot_pos();
 
     //To test part2 of the lab
-    //update_column();
+   // update_column();
 
 
 

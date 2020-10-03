@@ -1,4 +1,5 @@
-#include "CDH.h"
+#include <msp430.h>
+#include "CDC.h"
 
 
 char aux_char[7];
@@ -62,6 +63,7 @@ unsigned int c2ui( char *c2uc){
 }
 
 void s_pc(){uart_write_byte(' ');}
+void line_jump(){uart_write_byte(13);}
 
 void printlong(unsigned long longtochar)
 {
@@ -152,6 +154,24 @@ void printchar2c(unsigned int int2cchar)
 	aux_char[3]=(char)(_C+48);
 	aux_char[4]=(char)(_D+48);
 	aux_char[5]=(char)(_U+48);
+	uart_send_string(aux_char);
+}
+
+
+void print_uint(unsigned int intchar1)
+{
+	_DM=(intchar1/10000);
+	_UM=((intchar1-(_DM*10000))/1000);
+	_C=((intchar1-((_UM*1000)+(_DM*10000)))/100);
+	_D=((intchar1-((_UM*1000)+(_C*100)+(_DM*10000)))/10);
+	_U=(intchar1-(_D*10+(_UM*1000)+(_C*100)+(_DM*10000)));
+
+	aux_char[1]=(char)(_DM+48);
+	aux_char[2]=(char)(_UM+48);
+	aux_char[3]=(char)(_C+48);
+	aux_char[4]=(char)(_D+48);
+	aux_char[5]=(char)(_U+48);
+	aux_char[0]=48;
 	uart_send_string(aux_char);
 }
 

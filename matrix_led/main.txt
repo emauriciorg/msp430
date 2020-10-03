@@ -1,0 +1,218 @@
+#include <msp430.h>
+#include <stdbool.h>
+
+/*
+    Col 8(P9.0)
+    Col 7(P9.1)
+    Col 6(P9.2)
+    Col 5(P9.3)
+    Col 4(P9.4)
+    Col 3(P9.5)
+    Col 2(P9.6)
+    Col 1(P8.7)
+ */
+
+
+
+struct buttons_st{
+    char  up:1,
+          down:1,
+          left:1,
+          right:1;
+};
+
+
+#define LAB3_PART_2
+#define LAB3
+
+volatile struct buttons_st buttons;
+
+#ifdef LAB3
+    volatile unsigned char columns[8] = {0};
+#else
+    volatile unsigned char columns[8]= { 0x01, 0x03 ,0x07 , 0x0f , 0x1f,  0x3f, 0x7f,0xff};
+#endif
+
+void delay(void) {
+    volatile unsigned loops = 500; // Start the delay counter at 25,000
+
+    while (--loops > 0); // Count down until the delay counter reaches 0
+}
+
+void set_maxtrix_columns(char value){
+    P9OUT &=~0x7f; /*clears the row port*/
+    P8OUT &=~(BIT7);
+
+    P9OUT |=value & 0X7F;
+    P8OUT |=(BIT7 & (value&0x80));
+
+
+}
+
+
+void init_buttons(void){
+
+    P2DIR&=~(BIT1 | BIT2 | BIT3 |BIT4);
+    P2OUT|=(BIT1 | BIT2 | BIT3 |BIT4);
+    P2REN|=(BIT1 | BIT2 | BIT3 |BIT4);
+
+    P2IES|=(BIT1 | BIT2 | BIT3 |BIT4); /*INTERRUPT , high to low*/
+    P2IE |=(BIT1 | BIT2 | BIT3 |BIT4); /*INTERRUPT , enable*/
+    P2IFG = 0X00; /*INTERRUPT , clear flags*/
+
+}
+
+void enable_interrupts(){
+    _BIS_SR(GIE);
+    __enable_interrupt();
+    __bis_SR_register(GIE);
+}
+
+
+unsigned char current_col_pos;
+unsigned char current_arrow_pos;
+
+void update_dot_pos(struct buttons_st direction){
+
+	if (direction.left)  {
+		current_col_pos = current_col_pos>>1;
+		if (current_col_pos==0)current_col_pos=0x01;
+	}
+	
+	if (direction.right) {
+		current_col_pos = current_col_pos<<1;
+		if (current_col_pos==0)current_col_pos=0x80;
+	}
+	
+	if(direction.up){	
+		if( current_arrow_pos < 7)
+			current_arrow_pos++;
+	}
+
+	if(direction.down){	
+		if( current_arrow_pos > 0)
+			current_arrow_pos--;
+	}
+	
+	
+	
+	memset(columns,0 ,sizeof(columns));
+	columns[current_arrow_pos] = current_arrow_pos;
+
+}
+
+#ifdef LAB3
+#pragma vector = PORT2_VECTOR
+__interrupt void Port_2(void){
+
+    if (P2IFG&BIT1){ buttons.left = true;}
+    if (P2IFG&BIT2){ buttons.up= true;}
+    if (P2IFG&BIT3){ buttons.down= true;}
+    if (P2IFG&BIT4){ buttons.right=true;}
+    P2IFG =0x00;
+
+#ifdef LAB3_PART_1
+    if (buttons.up)    columns[4] = (~columns[4])  & 0x01;
+    if (buttons.down)  columns[5] = (~columns[5])  & 0x01;
+    if (buttons.left)  columns[6] = (~columns[6])  & 0x01;
+    if (buttons.right) columns[7] = (~columns[7])  & 0x01;
+#endif
+
+#ifdef LAB3_PART_2
+	update_dot_pos(buttons);
+#endif
+
+    buttons.up = false;
+    buttons.down= false;
+    buttons.left= false;
+    buttons.right=false;
+}
+#endif
+
+
+void init_led_matrix(void)
+{
+    /*setting  the led matrix column pins as output*/
+
+    P9DIR |= (BIT0| BIT1 |BIT2|BIT3|BIT4|BIT5|BIT6);  // P6DIR=0x7f;
+    P9OUT &=~(BIT0| BIT1 |BIT2|BIT3|BIT4|BIT5|BIT6);  // P6DIR=0x7f;
+
+    P8DIR|= (BIT7);
+    P8OUT&=~(BIT7);
+
+    /*Setting port alternate function to be I/O*/
+    P9SEL0 &=~(BIT0| BIT1 |BIT2|BIT3|BIT4|BIT5|BIT6);
+    P9SEL1 &=~(BIT0| BIT1 |BIT2|BIT3|BIT4|BIT5|BIT6);
+
+    P8SEL0 &=~(BIT7);
+    P8SEL1 &=~(BIT7);
+
+}
+
+
+
+void main(void)
+{
+    unsigned char rowcnt =0; // row counter
+    unsigned char port_output = 0;
+    unsigned char row_aux = 0;
+
+
+    WDTCTL = WDTPW | WDTHOLD;   // stop watchdog timer
+    PM5CTL0 &= ~LOCKLPM5; // Unlock ports from power manager
+
+    P2DIR |= (BIT6 | BIT7);   // Make Port 2.6 and 2.7 outputs
+    P2OUT &= ~(BIT6 | BIT7);  // Set ports to 0
+
+    init_led_matrix();
+
+    #ifdef LAB3
+        init_buttons();
+        enable_interrupts();
+
+    #endif
+
+    //P2OUT |= BIT6;
+    while(1)// continuous loop
+    {
+
+
+        delay();
+
+        if(P2OUT & BIT6) // If row clock 1 -> place breakpoint here
+            P2OUT &= ~BIT6;  //   Set row clock 0
+        else {
+
+            /*maps the current shift register row to FW row */
+            if (rowcnt== 0){
+                row_aux = 7;
+            }else{
+                row_aux =rowcnt-1;
+            }
+
+            port_output = columns[row_aux];
+
+            if(rowcnt == 7) {// if on row 7
+
+                P2OUT |= BIT6;  //   Set row clock and row init 1
+                P2OUT |= BIT7;  //   set row init to 0
+
+                rowcnt = 0;  //   set row counter back to 0
+
+            } else { // for all other rows
+                P2OUT |= BIT6;   //   only set row clock 1
+                P2OUT &= ~BIT7;  //   set row init to 0
+
+
+                rowcnt++;//   increment row counter
+            }
+            set_maxtrix_columns(port_output);
+
+
+
+
+        }
+
+    }
+
+}

@@ -25,14 +25,20 @@ Change Log:
 #include <msp430.h>
 #include <stdbool.h>
 
-
 volatile unsigned char columns[8] = {0};
 
-//Variables to hold the direction of the dot according to the button
-volatile unsigned char  up=0;
-volatile unsigned char  down=0;
-volatile unsigned char  left=0;
-volatile unsigned char  right=0;
+
+
+struct buttons_st{
+    char  up:1,
+          down:1,
+          left:1,
+          right:1;
+};
+
+
+
+volatile struct buttons_st buttons;
 
 
 
@@ -41,18 +47,18 @@ void delay(void) {
     while (--loops > 0);             // Count down until the delay counter reaches 0
 }
 
-
 void set_maxtrix_columns(char value){
-    P9OUT &=~0x7f; //clears the column port before setting it again
+    P9OUT &=~0x7f; /*clears the row port*/
     P8OUT &=~(BIT7);
-    
-    P9OUT |=value & 0X7F;          //sets the port 9 with the value of the column array
-    P8OUT |=(BIT7 & (value&0x80)); //only sets the bit7 of the port 8
+
+    P9OUT |=value & 0X7F;
+    P8OUT |=(BIT7 & (value&0x80));
 
 
 }
 
-void init_led_matrix(void){
+void init_led_matrix(void)
+{
     /*setting  the led matrix column pins as output*/
 
     P9DIR |= (BIT0| BIT1 |BIT2|BIT3|BIT4|BIT5|BIT6);  // P6DIR=0x7f;
@@ -76,75 +82,46 @@ void init_buttons(void){
     P2OUT|=(BIT1 | BIT2 | BIT3 |BIT4);
     P2REN|=(BIT1 | BIT2 | BIT3 |BIT4);
 
- /*INTERRUPT , Edge selection ,:1 high to low,0: low to high*/
-    P2IES&=~(BIT1 | BIT2 | BIT3 |BIT4);
-/*INTERRUPT , enable individual interrupt*/
-    P2IE |=(BIT1 | BIT2 | BIT3 |BIT4); 
+    P2IES&=~(BIT1 | BIT2 | BIT3 |BIT4); /*INTERRUPT , Edge selection ,:1 high to low,0: low to high*/
+    P2IE |=(BIT1 | BIT2 | BIT3 |BIT4); /*INTERRUPT , enable*/
     P2IFG = 0X00; /*INTERRUPT , clear flags*/
 
 }
 
 
 
-unsigned char current_col_pos  =0x08;
+unsigned char current_col_pos =0x10;
 unsigned char current_arrow_pos=0;
 
-//This routine would read the process the pressed button and update the column array accordingly
-void update_dot_pos(void){
+void update_dot_pos(struct buttons_st direction){
 
-//Updates the columns and dont let them pass go out boundaries
-
-    if (left)  {
+    if (direction.left)  {
         current_col_pos = current_col_pos>>1;
         if (current_col_pos==0)current_col_pos=0x01;
     }
 
-    if (right) {
+    if (direction.right) {
         current_col_pos = current_col_pos<<1;
         if (current_col_pos==0)current_col_pos=0x80;
     }
 
-//Updates the arrows and dont let them pass the limit of the array size
-    if(up){
+    if(direction.up){
         if( current_arrow_pos < 7)
             current_arrow_pos++;
     }
 
-    if(down){
+    if(direction.down){
         if( current_arrow_pos > 0)
             current_arrow_pos--;
     }
 
-    up = 0;
-    down = 0;
-    left = 0;
-    right = 0;
 
-//clear all the columns and only update the current position
-    columns[0] = 0;
-    columns[1] = 0;
-    columns[2] = 0;
-    columns[3] = 0;
-    columns[4] = 0;
-    columns[5] = 0;
-    columns[6] = 0;
-    columns[7] = 0;
-    
+    memset(columns,0 ,sizeof(columns));
     columns[current_arrow_pos] = current_col_pos;
 
 }
 
 
-void update_column(void){
-    if (up)    columns[4] = (~columns[4])  & 0xff;
-    if (down)  columns[5] = (~columns[5])  & 0xff;
-    if (left)  columns[6] = (~columns[6])  & 0xff;
-    if (right) columns[7] = (~columns[7])  & 0xff;
-    up = 0;
-    down = 0;
-    left = 0;
-    right = 0;
-}
 
 void enable_interrupts(){
     _BIS_SR(GIE);
@@ -161,8 +138,6 @@ int main(void)
 
     WDTCTL = WDTPW | WDTHOLD; // stop watchdog timer
 
-    PM5CTL0 &= ~LOCKLPM5;     // Unlock ports from power manager
-
     P2DIR &= ~(BIT1 | BIT2 | BIT3 |BIT4); // buttons as inputs
     P2REN |= (BIT1 | BIT2 | BIT3 |BIT4);  // enable resistor
     P2OUT |= (BIT1 | BIT2 | BIT3 |BIT4);  // pull up resistor
@@ -172,21 +147,25 @@ int main(void)
 
     init_led_matrix();
 
+    PM5CTL0 &= ~LOCKLPM5;     // Unlock ports from power manager
+
     // Insert Interrupt configuration for buttons here
     init_buttons();
 
     rowcnt = 0;
-    
-    // for part 3 of the lab
-    columns[5]=0x08; //start point for last exercise
 
+//     just for testing
+
+//    columns[5]=0x0f;
+//    columns[2]=0xff;
+
+    columns[5]=0x08; //start point for last exercise
     // Enable interrupts
     enable_interrupts();
 
     while(1)                    // continuous loop
     {
-
-        delay();
+              delay();
 
         if(P2OUT & BIT6) // If row clock 1 -> place breakpoint here
             P2OUT &= ~BIT6;  //   Set row clock 0
@@ -233,28 +212,33 @@ __interrupt void Port_2(void)      // name of ISR
 {
     // accessing P2IV automatically clears the pending interrupt flag with
     // the highest priority with P2IFG.0 being the highest and P2IFG.7 the lowest.
-    
-
     switch(__even_in_range(P2IV,P2IV_P2IFG7))
     {
     case P2IV_NONE:   break;   // Vector  0: no interrupt
     case P2IV_P2IFG0: break;   // Vector  2: P2.0
-    case P2IV_P2IFG1:  left  = true; break;   // Vector  4: P2.1
-    case P2IV_P2IFG2:  up    = true; break;   // Vector  6: P2.2
-    case P2IV_P2IFG3:  down  = true; break;   // Vector  8: P2.3
-    case P2IV_P2IFG4:  right = true; break;   // Vector 10: P2.4
+    case P2IV_P2IFG1:  buttons.left = true; break;   // Vector  4: P2.1
+    case P2IV_P2IFG2:  buttons.up = true; break;   // Vector  6: P2.2
+    case P2IV_P2IFG3:  buttons.down = true; break;   // Vector  8: P2.3
+    case P2IV_P2IFG4:  buttons.right = true; break;   // Vector 10: P2.4
     case P2IV_P2IFG5: break;   // Vector 12: P2.5
     case P2IV_P2IFG6: break;   // Vector 14: P2.6
     case P2IV_P2IFG7: break;   // Vector 16: P2.7
     default: break;
     }
 
-e// To test part 3 of the lab
-    update_dot_pos();
 
-    //To test part2 of the lab
-    //update_column();
+    update_dot_pos(buttons);
 
+/*
+    if (buttons.up)    columns[4] = (~columns[4])  & 0xff;
+    if (buttons.down)  columns[5] = (~columns[5])  & 0xff;
+    if (buttons.left)  columns[6] = (~columns[6])  & 0xff;
+    if (buttons.right) columns[7] = (~columns[7])  & 0xff;
+*/
+    buttons.left = false;
+    buttons.up = false;
+    buttons.down = false;
+    buttons.right = false;
 
 
 }

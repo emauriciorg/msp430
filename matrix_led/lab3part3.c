@@ -249,7 +249,7 @@ __interrupt void Port_2(void)      // name of ISR
     default: break;
     }
 
-e// To test part 3 of the lab
+// To test part 3 of the lab
     update_dot_pos();
 
     //To test part2 of the lab

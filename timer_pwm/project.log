@@ -1,0 +1,80 @@
+
+!CONFIGURATION: 'com.ti.ccstudio.buildDefinitions.MSP430.Debug.1158381778' [Sat Oct 03 10:46:50 COT 2020]
+
+	!TOOL: 'com.ti.ccstudio.buildDefinitions.MSP430_18.12.exe.compilerDebug.1513586165'
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.compilerID.SILICON_VERSION
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.compilerID.ABI
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.compilerID.INCLUDE_PATH
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.compilerID.ADVICE__POWER
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.compilerID.DEBUGGING_MODEL
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.compilerID.DEFINE
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.compilerID.DIAG_WARNING
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.compilerID.DISPLAY_ERROR_NUMBER
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.compilerID.PRINTF_SUPPORT
+
+	!TOOL: 'com.ti.ccstudio.buildDefinitions.MSP430_18.12.exe.linkerDebug.11641541'
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.linkerID.OUTPUT_FILE
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.linkerID.MAP_FILE
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.linkerID.HEAP_SIZE
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.linkerID.STACK_SIZE
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.linkerID.LIBRARY
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.linkerID.SEARCH_PATH
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.linkerID.DISPLAY_ERROR_NUMBER
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.linkerID.XML_LINK_INFO
+
+
+!CONFIGURATION: 'com.ti.ccstudio.buildDefinitions.MSP430.Release.407089355' [Sat Oct 03 10:46:50 COT 2020]
+
+	!TOOL: 'com.ti.ccstudio.buildDefinitions.MSP430_18.12.exe.compilerRelease.1359114973'
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.compilerID.SILICON_VERSION
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.compilerID.ABI
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.compilerID.INCLUDE_PATH
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.compilerID.ADVICE__POWER
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.compilerID.DEFINE
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.compilerID.DIAG_WARNING
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.compilerID.DISPLAY_ERROR_NUMBER
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.compilerID.PRINTF_SUPPORT
+
+	!TOOL: 'com.ti.ccstudio.buildDefinitions.MSP430_18.12.exe.linkerRelease.1861562124'
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.linkerID.OUTPUT_FILE
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.linkerID.MAP_FILE
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.linkerID.HEAP_SIZE
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.linkerID.STACK_SIZE
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.linkerID.LIBRARY
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.linkerID.SEARCH_PATH
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.linkerID.DISPLAY_ERROR_NUMBER
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_4.2.linkerID.XML_LINK_INFO
+
