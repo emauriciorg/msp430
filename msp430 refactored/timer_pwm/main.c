@@ -31,14 +31,24 @@
 
 #define TIMER_MODE_TOGGLE (BIT7) /*useful to create square waves*/
 #define TIMER_MODE_RESET_SET (BIT7|BIT6|BIT5) /*useful to for HW PWM ccr0 and crrX*/
-#define TIMER1_INTERRUPT_VECTOR_ENABLED
+#define TIMER_MODE_SET_RESET (BIT6|BIT5) /*useful to for HW PWM ccr0 and crrX*/
 
+#define TIMER1_INTERRUPT_VECTOR_ENABLED
+#define TIMER_MODE_CONTINUOUS (BIT5)
 
 struct soft_pwm_st{
 	uint16_t period;
 	uint16_t ticks;		
 };
 
+
+unsigned char rowcnt;               // row counter
+unsigned char colcnt;               // column counter
+unsigned char g_matrix[8];            // content for LED matrix
+unsigned char r_matrix[8];          // content for red LED matrix
+unsigned char g_row;                // current row of the green LED matrix
+unsigned char r_row;                // current row of the red LED matrix
+unsigned char col_done=0;
 
 volatile struct soft_pwm_st soft_pwm;
 
@@ -55,8 +65,8 @@ int main(void)
 {
 	clk_init();
 	uart_init();
-	timer_init(true);
 	leds_init();
+	timer_init(true);
 	enable_interrupts();
 
 	while(1){	
@@ -98,23 +108,28 @@ void timer_init(char trigger_timer)
 	if(trigger_timer)
 	{
 		/*TAIE general timer counter interrupt is disabled*/
-		TA1CTL   = ID_1|TASSEL_2|MC_1; /*controls timer A1*/
+		TA1CTL   = ID_1|TASSEL_2| TIMER_MODE_CONTINUOUS; /*controls timer A1*/
 	
-		TA1CCTL0 = TIMER_MODE_TOGGLE; /*controls timer A1 output0*/
-		TA1CCTL1 = TIMER_MODE_TOGGLE; /*controls timer A1 output0*/
+		TA1CCTL0 = TIMER_MODE_SET_RESET ; /*controls timer A1 output0*/
+		TA1CCTL1 = TIMER_MODE_SET_RESET ; /*controls timer A1 output0*/
+		TA1CCTL2 = TIMER_MODE_SET_RESET ; /*controls timer A1 output0*/
 		
 		/*Just random values to test square wave(use formula otherwise)*/
-		TA1CCR0 = 0x7d00;
-		TA1CCR1 = 5000;
+		TA1CCR0 = 16000;//32767;
+		TA1CCR1 = 4000;//2047;
+		TA1CCR2 = 32767;
+		
 
 		/*Choose alternative io function , in this case timerA_out0-1*/
-		P2SEL2 &=~ (BIT0|BIT1|BIT2|BIT6);
-		P2SEL  |=  (BIT0|BIT1|BIT2|BIT6);
-		P2DIR  |= (BIT0|BIT1|BIT2|BIT6);
-		P2OUT  &=~ (BIT0|BIT1|BIT2|BIT6);
+		P2SEL2 &=~ (BIT0|BIT1|BIT2|BIT6|BIT5);
+		P2SEL  |=  (BIT0|BIT1|BIT2|BIT6|BIT5);
+		P2DIR  |=  (BIT0|BIT1|BIT2|BIT6|BIT6);
+		P2OUT  &=~ (BIT0|BIT1|BIT2|BIT6|BIT6);
 		
 		TA1CCTL0|=CCIE;
-		TA1CCTL1|=CCIE;
+//		TA1CCTL1|=CCIE;
+//		TA1CCTL2|=CCIE;
+
 	}else
 	{
 		/*Clear timers*/
@@ -150,6 +165,7 @@ void leds_init(void){
 	P1SEL2&=~(BIT0|BIT6);	
 	P1DIR|=(BIT0|BIT6);
 	P1OUT&=~(BIT0|BIT6);
+	P1OUT |=(BIT6|BIT0);
 }
 
 
@@ -196,16 +212,84 @@ __interrupt void rx_serial_isr(void)
 #pragma vector=TIMER1_A1_VECTOR
 __interrupt void TIMER_A1_isr(void)
 {
-	if(TA1CCTL0 & CCIE)TA1CCTL0 &= ~CCIFG;
-	if(TA1CCTL1 & CCIE)TA1CCTL1 &= ~CCIFG;
-	if(TA1CTL & TAIFG)TA1CTL    &= ~TAIFG;
+	if(TA1CCTL1 & CCIE){
+	    TA1CCTL1 &= ~CCIFG;
+	//      TA1CCR1 +=2048;
+	}
+	if(TA1CCTL2 & CCIE){
+	    TA1CCTL2 &= ~CCIFG;
+	  //    TA1CCR2 +=10000;
 
-	P1OUT^=BIT0; /*blinks red led*/
+	  	P1OUT^=BIT6; /*blinks green led*/
+	}
+	if(TA1CTL & TAIFG){
+	    TA1CTL    &= ~TAIFG;
+	}
+
+	//P1OUT^=BIT0; /*blinks red led*/
 }
+
+//i am getting the output in p2.2 
+#pragma vector=TIMER1_A0_VECTOR
+__interrupt void TIMER_A10_isr(void)
+{
+	if(TA1CCTL0 & CCIE){
+	    TA1CCTL0 &= ~CCIFG;
+		//column update(g_matrix[rowcnt]);
+	
+		if(col_done){
+			P1OUT&=~BIT0;
+			col_done =0;
+		}		
+	
+		if (rowcnt==7){
+			rowcnt=0;
+		}else{
+			rowcnt++;
+		}
+		
+
+		if(colcnt == 7)                 // When on last column of matrix
+		{
+			col_done =1;
+			P1OUT|=BIT0; /*blinks red led*/
+			//TB0CCR3 = TB0CCR0;
+			rowcnt=0;
+			colcnt=0;
+	
+		} else { 
+			colcnt++;
+		}
+	}
+
+}
+	
+
+
+
+#pragma vector=COMPARATORA_VECTOR
+__interrupt void comparator_vector(void)
+{
+	if(TA1CCTL0 & CCIE){
+	    TA1CCTL0 &= ~CCIFG;}
+	if(TA1CCTL1 & CCIE){
+	    TA1CCTL1 &= ~CCIFG;}
+	if(TA1CCTL2 & CCIE){
+	    TA1CCTL2 &= ~CCIFG;
+	//	P1OUT^=BIT6; /*blinks green led*/
+	}
+	if(TA1CTL & TAIFG){
+	    TA1CTL    &= ~TAIFG;
+	}
+
+//	P1OUT^=BIT0; /*blinks red led*/
+}
+
 #endif
 
 
-#ifdef TIMER0_INTERRUPT_VECTOR_ENABLED
+#if 1
+///def TIMER0_INTERRUPT_VECTOR_ENABLED
 #pragma vector=TIMER0_A0_VECTOR
 __interrupt void TIMER_A0_isr(void)
 {
@@ -218,7 +302,7 @@ __interrupt void TIMER_A0_isr(void)
 	}else{
 		soft_pwm.ticks=0;
 	}
-	P1OUT^=BIT6; /*blinks green led*/
+	//P1OUT^=BIT6; /*blinks green led*/
 }
 #endif
 
